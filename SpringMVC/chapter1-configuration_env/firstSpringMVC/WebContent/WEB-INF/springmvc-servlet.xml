@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans.xsd">                 
+  <!--LoginController控制器类，映射到“/login”  -->  
+  <bean name="/login" class="controller.LoginController"/>
+  <!--RegisterController控制器类，映射到“/register”  --> 
+  <bean name="/register" class="controller.RegisterController"/>
+<!--   name是虚拟地址，写在href和action中， class是实际地址	 -->
+  <!-- 配置视图解析器 -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            id="internalResourceViewResolver">
+       <!-- 前缀 -->
+       <property name="prefix" value="/WEB-INF/jsp/" />
+       <!-- 后缀 -->
+       <property name="suffix" value=".jsp" />
+  </bean>
+</beans>
