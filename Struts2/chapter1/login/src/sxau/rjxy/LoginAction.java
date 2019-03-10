@@ -23,7 +23,7 @@ public class LoginAction {
 	}
 
 	public String execute() {
-		if("qin".equals(name) ) {
+		if("qin".equals(name)&&"123".equals(password) ) {
 			return "success";
 		}
 		else {
