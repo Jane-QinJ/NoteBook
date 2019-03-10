@@ -7,6 +7,8 @@ Struts HelloWorld program:
 - 核心控制器在Libraries中的-->org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter中
 这个核心控制器是框架开始工作的入口，负责接管请求(tomcat接到用户的request，转到Struts)
 
+![核心控制器](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Struts2/chapter1/images/img1.png)
+
 
 
 输入网址，它的运行步骤为：
