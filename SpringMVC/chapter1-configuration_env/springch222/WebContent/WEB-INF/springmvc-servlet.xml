@@ -14,6 +14,8 @@
 
 <!-- ch2 -->
 	<context:component-scan base-package="controller"/>
+	<context:component-scan base-package="service"/>	
+	
   <!-- 配置视图解析器 -->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
             id="internalResourceViewResolver">

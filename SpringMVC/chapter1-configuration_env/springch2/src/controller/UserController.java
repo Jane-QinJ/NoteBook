@@ -14,7 +14,6 @@ public class UserController {
 	public String register(UserForm user,Model model) {
 		if("qin".equals(user.getUname())&&"123".equals(user.getUpwd())) {
 			
-			
 			return "success"; //注册成功，请登录
 		}
 		else {
