@@ -16,6 +16,6 @@ public class IndexController {
 	}
 	@RequestMapping("/isRegister")
 	public String isRegister() {
-		return "register";
+		return "redirect";
 	}
 }

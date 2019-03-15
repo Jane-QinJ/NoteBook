@@ -4,6 +4,20 @@
 
 2. servletName-servlet.xml
 
+- 请求控制类
+控制类实现Controller接口
+返回ModelAndView
+
+- 视图
+JSP页面，可配置视图解析
+返回的ModelAndView指定视图名称
+
+- 流程
+1. web.xml部署DispatcherServlet，处理所有请求
+2. DispathcerServlet通过servletName-servlet.xml配置文件将请求分发给具体的Controller
+3. Controller接口处理用户请求，返回ModelAndView
+4. 返回视图
+
 ### Spring第二章
 web.xml不用改变
 第一章：哪个请求交给哪个类

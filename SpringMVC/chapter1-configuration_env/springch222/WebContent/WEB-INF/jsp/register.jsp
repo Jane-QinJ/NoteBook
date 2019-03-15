@@ -26,12 +26,15 @@
 	
 	<br>
 		<!-- 	提示信息 "uname" -- String ,Integer -->
+<!-- 		要将Bean转换为UserForm类型 -->
 		<%
 		
 		UserForm tmp=(UserForm)request.getAttribute("user"); //bean
 		out.print(tmp.getUname());
+		out.print(tmp.getUpass());
 		%>
-		<%=request.getAttribute("upass")%>
+		
+<%-- 		<%=request.getAttribute("upass")%> --%>
 <br>
 		View用EL表达式读取
 	

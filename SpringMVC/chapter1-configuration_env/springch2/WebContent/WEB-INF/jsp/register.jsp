@@ -12,10 +12,11 @@
 	<%= request.getAttribute("keym") %>
 <!-- 	action待配置 -->
 	<form action="user/reg_submit">
-		Username:<input type="text" name="uname">
-		Password:<input type="password" name="upwd">
-		Confirm Password:<input type="text" name="reset_pwd">
+		Username:<input type="text" name="uname"> <br>
+		Password:<input type="password" name="upwd"> <br>
+		Confirm Password:<input type="text" name="reset_pwd"> <br>
 		<input type="submit">
 	</form>
+	uname:${uname}
 </body>
 </html>
