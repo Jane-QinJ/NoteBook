@@ -37,6 +37,14 @@ Struts HelloWorld program:
 
 </struts>
 ```
+这个struts.xml捕获web.xml核心控制器传递给它的请求(比如一个表单action)
+struts.xml的package子元素中，action子元素用于配置action映射
+
+属性class：配置action的完整实现类的名称
+属性name：action的逻辑名称，用于匹配用户的请求
+
+在以上示例中，action名为"hello",其完整实现类的名称为"sxau.rjxy.HelloAction".当请求的action名称是"hello"时，Struts2框架将执行"sxau.rjxy.HelloAction"进行处理。
+
 3. HelloAction.java
 一个action对应一个请求，它有一个默认的execute方法
 - 是一个公共的 public
@@ -73,6 +81,7 @@ public class HelloAction {
 上网查得知是struts.xml的位置问题： **struts.xml要在src下**
 
 2.  Server的版本过高 
+修改JDK为1.8 Tomcat为1.7
 
 ### Learn
 - "aaa".equals(name)
@@ -81,3 +90,5 @@ public class HelloAction {
 
 - Struts将所有的请求（表单或者超链接）都转变为action，由Java类来处理它们
 这个类会返回一个字符串，这个返回值和Struts.xml的result标签中name一致的话，就会返回目标jsp页面
+
+web.xml->struts.xml->Action.java->hello.jsp
