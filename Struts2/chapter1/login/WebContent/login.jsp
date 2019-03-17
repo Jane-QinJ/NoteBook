@@ -7,9 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="login" method="post">
-		Username:<input type="text" name="user.name">
-		Password:<input type="password" name="user.password">
+<!-- action 的提交地址.action 是扩展名，默认为.action；action 的扩展名和 web.xml 中配 -->
+<!-- 置的 struts2 的核心过滤器相匹配；也就是如果表单中提交的地址以.action 结尾，那么在配 -->
+<!-- 置 filter 的 url-pattern 时一定是: <url-pattern>*.action</url-pattern>; -->
+
+	<form action="login.action" method="post">
+		Username:<input type="text" name="name">
+		Password:<input type="password" name="password">
 		<input type="submit">
 	</form>
 </body>

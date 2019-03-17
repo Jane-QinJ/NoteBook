@@ -14,7 +14,7 @@ rd
 cd(change directory)
 cd\
 cd..
-echo text  >> dir name
+echo text  >> dir name(将text写入名字为name的directory)
 
 Maven用于：
 1. 项目构件：
