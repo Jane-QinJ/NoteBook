@@ -279,6 +279,7 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 ```
 
 ![](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Maven/images/mvn_test.png)
+
 新增加两个文件夹
 (1)surefire-reprots
 (2)test-classes
@@ -389,7 +390,9 @@ mvn install
 
 执行后，在.m2/repository中新增了Hello所在的包
 
-！[mvn install](https://github.com/Jane-QinJ/NoteBook/blob/master/Maven/images/mvn_install.png?raw=true)
+
+![mvn install](https://github.com/Jane-QinJ/NoteBook/blob/master/Maven/images/mvn_install.png?raw=true)
+
 
 ```
 [INFO] Installing D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target\Hello-0.0.1-SNAPSHOT.jar to C:\Users\秦佳\.m2\repository\cn\rjxy\maven\Hello\0.0.1-SNAPSHOT\Hello-0.0.1-SNAPSHOT.jar
