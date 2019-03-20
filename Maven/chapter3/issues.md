@@ -1,13 +1,15 @@
 ### 第一个Maven项目Hello
-1.
-**在cmd中执行**
+1.**在cmd中执行**
+
 ```
 mvn compile
 ```
+
 需要进入有pom.xml(project object model)的目录下执行此命令
 之后它会将很多jar包下载到**C:\Users\秦佳\.m2\repository**中
 
 编译完成后，commend命令框显示：
+
 ```
 [INFO] Changes detected - recompiling the module!
 [WARNING] File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent!
@@ -21,15 +23,18 @@ mvn compile
 ```
 
 *Compiling 1 source file to D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target\classes*
+
 **结果**：
 生成target文件夹，编译过的文件放在了target/classes中
 
-2.
-**执行**：
+2.**执行**：
+
 ```
 mvn clean
 ```
+
 cmd结果：
+
 ```
 D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean
 [INFO] Scanning for projects...
@@ -64,16 +69,19 @@ Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-util
 ```
 
 * Deleting D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target*
+
 **结果**：
 Hello\target被删除
 
-3. 
-**run**
+3. **run**
+
 ```
 mvn clean compile
 ```
 
 **cmd show**
+
+```
 D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean compile
 [INFO] Scanning for projects...
 [INFO]
@@ -98,11 +106,15 @@ D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean compile
 [INFO] Finished at: 2019-03-20T14:38:19+08:00
 [INFO] Final Memory: 13M/137M
 [INFO] ------------------------------------------------------------------------
+```
+
 **result**
  *Compiling 1 source file to D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target\classes*
  编译成功，target文件再次被创建
 
 **尝试在compile文件存在的情况下，执行mvn clean compile**
+
+```
 D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean compile
 [INFO] Scanning for projects...
 [INFO]
@@ -130,15 +142,18 @@ D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean compile
 [INFO] ------------------------------------------------------------------------
  *[INFO] Deleting D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target *
 *[INFO] Compiling 1 source file to D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target\classes*
+```
 
 可以看出， 编译文件先被delete后再次compile
 
- 4.
- **run**
+ 4.**run**
+ 
  ```
  mvn clean test
  ```
+ 
  **result**
+ 
  ```
  -------------------------------------------------------
  T E S T S
@@ -211,6 +226,7 @@ Failed tests:   testHello(cn.rjxy.maven.HelloTest): expected:<Hello Jane Qin[]> 
 失败了，初步断定是测试文件或者java类写错了，少了一个！
 
 修改之后，尝试重新编译
+
 **Q： 需要先清理clean么？**
 A： 不需要 
 *[INFO] Changes detected - recompiling the module!*
@@ -261,17 +277,20 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] Final Memory: 15M/137M
 [INFO] ------------------------------------------------------------------------
 ```
+
 ![](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Maven/images/mvn_test.png)
 新增加两个文件夹
 (1)surefire-reprots
 (2)test-classes
 
-5.
-**run**
+5.**run**
+
  ```
  mvn clean package
  ```
+ 
  **result**
+ 
  ```
 
 D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean package
@@ -326,15 +345,13 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] Final Memory: 15M/72M
 [INFO] ------------------------------------------------------------------------
 ```
-将上述
 
-**清理->编译->测试->报告->打包->部署**
-都完成了，并生成了jar包。
-
+将上述**清理->编译->测试->报告->打包->部署**都完成了，并生成了jar包。
 **Q：部署还未出现**
 **A： to be continue**
 
 ### 第二个Maven项目 HelloFriend
+
 ```
 D:\19.2_19.7Spirng_semester\Maven\chapter3\HelloFriend>mvn package
 [INFO] Scanning for projects...
@@ -365,25 +382,31 @@ D:\19.2_19.7Spirng_semester\Maven\chapter3\HelloFriend>mvn package
 
 **solution**:
 将Hello项目的JAR包放入仓库中，执行
+
 ```
 mvn install
 ```
+
 执行后，在.m2/repository中新增了Hello所在的包
 
 ！[mvn install](https://github.com/Jane-QinJ/NoteBook/blob/master/Maven/images/mvn_install.png?raw=true)
+
 ```
 [INFO] Installing D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\target\Hello-0.0.1-SNAPSHOT.jar to C:\Users\秦佳\.m2\repository\cn\rjxy\maven\Hello\0.0.1-SNAPSHOT\Hello-0.0.1-SNAPSHOT.jar
 [INFO] Installing D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello\pom.xml to C:\Users\秦佳\.m2\repository\cn\rjxy\maven\Hello\0.0.1-SNAPSHOT\Hello-0.0.1-SNAPSHOT.pom
 ```
 
 **issues**
+
 ```
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project HelloFriend: Compilation failure
 [ERROR] /D:/19.2_19.7Spirng_semester/Maven/chapter3/HelloFriend/src/test/java/cn/rjxy/maven/HelloFriendTest.java:[7,6] 找不到符号
 ```
+
 **reason**
 没有导包 junit无法识别@Test
 **solution**
+
 ```
 import org.junit.Test;
 ```
