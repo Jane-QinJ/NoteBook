@@ -106,9 +106,40 @@ JaveResources->Libraries->Web App Libraries->struts2-core-2.3.32.jar->org.apache
 
 学习框架、技术，最重要是学习一个流程，根据流程顺序思考
 
-### chapter2:
-1. 业务逻辑类，三种实现方式
+### Chapter2:
+1. 业务逻辑类(Aciton类)，三种实现方式
+(1)自定义
+(2)实现接口Action
+(3)继承父类ActionSupport
+
 2. 表达取数据，三种方式
+action里面有三种方式从页面中获取值.一是直接在action里面写属性.这为属性驱动.
+二是在action里面放一个JavaBean的对象.这个为对象驱动.
+三是通过实现ModelDriven<Object>接口，这个为模型驱动
+(1)属性驱动
+在Action类中直接定义get,set方法
+
+(2)面向对象驱动
+设置一个javaBean(内置set,get方法)
+通过User user = new User(); set,get user对象
+表单通过user.name 取数据
+```
+<input name="user.name">
+```
+(3)模型驱动
+class implements ModelDriven<User>
+	实现抽象方法
+	public User getModel(){
+	return user;
+}
+
+表单取数据只需写属性名：
+```
+<input name='属性名'>
+```
+
+总的来说，就是Servlet的数据共享问题。 如何将视图中表单的值取到，和如何将action处理过的值传给视图。
+
 3. struts.xml常量配置(constant)
 
 优化action标签过多问题：每增加一个方法，都要增加一个不同method属性的action
@@ -152,3 +183,51 @@ Action处理并返回字符串deleteTeacher
 - 返回视图：delete_Student_success.jap
 
 **需要根据struts.xml配置修改业务逻辑类与视图名字**
+
+### Chapter3(Ex3)
+**访问request,session和application对象**
+
+传统开发中会用到Servlet API中的HttpServletRequest,HttpSession和ServletContext。
+Struts 2 提供多种方式来访问上述三种对象，归结可分为两大类：
+(1)与Servlet API解耦的访问方式 (2)与ServletAPI耦合的访问方式。
+
+1. 与ServletAPI解耦的访问方式
+为了避免与ServletAPI耦合，Strut2对HttpServletRequest,HttpSession和ServletContext进行了封装， 构造了三个Map对象代替这三种对象。在Action中，直接使用HttpServletRequest,HttpSession,ServletContext对应的**Map对象**来保存和读取数据。
+
+**ActionContext** 是action执行的上下文，在ActionContext中保存了action执行所需的一组对象，包括parameters,request,session,application和locale等。ActionContext类定义了以下方法获取Web元素对应的Map对象。
+- public Object get(Object key)
+*ActionContext类没哟提供类似getRequest()这样的方法来获取封装了HttpServletRequest的Map对象。要得到请求Map对象，需要为get()方法传递参数"request"*
+
+```
+ActionContext context = ActionContext.getContext();
+		/*public Object get(Object key)
+		 * ActionContext类没有提供类似getRequest()这样的方法来获取封装了HttpServletRequest的Map对象。
+		 * 要得到Map对象，需要为get方法传递参数"request"*/
+		Map request = (Map) context.get("request");
+```
+
+- public Map getSession()
+获取封装了HttpSession的Map对象。
+- public Map getApplication()
+获取封装了ServletContext的Map对象。
+
+2. 与Servlet API耦合的访问方式
+
+#### issues
+**Q**：
+1. OGNL访问静态方法时无法访问
+**S**
+访问静态方法
+
+```
+<s:property value="@com.test.util.S@abc()">
+```
+
+注意,两个@是约定..也就是必须这么写.第一个@后面跟的是类的全名.第二个@后面跟的是对应的方法名.当然,这个方法必须是静态的
+
+ 这个访问静态方法在struts2.1以后的版本里面需要设置一个属性,否则系统默认是不支持访问静态方法的(struts2.0版本默认是支持访问静态方法的).具体的方法是在struts.xml里面添加这么一句
+
+```
+ <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+ ```
+[ognl](https://www.cnblogs.com/20gg-com/p/6080107.html)

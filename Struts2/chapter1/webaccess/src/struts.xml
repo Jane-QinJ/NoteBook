@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<!-- 开发模式 -->
+    
+    <constant name="struts.devMode" value="true" />
+<!--     动态方法调用，添加这个constant属性可以不指定method名字调用非execute方法 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <package name="default" namespace="/" extends="struts-default">  
+<!-- 		通配符 * 处理所有action 第一个* 代表Teacher 第二个*代表方法名(如add)-->
+		<action name="web_*" class="sxau.rjxy.WebAction{1}" >
+			<result name="success">
+<!-- 			{2} 第二个*，代表方法 ;  {1} 第一个*，代表业务处理Action名 -->
+				/success.jsp
+			</result>
+			
+			
+		</action>
+		
+        
+    </package>
+
+    <include file="example.xml"/>
+
+    <!-- Add packages here -->
+
+</struts>
