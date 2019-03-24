@@ -10,6 +10,7 @@
 </head>
 <body>
 <%List<Phone> array = (List<Phone>)request.getAttribute("goodslist");
+// List中存有多个Phone对象
 	out.print("<table>");
 	for(int i = 0; i<array.size();i++)
 	{

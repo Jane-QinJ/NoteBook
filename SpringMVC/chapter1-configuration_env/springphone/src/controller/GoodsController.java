@@ -20,19 +20,19 @@ public class GoodsController {
 
 	@RequestMapping("/input")
 	public String input(Model model) {
-		model.addAttribute("phone", new Phone()); // 必须要有Phone对象
+		model.addAttribute("phone", new Phone()); // 必须要有Phone对象 和表单modelAttribute保持一致
 		return "addproduct"; // 打开表单页面
 	}
 
 	@RequestMapping("/save")
 	public String save(@ModelAttribute Phone phone) // 和表单modelAttribute保持一致
-//	@ModelAttribute 可以保留
+//	@ModelAttribute 可以保留表单填写的数据
 	{
 		if (goodsService.add(phone)) {
 			return "redirect:/goods/list"; 
 		} else {
 			return "addproduct";
-		} // 回退
+		} // 回退 地址栏不变 goods/save
 	}
 
 	@RequestMapping("/list")
