@@ -4,7 +4,7 @@ Struts HelloWorld program:
 2. 导入jar包
 - 参考 apps—> struts2-blank.war中的jar包
 3. 编写web.xml文件-配置struts的核心控制器
-- 核心控制器在Libraries中的-->org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter中
+- 核心控制器在Libraries中的-->struts2-core-2.3.32.jar-->org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter中
 这个核心控制器是框架开始工作的入口，负责接管请求(tomcat接到用户的request，转到Struts)
 
 ![核心控制器](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Struts2/chapter1/images/img1.png)
