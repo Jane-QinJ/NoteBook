@@ -35,7 +35,7 @@ Maven:
 - 有生命周期，只需执行mvn install就可以
 - 只需定义一个pom.xml，然后把源码放到目录中
 
-### Running Apache Maven
+### [Running Apache Maven](http://maven.apache.org/run.html)
 The syntax for running Maven is as follows:
 ```
 mvn [options] [<goal(s)>] [<phase(s)>]
@@ -51,7 +51,7 @@ The typical invocation for building a Maven project uses a Maven life cycle phas
 mvn package
 ```
 
-The built in life cycles and their phases are in order are:
+The built in **life cycles** and their **phases** are in order are:
 
 - clean - pre-clean, clean, post-clean(清理项目的)
 
