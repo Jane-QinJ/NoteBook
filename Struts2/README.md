@@ -112,7 +112,7 @@ JaveResources->Libraries->Web App Libraries->struts2-core-2.3.32.jar->org.apache
 (1)自定义
 (2)实现接口Action
 - 五个常量
-SUCCESS,ERROR,LOGGING
+SUCCESS,ERROR,LOGIN,INPUT,NONE
 - 重写execute()方法
 (3)继承父类ActionSupport
 
