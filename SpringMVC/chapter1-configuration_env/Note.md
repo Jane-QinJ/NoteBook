@@ -51,7 +51,9 @@ Converter & Formatter
        添加手机时，控制类调用goodsService.add(实体对象)，返回true,添加成功，重定向发出/list请求。否则，返回表单页面。
 (3)编写productlist.jsp的表格输出部分
 
-
+### Spring第九章
+EL和JSTL
+-[ ] 试用<c:forEach>实现九九乘法表（两个嵌套循环）
 ### Issues
 **Q**:
 - 页面跳转时地址栏请求出现重复
@@ -75,3 +77,4 @@ Html代码
 ```
 <base href="<%=basePath%>">  
 ```
+
