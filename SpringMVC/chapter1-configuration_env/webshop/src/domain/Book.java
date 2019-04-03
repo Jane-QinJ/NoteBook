@@ -1,6 +1,6 @@
 package domain;
 /**
- * 
+ * 领域模型，表示是对它进行增删改查。
  */
 
 public class Book {

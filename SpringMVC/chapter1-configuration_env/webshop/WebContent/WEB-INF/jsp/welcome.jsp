@@ -4,11 +4,17 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>显示物品页面</title>
+<base href="<%=basePath%>">
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -126,7 +132,7 @@ body {
 					if (pageIndex != 1) {
 				%>
 
-				<a href="welcome.jsp?i=1">First</a>
+				<a href="user/change?i=1">First</a>
 				<%
 					}
 				%>
@@ -134,7 +140,7 @@ body {
 				<%
 					if (pageIndex != 1) {
 				%>
-				<a href="welcome.jsp?i=<%=pageIndex - 1%>"><<</a>
+				<a href="user/change?i=<%=pageIndex - 1%>"><<</a>
 				<%
 					}
 				%>
@@ -144,7 +150,7 @@ body {
 					int size = rowCount % pageSize != 0 ? rowCount / pageSize + 1 : rowCount / pageSize;
 					for (int i = 1; i <= size; i++) {
 				%>
-				<a href="welcome.jsp?i=<%=i%>"><%=i%></a>
+				<a href="user/change?i=<%=i%>"><%=i%></a>
 				<%
 					}
 				%>
@@ -152,8 +158,8 @@ body {
 				<%
 					if (pageIndex != 3) {
 				%>
-				<a href="welcome.jsp?i=<%=pageIndex + 1%>">>></a> &nbsp;&nbsp;<a
-					href="welcome.jsp?i=3">End</a>
+				<a href="user/change?i=<%=pageIndex + 1%>">>></a> &nbsp;&nbsp;<a
+					href="user/change?i=3">End</a>
 				<%
 					}
 				%>

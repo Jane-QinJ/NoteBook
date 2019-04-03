@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import domain.User;
 
+
+
 @Service
 public class UserService {
 	public boolean login(User user) {

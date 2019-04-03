@@ -18,13 +18,11 @@ body {
 	
 	
 }
-
 .col-md-4 {
 	margin: 178px 500px;
 	box-shadow: 0 30px 60px 0 rgba(0, 0, 0, .3);
 	padding: 0;
 }
-
 .panel {
 	margin-bottom: 0px;
 }
