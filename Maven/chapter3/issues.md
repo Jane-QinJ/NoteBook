@@ -27,7 +27,7 @@ mvn compile
 **结果**：
 生成target文件夹，编译过的文件放在了target/classes中
 
-2.**执行**：
+2. **执行**：
 
 ```
 mvn clean
@@ -146,7 +146,7 @@ D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn clean compile
 
 可以看出， 编译文件先被delete后再次compile
 
- 4.**run**
+ 4. **run**
  
  ```
  mvn clean test
@@ -228,9 +228,16 @@ Failed tests:   testHello(cn.rjxy.maven.HelloTest): expected:<Hello Jane Qin[]> 
 修改之后，尝试重新编译
 
 **Q： 需要先清理clean么？**
-A： 不需要 
+A： 需要 
 *[INFO] Changes detected - recompiling the module!*
 每次改动，都可以自动检测到
+
+clean和default不是一个生命周期
+
+mvn三套相互独立的生命周期
+- clean lifecycle
+- default lifecycle
+- site lifecycle
 
 ```
 D:\19.2_19.7Spirng_semester\Maven\chapter3\Hello>mvn test
@@ -413,3 +420,15 @@ mvn install
 ```
 import org.junit.Test;
 ```
+
+**Q**（待解决）
+```
+mvn site
+```
+出错  
+
+Failed to execute goal org.apache.maven.plugins:maven-site-plugin:3.3:site (default-site) on project Hello: failed to get report for org.apache.maven.plugins:maven-project-info-reports-plugin: Plugin org.apache.maven.plugins:maven-project-info-reports-plugin:3.0.0 or one of its dependencies could not be resolved: Failed to collect dependencies at org.apache.maven.plugins:maven-project-info-reports-plugin:jar:3.0.0 -> org.apache.maven.doxia:doxia-site-renderer:jar:1.8.1 -> org.apache.maven.doxia:doxia-skin-model:jar:1.8.1: Failed to read artifact descriptor for org.apache.maven.doxia:doxia-skin-model:jar:1.8.1: Could not transfer artifact org.apache.maven.doxia:doxia-skin-model:pom:1.8.1 from/to central (https://repo.maven.apache.org/maven2): repo.maven.apache.org: Unknown host repo.maven.apache.org -> [Help 1]
+
+**S**
+refernce:
+[](https://stackoverflow.com/questions/51359953/maven-error-when-trying-to-build-project)

@@ -36,28 +36,55 @@ Maven:
 - 只需定义一个pom.xml，然后把源码放到目录中
 
 ### [Running Apache Maven](http://maven.apache.org/run.html)
+ 
 The syntax for running Maven is as follows:
+运行Maven的语法如下：
+
 ```
 mvn [options] [<goal(s)>] [<phase(s)>]
 ```
-
+ 
 All available options are documented in the built in help that you can access with
+所有的操作都内置在文档中，你可以使用mvn -h 获得帮助信息
+
 ```
 mvn -h
 ```
 
-The typical invocation for building a Maven project uses a Maven life cycle phase. E.g.
-```
+ The typical invocation for building a Maven project uses a Maven life cycle phase. E.g.
+### Maven生命周期阶段：
+ 
 mvn package
-```
 
-The built in **life cycles** and their **phases** are in order are:
+ The built in life cycles and their phases are in order are:
+内置生命周期（life cycles）和他们的 阶段（phase）按顺序如下：
 
-- clean - pre-clean, clean, post-clean(清理项目的)
+■ clean   (清理项目的)
+- pre-clean(执行一些需要在clean之前完成的工作） pre(词根：在。。。之前  如：prepare(预先))
+- clean
+- post-clean post(词根：在。。。之后 )
 
-- default - validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy(构建项目的)
+- Clean Lifecycle 在进行真正的构建之前进行的一些清理工作
 
-- site - pre-site, site, post-site, site-deploy(生成项目站点的)
+■ default   (构建项目的)
+- *validate*（验证）
+-initialize（初始化）, generate-sources, process-sources, generate-resources, process-resources, 
+- compile（编译项目的源代码)
+process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, 
+- test（编译测试源代码）
+ prepare-package, package, pre-integration-test, integration-test, post-integration-test, 
+- verify（确认）
+- install（将包安装至本地仓库(.m2->repository)，以让其他项目依赖） 
+- deploy（将最终的包复制到远程的仓库，以让其他开发人员与项目共享）
+ 
+- Default Lifecycle 构建的核心部分，编译，测试，打包，部署等等
+
+■ site  (生成项目站点的)
+- pre-site, site（站点）, post-site, site-deploy（发布站点）
+- Site Lifecycle 生成项目报告，站点，发布站点
+
+### 项目生命周期（Project Lifecycle）
+清理(clean )，编译(compile)，测试(test)，报告(?)，打包(package)，部署(deploy)，站点生成(site)等
 
 A fresh build of a project generating all packaged outputs and the documentation site and deploying it to a repository manager could be done with
 
