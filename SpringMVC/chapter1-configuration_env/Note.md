@@ -78,3 +78,8 @@ Html代码
 <base href="<%=basePath%>">  
 ```
 
+**Q**:
+java.lang.ClassNotFoundException: com.mysql.jdbc.Driver 
+**S**:
+在web项目中，当Class.forName("om.mysql.jdbc.Driver");时myeclipse是不会去查找字符串，不会去查找驱动的。所以只需要把mysql-connector-java-5.1.7-bin.jar拷贝到tomcat下lib目录就可以了
+[solve](https://www.cnblogs.com/swxj/archive/2013/06/05/3119206.html)
