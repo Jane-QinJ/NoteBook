@@ -83,3 +83,18 @@ java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
 **S**:
 在web项目中，当Class.forName("om.mysql.jdbc.Driver");时myeclipse是不会去查找字符串，不会去查找驱动的。所以只需要把mysql-connector-java-5.1.7-bin.jar拷贝到tomcat下lib目录就可以了
 [solve](https://www.cnblogs.com/swxj/archive/2013/06/05/3119206.html)
+
+### Spring第十章
+**Q**
+javax.el.PropertyNotFoundException: Property [id] not found on type [java.lang.String]
+
+**S**
+在jstl标签属性中的""中间不能有空格
+[solve](https://www.cnblogs.com/xiangkejin/p/5800521.html)
+
+**【Thought】**:
+1. 找到想用的构件，之后搜索配置生效方法
+- 网上有许多可用资源， 但前提是知道自己需要什么， 这需要掌握基本的知识，知道框架原理，才可以随心取用构件。
+要往深学， 学那些有共同点的知识，平时要在知识中寻找串联点，这样才能一通百通，举一反三。
+
+2. springMVC 将所有的请求都交给了spring，经由controller处理后，返回处理结果，之间经由各种逻辑处理。
