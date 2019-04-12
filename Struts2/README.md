@@ -377,8 +377,11 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 **表单标签的name和value属性**
 - name属性除了为HTML表单元素指定名字，在表单提交时作为请求参数的名字外，同时它还映射到Action的属性。多数下，name属性映射到一个简单的JavaBean属性(property)，如：name属性的值为'postalCode',表单提交后，Struts2框架会调用Action的setPostalCode()方法来设置属性(property)
 
+字符串属性与非字符串属性：
+	使用%可以定义非字符串属性
+	之后国际化用%{getText('key')}来调用ActionSupport中的getText()方法
 
-#### issues
+### issues
 表单value值为传给服务器的值
 ```
 <select>
@@ -389,3 +392,239 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 
 </select>
 ```
+
+### Chapter5(Ex5)
+**国际化**
+1. Java中的国际化
+java.util中：
+
+java.util.Locale
+- public Locale(String language)
+- public Locale(String language,String country)
+language表示语言，取值由ISO-639定义的小写的、两个字母组成的语言代码。
+country表示国家或地区，取值由ISO-3166定义的大写的、两个字母组成的代码。
+
+```
+import java.util.Locale;
+import java.util.ResourceBundle;
+		Locale locale = new Locale("zn","CN");
+		ResourceBundle res = ResourceBundle.getBundle("MyResources",locale);
+		//res.getString("");
+		System.out.println(res.getString("msg"));
+	
+```
+
+**资源包**
+在 **src**下新建资源文件
+baseName_language_country.properties
+
+```
+MyResources_en_US.properties
+
+MyResources_zn_CN.properties
+```
+
+资源文件内容为 key = value
+eg:
+
+```
+msg = hello
+```
+
+通过
+java.util.ResourceBundle类
+
+获取某个资源包，调用这个类的静态方法getBundle()：
+根据基名得到资源包，使用系统缺省的Locale对象
+- public static final ResourceBundle getBundle(String baseName)
+
+根据基名和Locale对象得到资源包
+- public static final ResourceBundle getBundle(String baseName,Locale locale)
+
+利用getBundle()方法可以得到对应于某个Locale对象的资源包，然后就可以利用ResourceBundle类的getString()方法得到相应语言版本的字符串。
+
+- public final String getString(String key)
+从资源包中根据关键字得到字符串
+
+```
+Locale locale = new Locale("zn","CN");
+ResourceBundle res = ResourceBundle.getBundle("MyResources",locale);
+		//res.getString("");
+System.out.println(res.getString("msg"));
+```
+
+2. Struts中的国际化
+
+**a. 使用sturts.custom.i18n.resources常量实现国际化**
+(1)创建工程与web.xml文件，配置过滤器
+(2)src下建立struts.xml
+- action中 name class
+- result标签中 name属性
+**添加constant常量**
+
+```
+<constant name="struts.custom.i18n.resources value="baseName of properties"/>
+```
+
+(3)创建Action，返回struts.xml中指定的字符串
+(4)创建视图
+直接使用i18n标签
+
+```
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
+<s:a href="login?request_locale=en">英语</s:a>
+	<s:a href="login?request_locale=zh">汉语</s:a>
+	<s:form>
+		<s:textfield name="username" key="info.username"></s:textfield>
+<!-- 		getText()要继承ActionSupport方法才有    
+			 %可以调方法，防止只输出字符串 -->
+		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
+		<s:submit key="info.submit"></s:submit>
+	</s:form>
+```
+
+**b. 使用i18n标签实现国际化**
+不使用constant配置，显示声明标签
+```
+	<s:i18n name="baseName">
+```
+
+```
+<s:form>
+		<s:i18n name="app">
+		<s:textfield name="username" key="info.username"></s:textfield>
+<!-- 		getText()要继承ActionSupport方法才有    
+			 %可以调方法，防止只输出字符串 -->
+		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
+		<s:submit key="info.submit"></s:submit>
+		</s:i18n name="app">
+	</s:form>
+```
+
+#### 访问资源文件中消息的方式
+
+1. 在表单标签中访问资源文件中的消息
+
+(1) 使用表单标签的key属性，属性的值是资源文件中消息的key
+
+```
+<s:textfield name="username" key="info.username"></s:textfield>
+```
+
+(2) 使用表单标签的label属性，属性的值通过getText()方法获取
+
+```
+<!-- 		getText()要继承ActionSupport方法才有    
+			 %可以调方法，防止只输出字符串 -->
+		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
+```
+
+2. 在Action中访问资源文件中的消息
+Struts2的com.opensymphony.xwork2.TextProvider接口定义了访问资源文件中消息的getText()方法，ActionSupport类实现了该接口。
+
+因此在Action中访问资源文件中的消息，只需Action extends ActionSupport就可在Action类中直接使用getText(String key) 方法获取资源文件中的消息
+
+3. 在JSP页面中访问资源文件中的消息
+- 使用text标签
+(1) 资源文件中用占位符:{0}
+
+```
+msg.welcome=\u6B22\u8FCE,{0}
+```
+
+视图中：
+
+通过s:param标签给资源文件中的占位符传递参数。
+如果有多个不同的占位符，则s:param标签的顺序和占位符的数字顺序依次对应
+
+```
+<s:text name="msg.welcome">
+<!-- 		通过在资源文件中添加占位符，在视图用s:param给资源文件的占位符传递参数 -->
+		<s:param>
+			<s:property value="username"/>
+		</s:param>
+	</s:text>
+```
+
+(2)资源文件中用ognl表达式:${username}
+
+```
+msg.welcome.ognl=\u6B22\u8FCE,${username}
+```
+
+```
+1. 占位符{0}   s:param 传参 <br>
+	<s:text name="msg.welcome">
+<!-- 		通过在资源文件中添加占位符，在视图用s:param给资源文件的占位符传递参数 -->
+		<s:param>
+			<s:property value="username"/>
+		</s:param>
+	</s:text>
+<%-- 	<s:property value="username"/> --%>
+<br>
+=============<br>
+2. ognl $ {username } <br>
+	<s:text name="msg.welcome.ognl">
+		
+	</s:text>
+```
+
+**添加用户名验证**
+
+1. struts.xml
+
+```
+<action name="login" class="sxau.rjxy.LoginAction">
+            <result name="login">
+            	/login.jsp
+            </result>
+            <result name="success">
+            	/welcome.jsp
+           </result>
+        </action>
+```
+
+2. LoginAction中
+
+```
+	public String execute() {
+		if(username==null||username.equals("")) {
+			return "login";
+		}
+		else {
+			return "success";
+		}
+	}
+```
+
+3. login.jsp
+(1) 表单action发出的login请求会被strut.xml转交给LoginAction处理
+(2) 在LoginAction中判断用户名
+- 为空：返回字符串login
+- 不为空：返回字符串success
+(3) 处理结果字符串和result标签的name属性比对
+- 若为login,跳转到login.jsp(用户名为空，跳转回登录页面)
+- 若为success,跳转到welcome.jsp(用户名正确，跳转到欢迎页面)
+```
+<s:form action="login">
+		<s:textfield name="username" key="info.username"></s:textfield>
+<!-- 		getText()要继承ActionSupport方法才有    
+			 %可以调方法，防止只输出字符串 -->
+		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
+		<s:submit key="info.submit"></s:submit>
+	</s:form>
+```
+
+### Learn
+**Q**：解决端口占用
+**S**
+1. 查看端口情况
+```
+netstat -ano
+```
+2. 查看进程号
+```
+netstat -ano|findstr "端口号"
+```
+3. 任务管理器禁用占用端口的进程
