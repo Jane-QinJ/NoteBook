@@ -98,3 +98,21 @@ javax.el.PropertyNotFoundException: Property [id] not found on type [java.lang.S
 要往深学， 学那些有共同点的知识，平时要在知识中寻找串联点，这样才能一通百通，举一反三。
 
 2. springMVC 将所有的请求都交给了spring，经由controller处理后，返回处理结果，之间经由各种逻辑处理。
+
+
+WebShop Spring实现
+把Cart当成Service
+增删改查
+
+参考名片管理系统
+
+从表单，表格角度考虑
+
+- 页面间传递的数据
+1. 表单穿给表格
+2. 表格中的链接， 到另一个表格
+
+注册， 登录
+
+角色
+-  
