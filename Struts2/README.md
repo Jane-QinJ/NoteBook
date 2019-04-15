@@ -374,12 +374,33 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 
 ### Chapter4(Ex4)
 
+*OGNL：*
+**访问Action属性**
+- Action实例通常压入值栈中。 因为Action在值栈中，并且值栈是OGNL的根，所以访问Action的属性时可以省略井号#
+
 **表单标签的name和value属性**
 - name属性除了为HTML表单元素指定名字，在表单提交时作为请求参数的名字外，同时它还映射到Action的属性。多数下，name属性映射到一个简单的JavaBean属性(property)，如：name属性的值为'postalCode',表单提交后，Struts2框架会调用Action的setPostalCode()方法来设置属性(property)
 
 字符串属性与非字符串属性：
 	使用%可以定义非字符串属性
 	之后国际化用%{getText('key')}来调用ActionSupport中的getText()方法
+
+### Struts标签库分为
+使用前需引入Struts2标签库
+
+```
+<%@ taglib uri="/struts-tags" prefix = "s" %>
+```
+
+1. 用户界面标签
+
+- 表单标签
+- 非表单标签
+
+2. 非用户标签(普通标签)
+- 控制标签
+- 数据标签
+
 
 ### issues
 表单value值为传给服务器的值
