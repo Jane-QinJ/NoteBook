@@ -1,0 +1,26 @@
+@Controller
+@RequestMapping("/food")
+public class FoodController{
+    @RequestMapping("/input")
+        public String inputFood(Model model){
+             model.addAttribute("food",new Food());
+             return "addfood";
+}
+@Autowired private FoodService foodService;
+    @RequestMapping("/save")
+        public String addFood(@ModelAttribute Food food){
+            if(foodService.add(Food food)){
+	//重定向 防止重复提交
+	return "redirect:/food/list";
+}else{
+	return "addfood";
+}
+}
+
+    @RequestMapping("/list")
+    public String listfood(Model model){
+	ArrayList<Food> foodlist = foodService.getFoodlist();
+	model.addAttribute("foodlist",foodlist);
+	return "foodlist";
+}
+}

@@ -1,0 +1,22 @@
+表单：addfood.jsp
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<form:form action="food/save" modelAttribute="food" method="post">
+		Food Name:<form:input path="name" /><br>
+		Quantity:<form:input path="quantity" /><br>
+		Address:<form:input path="address" /><br>
+		<br>
+		<input type="submit"/>
+	</form:form>
+
+
+表格：foodlist.jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<table border="1">
+	<c:forEach items="${foodlist}" var="food"> //注意EL的写法
+	   <tr>
+		<td>${food.name }</td> //注意EL
+		<td>${food.quantity }</td>
+		<td>${food.address }</td>
+	    </tr>
+	</c:forEach>
+	</table>
