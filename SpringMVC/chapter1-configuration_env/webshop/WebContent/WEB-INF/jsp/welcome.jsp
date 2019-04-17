@@ -112,8 +112,10 @@ body {
 							<td><%=booklist.get(i).getPrice()%></td>
 							<td><%=booklist.get(i).getInfo()%></td>
 							<td><%=booklist.get(i).getAuthor()%></td>
+<%-- 					?id=<%=booklist.get(i).getId()%>&name=<%=booklist.get(i).getName()%>&price=<%=booklist.get(i).getPrice()%>&quantity=<%=booklist.get(i).getQuantity()%> --%>
 							<td><a
-								href="AddBookServlet?id=<%=booklist.get(i).getId()%>&name=<%=booklist.get(i).getName()%>&price=<%=booklist.get(i).getPrice()%>&quantity=<%=booklist.get(i).getQuantity()%>">yes</a></td>
+					
+								href="book/add">yes</a></td>
 						</tr>
 
 						<%
