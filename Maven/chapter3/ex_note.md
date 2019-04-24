@@ -291,7 +291,7 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 (1)surefire-reprots
 (2)test-classes
 
-5.**run**
+5. **run**
 
  ```
  mvn clean package
@@ -384,6 +384,7 @@ D:\19.2_19.7Spirng_semester\Maven\chapter3\HelloFriend>mvn package
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
 ```
 
+
 *[WARNING] The POM for cn.rjxy.maven:Hello:jar:0.0.1-SNAPSHOT is missing, no dependency information available*
 
 **Error**:找不到依赖的Hello项目
@@ -422,6 +423,7 @@ import org.junit.Test;
 ```
 
 **Q**（待解决）
+
 ```
 mvn site
 ```
@@ -429,6 +431,50 @@ mvn site
 
 Failed to execute goal org.apache.maven.plugins:maven-site-plugin:3.3:site (default-site) on project Hello: failed to get report for org.apache.maven.plugins:maven-project-info-reports-plugin: Plugin org.apache.maven.plugins:maven-project-info-reports-plugin:3.0.0 or one of its dependencies could not be resolved: Failed to collect dependencies at org.apache.maven.plugins:maven-project-info-reports-plugin:jar:3.0.0 -> org.apache.maven.doxia:doxia-site-renderer:jar:1.8.1 -> org.apache.maven.doxia:doxia-skin-model:jar:1.8.1: Failed to read artifact descriptor for org.apache.maven.doxia:doxia-skin-model:jar:1.8.1: Could not transfer artifact org.apache.maven.doxia:doxia-skin-model:pom:1.8.1 from/to central (https://repo.maven.apache.org/maven2): repo.maven.apache.org: Unknown host repo.maven.apache.org -> [Help 1]
 
-**S**
+**Solution**
 refernce:
 [](https://stackoverflow.com/questions/51359953/maven-error-when-trying-to-build-project)
+
+
+### Maven 聚合
+
+1. 新建Parent工程
+在POM.xml中添加：
+```
+ <modules>
+        <module>../Hello</module>
+        <module>../HelloFriend</module>
+        <module>../MakeFriends</module>
+  </modules>
+```
+
+注意它的packaging为**pom**
+```
+<groupId>cn.rjxy.maven</groupId>
+  <artifactId>Parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+```
+
+2. 执行mvn install 
+
+在repository中查看发现四个工程都添加到了目录
+
+如果我们想一次构建多个项目模块，那我们就需要对多个项目模块进行聚合
+
+```
+<modules><module>…</module></modules>
+```
+
+### 创建web项目
+选择创建web型
+1. NEW->Maven Project-> maven-archetype-**webapp**
+
+```
+<packaging>war</packaging>
+```
+
+2. 之后执行 mvn install
+3. 在.m2->repository中找到Web文件夹
+4. 在文件夹中找到.war的文件
+5. 将war包放到Tomcat的webapps中，在网页中运行jsp页面
