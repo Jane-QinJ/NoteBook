@@ -46,7 +46,7 @@
 	<!-- 	for(i=1;i<=9;i++)等价 -->
 	<!-- 		for(j=1;j<=i;j++)等价 -->
 
-	<table>
+	<table border="1">
 
 		<c:forEach var="i" begin="1" end="9">
 			<tr>
