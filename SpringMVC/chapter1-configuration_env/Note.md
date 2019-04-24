@@ -116,3 +116,242 @@ WebShop Spring实现
 
 角色
 -  
+
+
+### Spring增删改查
+
+*公共函数（为多选框赋值）*：
+```
+@Controller
+@RequestMapping("/user")
+public class UerController {
+	
+	@Autowired
+	private UserService userService;
+	public void setform(Model model) {
+		HashMap<String, String> hobbys = new HashMap<String,String>();
+		hobbys.put("篮球", "basketball");
+		hobbys.put("乒乓球", "pingpong");
+		hobbys.put("电玩", "computer games");
+		hobbys.put("游泳", "swimming");
+		
+//		model.addAttribute("user", new User()); 出错，每次都新建一个user，回退无法保存数据
+		model.addAttribute("hobbys",hobbys);
+		model.addAttribute("carrers",new String[] {"teacher","student","coding remover","IT民工","others"});
+		model.addAttribute("houseRegisters", new String[] {"Beijing","ShangHai","Guangzhou","Shenzhen","others"});
+	}
+```
+---
+*Bean对象*
+
+```
+package domain;
+
+public class User {
+	private String userName;
+	private String[] hobby; 
+	private String[] friends;
+	private String carrer;
+	private String houseRegister;
+	private String remark;
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String[] getHobby() {
+		return hobby;
+	}
+	public void setHobby(String[] hobby) {
+		this.hobby = hobby;
+	}
+	public String[] getFriends() {
+		return friends;
+	}
+	public void setFriends(String[] friends) {
+		this.friends = friends;
+	}
+	public String getCarrer() {
+		return carrer;
+	}
+	public void setCarrer(String carrer) {
+		this.carrer = carrer;
+	}
+	public String getHouseRegister() {
+		return houseRegister;
+	}
+	public void setHouseRegister(String houseRegister) {
+		this.houseRegister = houseRegister;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+}
+
+```
+
+---
+*服务类*
+
+```
+@Service
+public class UserServiceImpl implements UserService{
+	//使用静态集合变量users模拟数据库
+	private static ArrayList<User> users = new ArrayList<User>();
+	@Override
+	//增
+	public boolean addUser(User u) {
+		// TODO Auto-generated method stub
+		if(!"IT民工".equals(u.getCarrer())) {//不允许添加 IT民工
+			users.add(u);
+			return true;}
+		return false;
+	}
+	//查
+	@Override
+	public ArrayList<User> getUsers() {
+		// TODO Auto-generated method stub
+		return users;
+	}
+}
+	
+	//
+	@Override
+	public User getUser(int id) {
+		// TODO Auto-generated method stub
+		
+		return users.get(id); //查询某一个
+	}
+	
+	//修改
+	@Override
+	public void updateUser(int id, User user) {
+		// TODO Auto-generated method stub
+		users.set(id, user); //修改某一个
+	}
+	
+	//删除
+	@Override
+	public void del(int id) {
+		// TODO Auto-generated method stub
+		users.remove(id); //删除某一个
+	}
+	
+```
+
+---
+**功能**
+1. 增：
+```
+	@RequestMapping(value="/input")
+	public String inputUser(Model model) {
+		model.addAttribute("user", new User());
+		setform(model);
+		return "userAdd";
+		
+	}
+```
+
+跳转到userAdd.jsp:(注意modelAttribute="user")
+```
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<form:form modelAttribute="user" method="post" action="user/save">
+	<form:input path="userName" />
+```
+
+### key point:
+通过后台打开表单：后台model存放对象，form绑定对象，二者一致
+- model.addAttibute("user",new User()); //相当于创建一个新表单
+- form:form modelAttribute = "user" //绑定一个javabean对象
+- form:input path="userName" //path和bean属性保持一致
+当表单用html标签，bean成员变量名必须和name属性保持一致；
+当表单用spring标签，bean成员变量名必须和path保持一致；
+
+由userAdd.jsp跳转到/user/save:
+
+```
+@Autowired
+	private UserService userService;
+@RequestMapping(value="/save")
+	public String addUser(@ModelAttribute User user, Model model) {
+		if(userService.addUser(user)) {
+			return "redirect:/user/list";
+		}else {
+			setform(model);
+			return "userAdd";
+			
+		}
+	}
+```
+### key point:
+@ModelAttribute存放对象，form绑定对象 二者一致，数据回退不丢失
+- @ModelAttribute User user //回退数据还在
+- form:form modelAttribute="user"
+
+@ModelAttribute User user <-> model.addAttribute("user",user);
+如果没有指定键值，它的键值为类名小写，如：
+@ModelAttribute UserForm user <-> model.addAttribute("userFrom",user);
+
+
+2. 查
+
+```
+@RequestMapping(value="/list")
+	public String listUsers(Model model) {
+		List<User> users = userService.getUsers();
+		model.addAttribute("users",users);
+		return "userList";
+	}
+```
+之前若添加成功，则 return "redirect:/user/list"
+
+用userService获得用户List,封装到Model中存储。
+
+之后跳转到
+**userList.jsp**表格页面:
+
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<table border="1">
+<c:forEach items="${users}" var="user">
+            <tr>
+                <td>${user.userName }</td>
+            </tr>
+</c:forEach>
+</table>
+```
+### key point:
+- items 属性要加双引号， 用EL表达式 ${users}获取之前封装到model中的用户List
+		List<User> users = userService.getUsers();
+		model.addAttribute("users",users);
+- var表示每次循环的对象，表格中用EL表达式${user.userName} 取bean对象属性
+- 导JSTL包
+
+3. 改
+
+```
+//输出表单，展示某一条数据
+		//user/select?id=1
+		//user/select?id=0
+	@RequestMapping(value="/select")
+			public String update(@ModelAttribute User user,Integer id,Model model) {
+				//修改某个数据
+//				model.addAttribute("users",userService.getUsers()); //若不保存列表，则跳转到user/update时之前的数据丢失
+				model.addAttribute("id",id);
+				setform(model);
+				return "userUpdate"; //打开修改表单
+		}
+
+
+		//修改表单，点提交。修改某一个
+	@RequestMapping(value="/update")
+	public String updateUser(@ModelAttribute User user,Model model, int id) {
+		userService.updateUser(id, user); //arraylist set方法
+		return "redirect:/user/list";
+	}
+```
