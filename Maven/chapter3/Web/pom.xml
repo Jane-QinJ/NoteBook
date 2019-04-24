@@ -3,8 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.rjxy.maven</groupId>
   <artifactId>Web</artifactId>
-  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+ 
   <name>Web Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -14,9 +15,38 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+    	<groupId>cn.rjxy.maven</groupId>
+  		<artifactId>Hello</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+    	<groupId>cn.rjxy.maven</groupId>
+  		<artifactId>HelloFriend</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+    	<groupId>cn.rjxy.maven</groupId>
+  		<artifactId>MakeFriends</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+    	<groupId>cn.rjxy.maven</groupId>
+  		<artifactId>Parent</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>Web</finalName>
   </build>
- 
+  
+
 </project>
