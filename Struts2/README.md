@@ -679,7 +679,9 @@ SHORT格式日期
 2. List类型转换
 
 3. 自定义类型转换
+
 (1)创建自定义类型转换器
+
 Converter:
 - 继承DefaultTypeConverter类
 它是StrutsTypeConverter接口的简化版
@@ -719,6 +721,7 @@ public class PointConverter extends StrutsTypeConverter{
 		Point point = new Point();
 		//(3,4)
 		//x:第二个开始，到逗号结束
+		//y:从逗号开始，到倒数第二个结束
 		/*
 		 *1. substring: 
 		 * Returns a string that is a substring of this string. 
@@ -746,10 +749,46 @@ public class PointConverter extends StrutsTypeConverter{
 }
 
 ```
+
 (2)注册自定义类型转换器
+
 - 全局注册方式
+注册为全局的类型转换器对所有的Action都起作用。注册全局的类型转换器需要在Web应用的WEB-INF/classes目录下创建一个名称为xwork-conversion.properties的属性文件。
+
+属性文件由键-值对组成，格式如下：
+
+```
+被转换类的完整实现类名称 = 自定义类型转换器的完整实现类名称
+```
+
 - 局部注册方式
+
+注册为局部的类型转换器又称为特定类的类型转换器。注册局部的类型转换器需要在类所在的包中建立一个文件名称形如ClassName-conversion.properties的属性文件。
+
+属性文件由键值对组成，格式如下：
+
+```
+propertyName = 自定义类型转换器的完整实现类名称
+```
+propertyName是类中被转换的字段名称，值是自定义类型转换器完整实现类名称。
+
+(3) 在Web应用中使用自定义类型转换器
 
 ### issues
 视图收不到数据，也没有转换
 初步推测：转换类没有加载出来，注册转换器有问题
+
+### chapter7(Ex7)
+拦截器
+
+invocation.invoke()调用之前的代码将在Action执行之前执行
+invocation.invoke()调用之后的代码将在Action执行之后执行。
+
+在设置拦截或排除的方法时，如果有多个方法，那么以逗号），分隔
+
+PreResultListener接口
+
+void beforeResult(ActionInvocation invocation, String resultCode)
+
+resultCode是Action执行返回的结果码。
+这个方法将在Action执行后，Result执行前被调用。
