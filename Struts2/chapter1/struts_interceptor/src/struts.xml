@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<!-- 开发模式 -->
+    
+    <constant name="struts.devMode" value="true" />
+<!--     动态方法调用，添加这个constant属性可以不指定method名字调用非execute方法 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+<!--     访问静态方法 -->
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+    <package name="default" namespace="/" extends="struts-default">  
+<!-- 		通配符 * 处理所有action 第一个* 代表Teacher 第二个*代表方法名(如add)-->
+
+<!-- 		注册拦截器  会在Action之前执行-->
+		<interceptors>
+			<interceptor name="loginStatus"
+			class="interceptor.LoginStatus"></interceptor>
+		</interceptors>		
+		
+		<action name="input" class="rjxy.bean.InputAction" >
+			<result name="success">
+<!-- 			{2} 第二个*，代表方法 ;  {1} 第一个*，代表业务处理Action名 -->
+				/input.jsp
+			</result>
+						
+		
+			
+		</action>
+		
+		<action name="login" class="rjxy.bean.LoginAction">
+			<result name="success">/success.jsp</result>
+			
+			<interceptor-ref name="defaultStack"/>
+<!-- 			 Token拦截器（token） -->
+<!-- 确保每个请求只有一个token被处理。可以确保后退按钮和双击操作不会引起不必要的负面影响。  -->
+			<interceptor-ref name="token"/>
+<!-- 			重复提交后，token拦截器返回一个result="invalid.token" -->
+			<result name="invalid.token">/error.jsp</result>
+		</action>
+		
+        
+    </package>
+
+    <include file="example.xml"/>
+
+    <!-- Add packages here -->
+
+</struts>
