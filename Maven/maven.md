@@ -15,7 +15,7 @@ cd(change directory)
 cd\
 cd..
 echo text  >> dir name(将text写入名字为name的directory)
-
+cat dir name(查看文件内容)
 一个 > : 只显示新写入的内容，旧内容全部删除
 两个 >> :追加，旧内容不会删除
 Maven用于：

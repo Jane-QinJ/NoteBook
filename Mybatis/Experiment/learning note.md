@@ -27,6 +27,7 @@ INSERT INTO users(NAME, age) VALUES('Jack', 11);
 ```
 
 3. 添加Mybatis的配置文件conf.xml
+
 **注意**： 
 - conf.xml名称可随便起，之后加载时和它一致即可
 - conf.xml配置文件要在src文件下
@@ -36,6 +37,7 @@ String resource = "conf.xml";
 		//加载mybatis的配置文件（它也加载关联的映射文件）
 		Reader reader = Resources.getResourceAsReader(resource); 
 ```
+
 
 **conf.xml**
 
@@ -59,6 +61,7 @@ String resource = "conf.xml";
 	</environments>
 </configuration>
 ```
+
 
 4. 定义表所对应的实体类
 ```
@@ -91,6 +94,8 @@ public class User {
 	
 }
 ```
+
+
 5. 定义操作users表的sql映射文件userMapper.xml
 
 ```
@@ -102,6 +107,7 @@ public class User {
 	</select>
 </mapper>
 ```
+
 **Attention**:
 - 这里的namespace 和 select语句中的 id 可以自定义，目的是准确定位这一条SQL语句的位置
 - namespace可自定义，但规范是包名+类名 
@@ -110,7 +116,7 @@ public class User {
 ```
 //映射sql的标识字符串
 		String statement = "com.rjxy.ex1.userMapper"+".getUser";
-	//执行查询返回一个唯一user对象的sql
+//执行查询返回一个唯一user对象的sql
 		User user = session.selectOne(statement, 1);
 ```
 如这个表示传入了参数 1
@@ -120,6 +126,7 @@ public class User {
 ```
 select * from users where id = 1
 ```
+
 
 6. 在conf.xml文件中注册userMapper.xml文件
 
@@ -131,9 +138,10 @@ select * from users where id = 1
 ```
 
 **Attention**:
-这里的路径为src下的相对路径，所以从包名开始+xml文件名
+- 这里的路径为src下的相对路径，所以从包名开始+xml文件名
 
-路径的设置目的都为使计算机找到对应的文件所在的地址
+> 路径的设置目的都为使计算机找到对应的文件所在的地址
+
 
 7. 编写测试代码：执行定义的select语句
 
@@ -158,6 +166,7 @@ public class Test {
 ```
 
 ### issues
+
 1. **java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'PRIMARY'**
 
 错误原因：*Duplicate entry 1* 多重输入1
@@ -168,6 +177,7 @@ id INT PRIMARY KEY AUTO_INCREMENT
 
 **Solution**
 因为id字段为主键，不允许重复。而表中已经有id为1的数据，所以将id改为不为1即可。
+
 
 2. **The server time zone value 'ÖÐ¹ú±ê×¼Ê±¼ä' is unrecognized or represents more than one time zone**
 
@@ -181,8 +191,8 @@ set time_zone = ‘+8:00‘; ##修改当前会话时区
 flush privileges; #立即生效
 ```
 
-3. 
-**Caused by: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value**
+
+3. **Caused by: java.lang.IllegalArgumentException: Mapped Statements collection does not contain value**
 
 ```
 public class Test {
@@ -222,7 +232,7 @@ SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 
 ### To be solved:
-添加DTD文档
+-[ ] 添加DTD文档
 
 ### JDBC应用步骤
 1. 注册加载一个驱动

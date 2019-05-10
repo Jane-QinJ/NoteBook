@@ -8,5 +8,7 @@
 </head>
 <body>
 	WEB INDEX PAGE
+	<a href="user/input">Please Click me</a>
+	<a href="#">Hello</a>
 </body>
 </html>

@@ -37,17 +37,7 @@ public class UerController {
 		return "userAdd";
 		
 	}
-	//输出表单，展示某一条就数据
-	//user/select?id=1
-	//user/select?id=0
-		@RequestMapping(value="/select")
-		public String update(@ModelAttribute User user,Integer id,Model model) {
-			//修改某个数据
-			model.addAttribute("users",userService.getUsers());
-			model.addAttribute("id",id);
-			setform(model);
-			return "userUpdate"; //打开修改表单
-		}
+	
 	
 	@RequestMapping(value="/save")
 	public String addUser(@ModelAttribute User user, Model model) {
@@ -60,7 +50,18 @@ public class UerController {
 		}
 	}
 	
-	
+	//输出表单，展示某一条数据
+		//user/select?id=1
+		//user/select?id=0
+			@RequestMapping(value="/select")
+			public String update(@ModelAttribute User user,Integer id,Model model) {
+				//修改某个数据
+//				model.addAttribute("users",userService.getUsers()); //若不保存列表，则跳转到user/update时之前的数据丢失
+				model.addAttribute("id",id);
+				setform(model);
+				return "userUpdate"; //打开修改表单
+		}
+			
 	//修改表单，点提交。修改某一个
 	@RequestMapping(value="/update")
 	public String updateUser(@ModelAttribute User user,Model model, int id) {
