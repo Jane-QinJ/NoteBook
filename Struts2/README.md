@@ -160,18 +160,28 @@ class implements ModelDriven<User>
 总的来说，就是Servlet的数据共享问题。 如何将视图中表单的值取到，和如何将action处理过的值传给视图。
 
 3. struts.xml常量配置(constant)
+method属性：
+1. 设置不同的访问点
+Action中定义不同的方法，在struts.xml中使用不同的method属性与之相映射。
+Action实现类默认入口方法是execute方法，即在调用某个action的时候，将自动查找并执行execute方法。
 
-优化action标签过多问题：每增加一个方法，都要增加一个不同method属性的action
-- 动态方法调用
-<!--     动态方法调用，添加这个constant属性可以不指定method名字调用非execute方法 -->
 ```
-	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+action.java
+public String create(){
+	retuan "success";
+}
+
+struts.xml
+<action name="createData" class="packagename.action" method="create"/>
 ```
 
 优化action标签过多的问题：每增加一个功能类，都要增加一个action
 优化result标签过多的问题：每增加一个页面，都要增加一个result name
 
 **解决方法**:
+
+2. 通配符方法
+
 使用通配符 *  两个通配符需要用"\_"隔开
 ```
 <action name="*_*" class="sxau.rjxy.{1}Action" method="{2}">
@@ -202,6 +212,18 @@ Action处理并返回字符串deleteTeacher
 - 返回视图：delete_Student_success.jap
 
 **需要根据struts.xml配置修改业务逻辑类与视图名字**
+
+优化action标签过多问题：每增加一个方法，都要增加一个不同method属性的action
+
+3. 动态方法调用
+<!--     动态方法调用，添加这个constant属性可以不指定method名字调用非execute方法 -->
+```
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+```
+
+使用 '!' 符号来调用方法
+如'Action!create' 表示匹配名称为Action(action中的name映射)的create方法
+
 
 
 ### Chapter3(Ex3)
