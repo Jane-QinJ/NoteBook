@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript">
+	function getXmlHttpObject(){
+		
+		var xmlHttpRequest;
+		//不同浏览器获取对象xmlhttprequest对象方法不同
+		if(window.ActiveXObject){
+			xmlHttpRquest = new ActiveXObject("Microsoft.XMLHTTP");
+		}else{
+			xmlHttpRequest = new XMLHttpRequest();
+			
+		}
+		return xmlHttpRequest;
+	}
+	var myXmlHttpRequest="";
+	
+	//验证用户名是否存在
+	function checkName(){
+		 myXmlHttpRequest = getXmlHttpObject();
+		 
+		 //怎么判断创建ok
+		 if(myXmlHttpRequest){
+			 var url = "registerProcess.jsp?username=" + $("username").value;
+			 //打开请求
+			 myXmlHttpRequest.open("get",url,true);
+			 //指定回调函数  只有当回调函数条件被触发，才返回对应的值，异步
+			 myXmlHttpRequest.onreadystatechange=chuli;
+			 
+			 //向服务器发送数据 get填入null即可
+			 myXmlHttpRequest.send(null);
+		 }
+	}
+	
+	function $(id){
+		return document.getElementById(id);
+	}
+	function chuli(){
+		//readyState4 描述一种"已加载"状态；此时，响应已经被完全接收。
+		//也就是完全接受后， onreadystatechange事件触发器 触发chuli函数
+		if(myXmlHttpRequest.readyState==4){
+			$('myres').value=myXmlHttpRequest.responseText;
+		}
+	}
+</script>
+
+<body>
+	<form action="" method = "post">
+		Username: <input type="text" onkeyup="checkName();" name="username1" id="username"/>
+		<input type="button" onclick="checkName();" value="验证用户名"/>
+		<input style="border-width:0;color:red" type="text" id="myres">
+	</form>
+</body>
+</html>
