@@ -101,6 +101,19 @@ ajax: 数据的交互
 	%>
 ```
 
+## Ajax程序异步执行过程
+
+(1) 用户通过用户界面发出需求；                              
+(2) JavaScript开始调用XMLHttpRequest对象并设置传递给服务器的参数；                                       
+(3) XMLHttpRequest对象通过网络连接Web服务器并发出HTTP请求；                                 
+(4) Web服务器接收到请求和传递来参数后与数据库进行数据交换；                                                                              
+(5) Web服务器通过网络把数据按XML或者JSON或者别的形式传回给客户端；                                                         
+(6) XMLHttpRequest对象接收到数据后回调预先设置好的事件函数；                                                      
+(7) 事件函数解析数据后把结果显示在用户界面。                                            
+这里的事件函数就是XMLHttpRequest对象的onreadystatechange事件函数，这个事件函数指向程序中一个自定义的函数体。
+
+![ajax_process](https://github.com/Jane-QinJ/NoteBook/blob/master/AJAX/images/2_ajax_process.png)
+
 ## issues
 
 **Q1:取返回值时,取到的是一整个页面**
@@ -109,7 +122,7 @@ ajax: 数据的交互
 $('myres').value=myXmlHttpRequest.responseText;
 ```
 
-![google network debug](https://github.com/Jane-QinJ/NoteBook/blob/master/AJAX/images/ex1_reponseText.png)
+![google network debug](https://github.com/Jane-QinJ/NoteBook/blob/master/AJAX/images/1_ex1_reponseText.png)
 
 **S1:理解responseText, 返回的是*纯文本***
 
