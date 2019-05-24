@@ -1,13 +1,13 @@
 Struts HelloWorld program:
 
-1. ĞÂ½¨WebÏîÄ¿
-2. µ¼Èëjar°ü
-- ²Î¿¼ apps¡ª> struts2-blank.warÖĞµÄjar°ü
-3. ±àĞ´web.xmlÎÄ¼ş-ÅäÖÃstrutsµÄºËĞÄ¿ØÖÆÆ÷
-- ºËĞÄ¿ØÖÆÆ÷ÔÚLibrariesÖĞµÄ-->struts2-core-2.3.32.jar-->org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilterÖĞ
-Õâ¸öºËĞÄ¿ØÖÆÆ÷ÊÇ¿ò¼Ü¿ªÊ¼¹¤×÷µÄÈë¿Ú£¬¸ºÔğ½Ó¹ÜÇëÇó(tomcat½Óµ½ÓÃ»§µÄrequest£¬×ªµ½Struts)
+1. æ–°å»ºWebé¡¹ç›®
+2. å¯¼å…¥jaråŒ…
+- å‚è€ƒ appsâ€”> struts2-blank.warä¸­çš„jaråŒ…
+3. ç¼–å†™web.xmlæ–‡ä»¶-é…ç½®strutsçš„æ ¸å¿ƒæ§åˆ¶å™¨
+- æ ¸å¿ƒæ§åˆ¶å™¨åœ¨Librariesä¸­çš„-->struts2-core-2.3.32.jar-->org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilterä¸­
+è¿™ä¸ªæ ¸å¿ƒæ§åˆ¶å™¨æ˜¯æ¡†æ¶å¼€å§‹å·¥ä½œçš„å…¥å£ï¼Œè´Ÿè´£æ¥ç®¡è¯·æ±‚(tomcatæ¥åˆ°ç”¨æˆ·çš„requestï¼Œè½¬åˆ°Struts)
 
-![ºËĞÄ¿ØÖÆÆ÷](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Struts2/chapter1/images/img1.png)
+![æ ¸å¿ƒæ§åˆ¶å™¨](https://raw.githubusercontent.com/Jane-QinJ/NoteBook/master/Struts2/chapter1/images/img1.png)
 
 ```
 <filter>
@@ -23,12 +23,12 @@ Struts HelloWorld program:
 
 4. struts.xml
 
-ÊäÈëÍøÖ·£¬ËüµÄÔËĞĞ²½ÖèÎª£º
+è¾“å…¥ç½‘å€ï¼Œå®ƒçš„è¿è¡Œæ­¥éª¤ä¸ºï¼š
 1. web.xml
 2. struts.xml
 ```
 <struts>
-	<!-- ¿ª·¢Ä£Ê½ -->
+	<!-- å¼€å‘æ¨¡å¼ -->
     
     <constant name="struts.devMode" value="true" />
 
@@ -37,133 +37,128 @@ Struts HelloWorld program:
         <action name="hello" class="sxau.rjxy.HelloAction">
             <result name="success">
             	/hello.jsp
-<!--                 <param name="actionName">HelloWorld</param> -->
-<!--                 <param name="namespace">/example</param> -->
+
             </result>
         </action>
     </package>
 
-    <include file="example.xml"/>
-
-    <!-- Add packages here -->
-
 </struts>
 ```
-Õâ¸östruts.xml²¶»ñweb.xmlºËĞÄ¿ØÖÆÆ÷´«µİ¸øËüµÄÇëÇó(±ÈÈçÒ»¸ö±íµ¥action)
-struts.xmlµÄpackage×ÓÔªËØÖĞ£¬action×ÓÔªËØÓÃÓÚÅäÖÃactionÓ³Éä
+è¿™ä¸ªstruts.xmlæ•è·web.xmlæ ¸å¿ƒæ§åˆ¶å™¨ä¼ é€’ç»™å®ƒçš„è¯·æ±‚(æ¯”å¦‚ä¸€ä¸ªè¡¨å•action)
+struts.xmlçš„packageå­å…ƒç´ ä¸­ï¼Œactionå­å…ƒç´ ç”¨äºé…ç½®actionæ˜ å°„
 
-ÊôĞÔclass£ºÅäÖÃactionµÄÍêÕûÊµÏÖÀàµÄÃû³Æ
-ÊôĞÔname£ºactionµÄÂß¼­Ãû³Æ£¬ÓÃÓÚÆ¥ÅäÓÃ»§µÄÇëÇó
+å±æ€§classï¼šé…ç½®actionçš„å®Œæ•´å®ç°ç±»çš„åç§°
+å±æ€§nameï¼šactionçš„é€»è¾‘åç§°ï¼Œç”¨äºåŒ¹é…ç”¨æˆ·çš„è¯·æ±‚
 
-ÔÚÒÔÉÏÊ¾ÀıÖĞ£¬actionÃûÎª"hello",ÆäÍêÕûÊµÏÖÀàµÄÃû³ÆÎª"sxau.rjxy.HelloAction".µ±ÇëÇóµÄactionÃû³ÆÊÇ"hello"Ê±£¬Struts2¿ò¼Ü½«Ö´ĞĞ"sxau.rjxy.HelloAction"½øĞĞ´¦Àí¡£
+åœ¨ä»¥ä¸Šç¤ºä¾‹ä¸­ï¼Œactionåä¸º"hello",å…¶å®Œæ•´å®ç°ç±»çš„åç§°ä¸º"sxau.rjxy.HelloAction".å½“è¯·æ±‚çš„actionåç§°æ˜¯"hello"æ—¶ï¼ŒStruts2æ¡†æ¶å°†æ‰§è¡Œ"sxau.rjxy.HelloAction"è¿›è¡Œå¤„ç†ã€‚
 
 3. HelloAction.java
-Ò»¸öaction¶ÔÓ¦Ò»¸öÇëÇó£¬ËüÓĞÒ»¸öÄ¬ÈÏµÄexecute·½·¨
-- ÊÇÒ»¸ö¹«¹²µÄ public
-- ·µ»ØÀàĞÍÎªString
-- ²»ÄÜÓĞ²ÎÊı
+ä¸€ä¸ªactionå¯¹åº”ä¸€ä¸ªè¯·æ±‚ï¼Œå®ƒæœ‰ä¸€ä¸ªé»˜è®¤çš„executeæ–¹æ³•
+- æ˜¯ä¸€ä¸ªå…¬å…±çš„ public
+- è¿”å›ç±»å‹ä¸ºString
+- ä¸èƒ½æœ‰å‚æ•°
 
 ```
 package sxau.rjxy;
 
 public class HelloAction {
 	/**
-	 * ·½·¨->public
-	 * ²»ÄÜÓĞ²ÎÊı
-	 * Ãû×ÖÄ¬ÈÏÎªexecute()
+	 * æ–¹æ³•->public
+	 * ä¸èƒ½æœ‰å‚æ•°
+	 * åå­—é»˜è®¤ä¸ºexecute()
 	 * @return String
 	 */
-	//Ò»¸öaction
+	//ä¸€ä¸ªaction
 	public String excute() {
 		System.out.println("HelloAction.execute()");
 		return "success";
 	}
 }
 ```
-Ëü·µ»ØÒ»¸ö×Ö·û´®£¬Õâ¸ö×Ö·û´®ºÍstruts.xmlµÄ
+å®ƒè¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™ä¸ªå­—ç¬¦ä¸²å’Œstruts.xmlçš„
 ```<result name="success">```
-	ÏàÍ¬
+	ç›¸åŒ
 
-	Ö®ºó·µ»Øresult±êÇ©ÖĞµÄ/hello.jsp
-4. hello.jspÏìÓ¦¸øÓÃ»§
+	ä¹‹åè¿”å›resultæ ‡ç­¾ä¸­çš„/hello.jsp
+4. hello.jspå“åº”ç»™ç”¨æˆ·
 
 ### Issues:
-1. ÊµÑéÖĞ³öÏÖHttp Status 404 There is no Action mapped for namespace / and action name.
-ÅĞ¶ÏÊÇÅäÖÃÎÊÌâ£¬µ¼ÖÂStrutsºËĞÄ¿ØÖÆÆ÷ÎŞ·¨ÕÒµ½actionµÄmap¾µÏñ
-ÉÏÍø²éµÃÖªÊÇstruts.xmlµÄÎ»ÖÃÎÊÌâ£º 
-**struts.xmlÒªÔÚsrcÏÂ**
+1. å®éªŒä¸­å‡ºç°Http Status 404 There is no Action mapped for namespace / and action name.
+åˆ¤æ–­æ˜¯é…ç½®é—®é¢˜ï¼Œå¯¼è‡´Strutsæ ¸å¿ƒæ§åˆ¶å™¨æ— æ³•æ‰¾åˆ°actionçš„mapé•œåƒ
+ä¸Šç½‘æŸ¥å¾—çŸ¥æ˜¯struts.xmlçš„ä½ç½®é—®é¢˜ï¼š 
+**struts.xmlè¦åœ¨srcä¸‹**
 
-2.  ServerµÄ°æ±¾¹ı¸ß 
-ĞŞ¸ÄJDKÎª1.8 TomcatÎª1.7
+2.  Serverçš„ç‰ˆæœ¬è¿‡é«˜ 
+ä¿®æ”¹JDKä¸º1.8 Tomcatä¸º1.7
 
 ### Learn
 - "aaa".equals(name)
-Èç¹û·´Ğ´ £º name.equals('aaa');
-»á³öÏÖ¿ÕÖ¸ÕëÒì³£µÄÇé¿ö£¬ ±äÁ¿Öµ¿ÉÄÜÎª¿Õ
+å¦‚æœåå†™ ï¼š name.equals('aaa');
+ä¼šå‡ºç°ç©ºæŒ‡é’ˆå¼‚å¸¸çš„æƒ…å†µï¼Œ å˜é‡å€¼å¯èƒ½ä¸ºç©º
 
-- Struts½«ËùÓĞµÄÇëÇó£¨±íµ¥»òÕß³¬Á´½Ó£©¶¼×ª±äÎªaction£¬ÓÉJavaÀàÀ´´¦ÀíËüÃÇ
-Õâ¸öÀà»á·µ»ØÒ»¸ö×Ö·û´®£¬Õâ¸ö·µ»ØÖµºÍStruts.xmlµÄresult±êÇ©ÖĞnameÒ»ÖÂµÄ»°£¬¾Í»á·µ»ØÄ¿±êjspÒ³Ãæ
+- Strutså°†æ‰€æœ‰çš„è¯·æ±‚ï¼ˆè¡¨å•æˆ–è€…è¶…é“¾æ¥ï¼‰éƒ½è½¬å˜ä¸ºactionï¼Œç”±Javaç±»æ¥å¤„ç†å®ƒä»¬
+è¿™ä¸ªç±»ä¼šè¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™ä¸ªè¿”å›å€¼å’ŒStruts.xmlçš„resultæ ‡ç­¾ä¸­nameä¸€è‡´çš„è¯ï¼Œå°±ä¼šè¿”å›ç›®æ ‡jspé¡µé¢
 
 web.xml->struts.xml->Action.java->hello.jsp
 
-**²éÕÒdefault.properties**
-- ÉèÖÃstruts.xmlµÄconstant×ÓÔªËØ
-- ÓÃÓÚÅäÖÃ³£Á¿
-Î»ÖÃ£º
+**æŸ¥æ‰¾default.properties**
+- è®¾ç½®struts.xmlçš„constantå­å…ƒç´ 
+- ç”¨äºé…ç½®å¸¸é‡
+ä½ç½®ï¼š
 JaveResources->Libraries->Web App Libraries->struts2-core-2.3.32.jar->org.apache.struts2->default.properties
 
-**ÖØÒªµÄÊÇ¶Ôstruts.xmlÅäÖÃÖĞµÄÀí½â£¬Ò»¸öaction¶ÔÓ¦µ½ÅäÖÃÎÄ¼şÖĞÒ»¸öactionÓ³Éä**
-- ¶Ôstruts.xmlÖĞ¸÷¸ö×Ó±êÇ©µÄÀí½âºÍ¶ÔÓ¦ÀàµÄĞŞ¸Ä
+**é‡è¦çš„æ˜¯å¯¹struts.xmlé…ç½®ä¸­çš„ç†è§£ï¼Œä¸€ä¸ªactionå¯¹åº”åˆ°é…ç½®æ–‡ä»¶ä¸­ä¸€ä¸ªactionæ˜ å°„**
+- å¯¹struts.xmlä¸­å„ä¸ªå­æ ‡ç­¾çš„ç†è§£å’Œå¯¹åº”ç±»çš„ä¿®æ”¹
 
-Ê¹ÓÃÎÊÌâÇı¶¯µÄ·½Ê½¼Ç±Ê¼Ç£¬ÏÖÓĞÎÊÌâ£¬ºóÓĞ½â¾öÓëÓÅ»¯
+ä½¿ç”¨é—®é¢˜é©±åŠ¨çš„æ–¹å¼è®°ç¬”è®°ï¼Œç°æœ‰é—®é¢˜ï¼Œåæœ‰è§£å†³ä¸ä¼˜åŒ–
 
-Ñ§Ï°¿ò¼Ü¡¢¼¼Êõ£¬×îÖØÒªÊÇÑ§Ï°Ò»¸öÁ÷³Ì£¬¸ù¾İÁ÷³ÌË³ĞòË¼¿¼
+å­¦ä¹ æ¡†æ¶ã€æŠ€æœ¯ï¼Œæœ€é‡è¦æ˜¯å­¦ä¹ ä¸€ä¸ªæµç¨‹ï¼Œæ ¹æ®æµç¨‹é¡ºåºæ€è€ƒ
 
 ### Chapter2:
-1. ÒµÎñÂß¼­Àà(AcitonÀà)£¬ÈıÖÖÊµÏÖ·½Ê½
-(1)×Ô¶¨Òå
-(2)ÊµÏÖ½Ó¿ÚAction
-- Îå¸ö³£Á¿
+1. ä¸šåŠ¡é€»è¾‘ç±»(Acitonç±»)ï¼Œä¸‰ç§å®ç°æ–¹å¼
+(1)è‡ªå®šä¹‰
+(2)å®ç°æ¥å£Action
+- äº”ä¸ªå¸¸é‡
 SUCCESS,ERROR,LOGIN,INPUT,NONE
-- ÖØĞ´execute()·½·¨
-(3)¼Ì³Ğ¸¸ÀàActionSupport
+- é‡å†™execute()æ–¹æ³•
+(3)ç»§æ‰¿çˆ¶ç±»ActionSupport
 
-2. ±í´ïÈ¡Êı¾İ£¬½ÓÊÜÓÃ»§ÊäÈëÊı¾İµÄÈıÖÖ·½Ê½
-actionÀïÃæÓĞÈıÖÖ·½Ê½´ÓÒ³ÃæÖĞ»ñÈ¡Öµ.
+2. è¡¨è¾¾å–æ•°æ®ï¼Œæ¥å—ç”¨æˆ·è¾“å…¥æ•°æ®çš„ä¸‰ç§æ–¹å¼
+actioné‡Œé¢æœ‰ä¸‰ç§æ–¹å¼ä»é¡µé¢ä¸­è·å–å€¼.
 
-Ò»ÊÇÖ±½ÓÔÚactionÀïÃæĞ´ÊôĞÔ.ÕâÎªÊôĞÔÇı¶¯. (**ÒªÓĞget,set·½·¨**)
-¶şÊÇÔÚactionÀïÃæ·ÅÒ»¸öJavaBean(ÁìÓò¶ÔÏó)µÄ¶ÔÏó.Õâ¸öÎª¶ÔÏóÇı¶¯.
-ÈıÊÇÍ¨¹ıÊµÏÖModelDriven<Object>½Ó¿Ú£¬Õâ¸öÎªÄ£ĞÍÇı¶¯
+ä¸€æ˜¯ç›´æ¥åœ¨actioné‡Œé¢å†™å±æ€§.è¿™ä¸ºå±æ€§é©±åŠ¨. (**è¦æœ‰get,setæ–¹æ³•**)
+äºŒæ˜¯åœ¨actioné‡Œé¢æ”¾ä¸€ä¸ªJavaBean(é¢†åŸŸå¯¹è±¡)çš„å¯¹è±¡.è¿™ä¸ªä¸ºå¯¹è±¡é©±åŠ¨.
+ä¸‰æ˜¯é€šè¿‡å®ç°ModelDriven<Object>æ¥å£ï¼Œè¿™ä¸ªä¸ºæ¨¡å‹é©±åŠ¨
 
-(1)ÊôĞÔÇı¶¯
-ÔÚActionÀàÖĞÖ±½Ó¶¨Òåget,set·½·¨
+(1)å±æ€§é©±åŠ¨
+åœ¨Actionç±»ä¸­ç›´æ¥å®šä¹‰get,setæ–¹æ³•
 
-(2)ÃæÏò¶ÔÏóÇı¶¯
-ÉèÖÃÒ»¸öjavaBean(ÄÚÖÃset,get·½·¨)
-Í¨¹ıUser user = new User(); set,get user¶ÔÏó
-±íµ¥Í¨¹ıuser.name È¡Êı¾İ
+(2)é¢å‘å¯¹è±¡é©±åŠ¨
+è®¾ç½®ä¸€ä¸ªjavaBean(å†…ç½®set,getæ–¹æ³•)
+é€šè¿‡User user = new User(); set,get userå¯¹è±¡
+è¡¨å•é€šè¿‡user.name å–æ•°æ®
 ```
 <input name="user.name">
 ```
-(3)Ä£ĞÍÇı¶¯
+(3)æ¨¡å‹é©±åŠ¨
 class implements ModelDriven<User>
-	ÊµÏÖ³éÏó·½·¨
+	å®ç°æŠ½è±¡æ–¹æ³•
 	public User getModel(){
 	return user;
 }
 
-±íµ¥È¡Êı¾İÖ»ĞèĞ´ÊôĞÔÃû£º
+è¡¨å•å–æ•°æ®åªéœ€å†™å±æ€§åï¼š
 ```
-<input name='ÊôĞÔÃû'>
+<input name='å±æ€§å'>
 ```
 
-×ÜµÄÀ´Ëµ£¬¾ÍÊÇServletµÄÊı¾İ¹²ÏíÎÊÌâ¡£ ÈçºÎ½«ÊÓÍ¼ÖĞ±íµ¥µÄÖµÈ¡µ½£¬ºÍÈçºÎ½«action´¦Àí¹ıµÄÖµ´«¸øÊÓÍ¼¡£
+æ€»çš„æ¥è¯´ï¼Œå°±æ˜¯Servletçš„æ•°æ®å…±äº«é—®é¢˜ã€‚ å¦‚ä½•å°†è§†å›¾ä¸­è¡¨å•çš„å€¼å–åˆ°ï¼Œå’Œå¦‚ä½•å°†actionå¤„ç†è¿‡çš„å€¼ä¼ ç»™è§†å›¾ã€‚
 
-3. struts.xml³£Á¿ÅäÖÃ(constant)
-methodÊôĞÔ£º
-1. ÉèÖÃ²»Í¬µÄ·ÃÎÊµã
-ActionÖĞ¶¨Òå²»Í¬µÄ·½·¨£¬ÔÚstruts.xmlÖĞÊ¹ÓÃ²»Í¬µÄmethodÊôĞÔÓëÖ®ÏàÓ³Éä¡£
-ActionÊµÏÖÀàÄ¬ÈÏÈë¿Ú·½·¨ÊÇexecute·½·¨£¬¼´ÔÚµ÷ÓÃÄ³¸öactionµÄÊ±ºò£¬½«×Ô¶¯²éÕÒ²¢Ö´ĞĞexecute·½·¨¡£
+3. struts.xmlå¸¸é‡é…ç½®(constant)
+methodå±æ€§ï¼š
+1. è®¾ç½®ä¸åŒçš„è®¿é—®ç‚¹
+Actionä¸­å®šä¹‰ä¸åŒçš„æ–¹æ³•ï¼Œåœ¨struts.xmlä¸­ä½¿ç”¨ä¸åŒçš„methodå±æ€§ä¸ä¹‹ç›¸æ˜ å°„ã€‚
+Actionå®ç°ç±»é»˜è®¤å…¥å£æ–¹æ³•æ˜¯executeæ–¹æ³•ï¼Œå³åœ¨è°ƒç”¨æŸä¸ªactionçš„æ—¶å€™ï¼Œå°†è‡ªåŠ¨æŸ¥æ‰¾å¹¶æ‰§è¡Œexecuteæ–¹æ³•ã€‚
 
 ```
 action.java
@@ -175,27 +170,27 @@ struts.xml
 <action name="createData" class="packagename.action" method="create"/>
 ```
 
-ÓÅ»¯action±êÇ©¹ı¶àµÄÎÊÌâ£ºÃ¿Ôö¼ÓÒ»¸ö¹¦ÄÜÀà£¬¶¼ÒªÔö¼ÓÒ»¸öaction
-ÓÅ»¯result±êÇ©¹ı¶àµÄÎÊÌâ£ºÃ¿Ôö¼ÓÒ»¸öÒ³Ãæ£¬¶¼ÒªÔö¼ÓÒ»¸öresult name
+ä¼˜åŒ–actionæ ‡ç­¾è¿‡å¤šçš„é—®é¢˜ï¼šæ¯å¢åŠ ä¸€ä¸ªåŠŸèƒ½ç±»ï¼Œéƒ½è¦å¢åŠ ä¸€ä¸ªaction
+ä¼˜åŒ–resultæ ‡ç­¾è¿‡å¤šçš„é—®é¢˜ï¼šæ¯å¢åŠ ä¸€ä¸ªé¡µé¢ï¼Œéƒ½è¦å¢åŠ ä¸€ä¸ªresult name
 
-**½â¾ö·½·¨**:
+**è§£å†³æ–¹æ³•**:
 
-2. Í¨Åä·û·½·¨
+2. é€šé…ç¬¦æ–¹æ³•
 
-Ê¹ÓÃÍ¨Åä·û *  Á½¸öÍ¨Åä·ûĞèÒªÓÃ"\_"¸ô¿ª
+ä½¿ç”¨é€šé…ç¬¦ *  ä¸¤ä¸ªé€šé…ç¬¦éœ€è¦ç”¨"\_"éš”å¼€
 ```
 <action name="*_*" class="sxau.rjxy.{1}Action" method="{2}">
 			<result name="{2}{1}success">
-<!-- 			{2} µÚ¶ş¸ö*£¬´ú±í·½·¨ ;  {1} µÚÒ»¸ö*£¬´ú±íÒµÎñ´¦ÀíActionÃû -->
+<!-- 			{2} ç¬¬äºŒä¸ª*ï¼Œä»£è¡¨æ–¹æ³• ;  {1} ç¬¬ä¸€ä¸ª*ï¼Œä»£è¡¨ä¸šåŠ¡å¤„ç†Actionå -->
 				/{2}_{1}_success.jsp
 			</result>
 			
 			
 		</action>
 ```
-ÕâÑù£¬ÔÚĞ´ÍøÖ·Ê±
+è¿™æ ·ï¼Œåœ¨å†™ç½‘å€æ—¶
 http://localhost:8081/testdmi/Teacher_delete
-ÇëÇó±»struts´¦ÀíÊ±£¬¾ÍÊÇ:
+è¯·æ±‚è¢«strutså¤„ç†æ—¶ï¼Œå°±æ˜¯:
 ```
 <action name="Teacher_delete class="sxau.rjxy.TeacherAction" method="delete">
 	<result name="deleteTeacher">
@@ -203,74 +198,74 @@ http://localhost:8081/testdmi/Teacher_delete
 	</result>
 </action>
 ```
-Ëü¾Í»áÕÒµ½ÕıÈ·µÄÒµÎñ´¦ÀíÀàTeacherAction.java
-Action´¦Àí²¢·µ»Ø×Ö·û´®deleteTeacher
-¾­result´¦Àí£¬·µ»Ødelete_Teacher_success.jspÒ³Ãæ
+å®ƒå°±ä¼šæ‰¾åˆ°æ­£ç¡®çš„ä¸šåŠ¡å¤„ç†ç±»TeacherAction.java
+Actionå¤„ç†å¹¶è¿”å›å­—ç¬¦ä¸²deleteTeacher
+ç»resultå¤„ç†ï¼Œè¿”å›delete_Teacher_success.jspé¡µé¢
 
-Í¬Àí£¬¿ÉÒÔºÜ·½±ãµÄ´´½¨
-- ÒµÎñ´¦ÀíÀà£ºStudentAction.java
-- ·µ»ØÊÓÍ¼£ºdelete_Student_success.jap
+åŒç†ï¼Œå¯ä»¥å¾ˆæ–¹ä¾¿çš„åˆ›å»º
+- ä¸šåŠ¡å¤„ç†ç±»ï¼šStudentAction.java
+- è¿”å›è§†å›¾ï¼šdelete_Student_success.jap
 
-**ĞèÒª¸ù¾İstruts.xmlÅäÖÃĞŞ¸ÄÒµÎñÂß¼­ÀàÓëÊÓÍ¼Ãû×Ö**
+**éœ€è¦æ ¹æ®struts.xmlé…ç½®ä¿®æ”¹ä¸šåŠ¡é€»è¾‘ç±»ä¸è§†å›¾åå­—**
 
-ÓÅ»¯action±êÇ©¹ı¶àÎÊÌâ£ºÃ¿Ôö¼ÓÒ»¸ö·½·¨£¬¶¼ÒªÔö¼ÓÒ»¸ö²»Í¬methodÊôĞÔµÄaction
+ä¼˜åŒ–actionæ ‡ç­¾è¿‡å¤šé—®é¢˜ï¼šæ¯å¢åŠ ä¸€ä¸ªæ–¹æ³•ï¼Œéƒ½è¦å¢åŠ ä¸€ä¸ªä¸åŒmethodå±æ€§çš„action
 
-3. ¶¯Ì¬·½·¨µ÷ÓÃ
-<!--     ¶¯Ì¬·½·¨µ÷ÓÃ£¬Ìí¼ÓÕâ¸öconstantÊôĞÔ¿ÉÒÔ²»Ö¸¶¨methodÃû×Öµ÷ÓÃ·Çexecute·½·¨ -->
+3. åŠ¨æ€æ–¹æ³•è°ƒç”¨
+<!--     åŠ¨æ€æ–¹æ³•è°ƒç”¨ï¼Œæ·»åŠ è¿™ä¸ªconstantå±æ€§å¯ä»¥ä¸æŒ‡å®šmethodåå­—è°ƒç”¨éexecuteæ–¹æ³• -->
 ```
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
 ```
 
-Ê¹ÓÃ '!' ·ûºÅÀ´µ÷ÓÃ·½·¨
-Èç'Action!create' ±íÊ¾Æ¥ÅäÃû³ÆÎªAction(actionÖĞµÄnameÓ³Éä)µÄcreate·½·¨
+ä½¿ç”¨ '!' ç¬¦å·æ¥è°ƒç”¨æ–¹æ³•
+å¦‚'Action!create' è¡¨ç¤ºåŒ¹é…åç§°ä¸ºAction(actionä¸­çš„nameæ˜ å°„)çš„createæ–¹æ³•
 
 
 
 ### Chapter3(Ex3)
-**·ÃÎÊrequest,sessionºÍapplication¶ÔÏó**
+**è®¿é—®request,sessionå’Œapplicationå¯¹è±¡**
 
-´«Í³¿ª·¢ÖĞ»áÓÃµ½Servlet APIÖĞµÄHttpServletRequest,HttpSessionºÍServletContext¡£
-Struts 2 Ìá¹©¶àÖÖ·½Ê½À´·ÃÎÊÉÏÊöÈıÖÖ¶ÔÏó£¬¹é½á¿É·ÖÎªÁ½´óÀà£º
-(1)ÓëServlet API½âñîµÄ·ÃÎÊ·½Ê½ (2)ÓëServletAPIñîºÏµÄ·ÃÎÊ·½Ê½¡£
+ä¼ ç»Ÿå¼€å‘ä¸­ä¼šç”¨åˆ°Servlet APIä¸­çš„HttpServletRequest,HttpSessionå’ŒServletContextã€‚
+Struts 2 æä¾›å¤šç§æ–¹å¼æ¥è®¿é—®ä¸Šè¿°ä¸‰ç§å¯¹è±¡ï¼Œå½’ç»“å¯åˆ†ä¸ºä¸¤å¤§ç±»ï¼š
+(1)ä¸Servlet APIè§£è€¦çš„è®¿é—®æ–¹å¼ (2)ä¸ServletAPIè€¦åˆçš„è®¿é—®æ–¹å¼ã€‚
 
-1. ÓëServletAPI½âñîµÄ·ÃÎÊ·½Ê½
-ÎªÁË±ÜÃâÓëServletAPIñîºÏ£¬Strut2¶ÔHttpServletRequest,HttpSessionºÍServletContext½øĞĞÁË·â×°£¬ ¹¹ÔìÁËÈı¸öMap¶ÔÏó´úÌæÕâÈıÖÖ¶ÔÏó¡£ÔÚActionÖĞ£¬Ö±½ÓÊ¹ÓÃHttpServletRequest,HttpSession,ServletContext¶ÔÓ¦µÄ**Map¶ÔÏó**À´±£´æºÍ¶ÁÈ¡Êı¾İ¡£
+1. ä¸ServletAPIè§£è€¦çš„è®¿é—®æ–¹å¼
+ä¸ºäº†é¿å…ä¸ServletAPIè€¦åˆï¼ŒStrut2å¯¹HttpServletRequest,HttpSessionå’ŒServletContextè¿›è¡Œäº†å°è£…ï¼Œ æ„é€ äº†ä¸‰ä¸ªMapå¯¹è±¡ä»£æ›¿è¿™ä¸‰ç§å¯¹è±¡ã€‚åœ¨Actionä¸­ï¼Œç›´æ¥ä½¿ç”¨HttpServletRequest,HttpSession,ServletContextå¯¹åº”çš„**Mapå¯¹è±¡**æ¥ä¿å­˜å’Œè¯»å–æ•°æ®ã€‚
 
-(1) **ActionContext** ÊÇactionÖ´ĞĞµÄÉÏÏÂÎÄ£¬ÔÚActionContextÖĞ±£´æÁËactionÖ´ĞĞËùĞèµÄÒ»×é¶ÔÏó£¬°üÀ¨parameters,request,session,applicationºÍlocaleµÈ¡£ActionContextÀà¶¨ÒåÁËÒÔÏÂ·½·¨»ñÈ¡WebÔªËØ¶ÔÓ¦µÄMap¶ÔÏó¡£
+(1) **ActionContext** æ˜¯actionæ‰§è¡Œçš„ä¸Šä¸‹æ–‡ï¼Œåœ¨ActionContextä¸­ä¿å­˜äº†actionæ‰§è¡Œæ‰€éœ€çš„ä¸€ç»„å¯¹è±¡ï¼ŒåŒ…æ‹¬parameters,request,session,applicationå’Œlocaleç­‰ã€‚ActionContextç±»å®šä¹‰äº†ä»¥ä¸‹æ–¹æ³•è·å–Webå…ƒç´ å¯¹åº”çš„Mapå¯¹è±¡ã€‚
 
 - public Object get(Object key)
 
-*ActionContextÀàÃ»Ó´Ìá¹©ÀàËÆgetRequest()ÕâÑùµÄ·½·¨À´»ñÈ¡·â×°ÁËHttpServletRequestµÄMap¶ÔÏó¡£ÒªµÃµ½ÇëÇóMap¶ÔÏó£¬ĞèÒªÎªget()·½·¨´«µİ²ÎÊı"request"*
+*ActionContextç±»æ²¡å“Ÿæä¾›ç±»ä¼¼getRequest()è¿™æ ·çš„æ–¹æ³•æ¥è·å–å°è£…äº†HttpServletRequestçš„Mapå¯¹è±¡ã€‚è¦å¾—åˆ°è¯·æ±‚Mapå¯¹è±¡ï¼Œéœ€è¦ä¸ºget()æ–¹æ³•ä¼ é€’å‚æ•°"request"*
 
 ```
 ActionContext context = ActionContext.getContext();
 		/*public Object get(Object key)
-		 * ActionContextÀàÃ»ÓĞÌá¹©ÀàËÆgetRequest()ÕâÑùµÄ·½·¨À´»ñÈ¡·â×°ÁËHttpServletRequestµÄMap¶ÔÏó¡£
-		 * ÒªµÃµ½Map¶ÔÏó£¬ĞèÒªÎªget·½·¨´«µİ²ÎÊı"request"*/
+		 * ActionContextç±»æ²¡æœ‰æä¾›ç±»ä¼¼getRequest()è¿™æ ·çš„æ–¹æ³•æ¥è·å–å°è£…äº†HttpServletRequestçš„Mapå¯¹è±¡ã€‚
+		 * è¦å¾—åˆ°Mapå¯¹è±¡ï¼Œéœ€è¦ä¸ºgetæ–¹æ³•ä¼ é€’å‚æ•°"request"*/
 		Map request = (Map) context.get("request");
 ```
 
 - public Map getSession()
-»ñÈ¡·â×°ÁËHttpSessionµÄMap¶ÔÏó¡£
+è·å–å°è£…äº†HttpSessionçš„Mapå¯¹è±¡ã€‚
 
 - public Map getApplication()
-»ñÈ¡·â×°ÁËServletContextµÄMap¶ÔÏó¡£
+è·å–å°è£…äº†ServletContextçš„Mapå¯¹è±¡ã€‚
 
-ActionÖĞ£º
+Actionä¸­ï¼š
 ```
 ActionContext context = ActionContext.getContext();
 Map session = context.getSession();
 Map application = context.getApplication();
-ÔÚÇëÇóÖĞ·ÅÖÃĞÅÏ¢
+åœ¨è¯·æ±‚ä¸­æ”¾ç½®ä¿¡æ¯
 		request.put("r1", "r1");
-//		ÔÚsessionÖĞ±£´æuser¶ÔÏó
+//		åœ¨sessionä¸­ä¿å­˜userå¯¹è±¡
 		session.put("user", "user");
-//		ÔÚapplicationÖĞ±£´æĞÅÏ¢
+//		åœ¨applicationä¸­ä¿å­˜ä¿¡æ¯
 		application.put("appkey", "value");
 ```
 
-JSPÊÓÍ¼ÖĞ£º
-¿ÉÓÃEL±í´ïÊ½·ÃÎÊ£º
+JSPè§†å›¾ä¸­ï¼š
+å¯ç”¨ELè¡¨è¾¾å¼è®¿é—®ï¼š
 
 ```
 ${requestScope.r1}
@@ -278,15 +273,15 @@ ${sessionScope.user}
 ${applicationScope.appkey}
 ```
 
-(2) ½Ó¿Ú×¢Èë·½Ê½»ñÈ¡request,session,application¶ÔÏó
+(2) æ¥å£æ³¨å…¥æ–¹å¼è·å–request,session,applicationå¯¹è±¡
 - org.apache.struts2.interceptor.RequestAware
-	¿ò¼ÜÀûÓÃRequestAware½Ó¿Ú£¬ÏòActionÊµÀı×¢Èërequest Map¶ÔÏó¡£¸Ã½Ó¿ÚÖ»ÓĞÒ»¸ö·½·¨
+	æ¡†æ¶åˆ©ç”¨RequestAwareæ¥å£ï¼Œå‘Actionå®ä¾‹æ³¨å…¥request Mapå¯¹è±¡ã€‚è¯¥æ¥å£åªæœ‰ä¸€ä¸ªæ–¹æ³•
 	- public void setRequest(Map request)
 - org.apache.struts2.interceptor.SessionAware
-	¿ò¼ÜÀûÓÃSessionAware½Ó¿Ú£¬ÏòActionÊµÀı×¢Èësession Map¶ÔÏó¡£¸Ã½Ó¿ÚÖ»ÓĞÒ»¸ö·½·¨
+	æ¡†æ¶åˆ©ç”¨SessionAwareæ¥å£ï¼Œå‘Actionå®ä¾‹æ³¨å…¥session Mapå¯¹è±¡ã€‚è¯¥æ¥å£åªæœ‰ä¸€ä¸ªæ–¹æ³•
 	- void setSessioin(Map session)
 - org.apache.struts2.interceptor.ApplicationAware
- 	¿ò¼ÜÀûÓÃApplicationAware½Ó¿Ú£¬ÏòActionÊµÀı×¢Èëapplication Map¶ÔÏó¡£¸Ã½Ó¿ÚÖ»ÓĞÒ»¸ö·½·¨
+ 	æ¡†æ¶åˆ©ç”¨ApplicationAwareæ¥å£ï¼Œå‘Actionå®ä¾‹æ³¨å…¥application Mapå¯¹è±¡ã€‚è¯¥æ¥å£åªæœ‰ä¸€ä¸ªæ–¹æ³•
  	- void setApplication(Map application)
 
  **eg**:
@@ -298,9 +293,9 @@ public class WebAction2 extends ActionSupport implements RequestAware,SessionAwa
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-//		ÔÚÇëÇóÖĞ·ÅÖÃĞÅÏ¢
+//		åœ¨è¯·æ±‚ä¸­æ”¾ç½®ä¿¡æ¯
 		request.put("r1", "r1");
-//		ÔÚsessionÖĞ±£´æuser¶ÔÏó
+//		åœ¨sessionä¸­ä¿å­˜userå¯¹è±¡
 		session.put("user", "user");
 		return super.execute();
 	}
@@ -317,21 +312,21 @@ public class WebAction2 extends ActionSupport implements RequestAware,SessionAwa
 	}
 }
 ``` 
-2. ÓëServlet APIñîºÏµÄ·ÃÎÊ·½Ê½
+2. ä¸Servlet APIè€¦åˆçš„è®¿é—®æ–¹å¼
 
-Ö±½Ó·ÃÎÊServlet APIÊ¹ActionºÍServlet»·¾³ñîºÏÔÚÒ»Æğ£¬¶ÔÓÚHttpServletRequest,HttpServletResponseºÍServletContextÕâĞ©¶ÔÏó£¬¶¼ÊÇÓÉServletÈİÆ÷¹¹ÔìµÄ£¬ÓëÕâĞ©¶ÔÏó°ó¶¨ÔÚÒ»Æğ£¬²âÊÔÊ±¾ÍĞèÒªÓĞServletÈİÆ÷£¬²»±ãÓÚActionµÄµ¥Ôª²âÊÔ¡£
-µ«ÓĞÊ±ĞèÒªÖ±½Ó·ÃÎÊÕâĞ©¶ÔÏó£¬ÒªÖ±½Ó»ñÈ¡HttpServletRequestºÍServletContext¶ÔÏó£¬¿ÉÒÔ
+ç›´æ¥è®¿é—®Servlet APIä½¿Actionå’ŒServletç¯å¢ƒè€¦åˆåœ¨ä¸€èµ·ï¼Œå¯¹äºHttpServletRequest,HttpServletResponseå’ŒServletContextè¿™äº›å¯¹è±¡ï¼Œéƒ½æ˜¯ç”±Servletå®¹å™¨æ„é€ çš„ï¼Œä¸è¿™äº›å¯¹è±¡ç»‘å®šåœ¨ä¸€èµ·ï¼Œæµ‹è¯•æ—¶å°±éœ€è¦æœ‰Servletå®¹å™¨ï¼Œä¸ä¾¿äºActionçš„å•å…ƒæµ‹è¯•ã€‚
+ä½†æœ‰æ—¶éœ€è¦ç›´æ¥è®¿é—®è¿™äº›å¯¹è±¡ï¼Œè¦ç›´æ¥è·å–HttpServletRequestå’ŒServletContextå¯¹è±¡ï¼Œå¯ä»¥
 
-(1)Ê¹ÓÃorg.apache.struts2.**ServletActionContext**Àà£¬¸ÃÀàÊ±ActionContextµÄ×ÓÀà£¬ËüÓĞÁ½¸ö¾²Ì¬·½·¨£º
+(1)ä½¿ç”¨org.apache.struts2.**ServletActionContext**ç±»ï¼Œè¯¥ç±»æ—¶ActionContextçš„å­ç±»ï¼Œå®ƒæœ‰ä¸¤ä¸ªé™æ€æ–¹æ³•ï¼š
 - public static HttpServletRequest getRequest()
-µÃµ½HttpServletRequest¶ÔÏó
+å¾—åˆ°HttpServletRequestå¯¹è±¡
 - public static ServletContext getServletContext()
-µÃµ½ServletContext¶ÔÏó
+å¾—åˆ°ServletContextå¯¹è±¡
 - public static HttpServletResponse getResponse()
-»ñÈ¡HttpServletResponse¶ÔÏó
-**ServletActionContextÀàÃ»ÓĞÖ±½ÓµÃµ½Httpsession¶ÔÏóµÄ·½·¨£¬Ëü¿ÉÍ¨¹ıHttpServletRequest¶ÔÏóµÃµ½**
+è·å–HttpServletResponseå¯¹è±¡
+**ServletActionContextç±»æ²¡æœ‰ç›´æ¥å¾—åˆ°Httpsessionå¯¹è±¡çš„æ–¹æ³•ï¼Œå®ƒå¯é€šè¿‡HttpServletRequestå¯¹è±¡å¾—åˆ°**
 
-**eg**£º
+**eg**ï¼š
 ```
 public class WebAction3 extends ActionSupport{
 
@@ -341,8 +336,8 @@ public class WebAction3 extends ActionSupport{
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		request = ServletActionContext.getRequest();
-	/*ServletActionContextÀà²¢Ã»ÓĞ¸ø³öÖ±½ÓµÃµ½HttpSession¶ÔÏóµÄ·½·¨
-	 * HttpSession¶ÔÏó¿ÉÒÔÍ¨¹ıHttpServletRequest¶ÔÏóÀ´µÃµ½*/
+	/*ServletActionContextç±»å¹¶æ²¡æœ‰ç»™å‡ºç›´æ¥å¾—åˆ°HttpSessionå¯¹è±¡çš„æ–¹æ³•
+	 * HttpSessionå¯¹è±¡å¯ä»¥é€šè¿‡HttpServletRequestå¯¹è±¡æ¥å¾—åˆ°*/
 		session = request.getSession(true);
 		
 		request.setAttribute("r1", "r1");
@@ -353,14 +348,14 @@ public class WebAction3 extends ActionSupport{
 }
 
 ```
-(2) ½Ó¿Ú×¢Èë(ñîºÏIOC)
-Í¨¹ıActionÀà**ÊµÏÖServletRequestAwareºÍServletContextAware½Ó¿Ú**
-ÓÉStruts2¿ò¼ÜÏòActionÊµÀı×¢ÈëHttpServletRequestºÍServletContext¶ÔÏó¡£
+(2) æ¥å£æ³¨å…¥(è€¦åˆIOC)
+é€šè¿‡Actionç±»**å®ç°ServletRequestAwareå’ŒServletContextAwareæ¥å£**
+ç”±Struts2æ¡†æ¶å‘Actionå®ä¾‹æ³¨å…¥HttpServletRequestå’ŒServletContextå¯¹è±¡ã€‚
 
-org.apache.struts2.interceptor.ServletRequestAware½Ó¿ÚÓĞÒ»¸ö·½·¨
+org.apache.struts2.interceptor.ServletRequestAwareæ¥å£æœ‰ä¸€ä¸ªæ–¹æ³•
 - void setServletRequest(HttpServletRequest request)
 
-org.apache.struts2.util.ServletContextAware½Ó¿ÚÓĞÒ»¸ö·½·¨
+org.apache.struts2.util.ServletContextAwareæ¥å£æœ‰ä¸€ä¸ªæ–¹æ³•
 - void setServletContext(ServletContext context)
 ```
 public class WebAction extends ActionSupport implements ServletRequestAware{
@@ -369,7 +364,7 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-//		×¢ÈëÖĞµÄ½âñî·½Ê½
+//		æ³¨å…¥ä¸­çš„è§£è€¦æ–¹å¼
 //		ActionContext.getContext("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
 		request.setAttribute("r1", "implements ServletRequestAware");
 		return super.execute();
@@ -378,7 +373,7 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-//		½Ó¿Ú×¢Èë·½Ê½£º ½Ó¿ÚÌá¹©set·½·¨£¬½«HttpServletRequest¶ÔÏó×¢Èëµ½Action
+//		æ¥å£æ³¨å…¥æ–¹å¼ï¼š æ¥å£æä¾›setæ–¹æ³•ï¼Œå°†HttpServletRequestå¯¹è±¡æ³¨å…¥åˆ°Action
 		this.request = request;
 	}
 	
@@ -388,18 +383,18 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 ```
 
 #### issues
-**Q**£º
-1. OGNL·ÃÎÊ¾²Ì¬·½·¨Ê±ÎŞ·¨·ÃÎÊ
+**Q**ï¼š
+1. OGNLè®¿é—®é™æ€æ–¹æ³•æ—¶æ— æ³•è®¿é—®
 **S**
-·ÃÎÊ¾²Ì¬·½·¨
+è®¿é—®é™æ€æ–¹æ³•
 
 ```
 <s:property value="@com.test.util.S@abc()">
 ```
 
-×¢Òâ,Á½¸ö@ÊÇÔ¼¶¨..Ò²¾ÍÊÇ±ØĞëÕâÃ´Ğ´.µÚÒ»¸ö@ºóÃæ¸úµÄÊÇÀàµÄÈ«Ãû.µÚ¶ş¸ö@ºóÃæ¸úµÄÊÇ¶ÔÓ¦µÄ·½·¨Ãû.µ±È»,Õâ¸ö·½·¨±ØĞëÊÇ¾²Ì¬µÄ
+æ³¨æ„,ä¸¤ä¸ª@æ˜¯çº¦å®š..ä¹Ÿå°±æ˜¯å¿…é¡»è¿™ä¹ˆå†™.ç¬¬ä¸€ä¸ª@åé¢è·Ÿçš„æ˜¯ç±»çš„å…¨å.ç¬¬äºŒä¸ª@åé¢è·Ÿçš„æ˜¯å¯¹åº”çš„æ–¹æ³•å.å½“ç„¶,è¿™ä¸ªæ–¹æ³•å¿…é¡»æ˜¯é™æ€çš„
 
- Õâ¸ö·ÃÎÊ¾²Ì¬·½·¨ÔÚstruts2.1ÒÔºóµÄ°æ±¾ÀïÃæĞèÒªÉèÖÃÒ»¸öÊôĞÔ,·ñÔòÏµÍ³Ä¬ÈÏÊÇ²»Ö§³Ö·ÃÎÊ¾²Ì¬·½·¨µÄ(struts2.0°æ±¾Ä¬ÈÏÊÇÖ§³Ö·ÃÎÊ¾²Ì¬·½·¨µÄ).¾ßÌåµÄ·½·¨ÊÇÔÚstruts.xmlÀïÃæÌí¼ÓÕâÃ´Ò»¾ä
+ è¿™ä¸ªè®¿é—®é™æ€æ–¹æ³•åœ¨struts2.1ä»¥åçš„ç‰ˆæœ¬é‡Œé¢éœ€è¦è®¾ç½®ä¸€ä¸ªå±æ€§,å¦åˆ™ç³»ç»Ÿé»˜è®¤æ˜¯ä¸æ”¯æŒè®¿é—®é™æ€æ–¹æ³•çš„(struts2.0ç‰ˆæœ¬é»˜è®¤æ˜¯æ”¯æŒè®¿é—®é™æ€æ–¹æ³•çš„).å…·ä½“çš„æ–¹æ³•æ˜¯åœ¨struts.xmlé‡Œé¢æ·»åŠ è¿™ä¹ˆä¸€å¥
 
 ```
  <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
@@ -408,56 +403,56 @@ public class WebAction extends ActionSupport implements ServletRequestAware{
 
 ### Chapter4(Ex4)
 
-*OGNL£º*
-**·ÃÎÊActionÊôĞÔ**
-- ActionÊµÀıÍ¨³£Ñ¹ÈëÖµÕ»ÖĞ¡£ ÒòÎªActionÔÚÖµÕ»ÖĞ£¬²¢ÇÒÖµÕ»ÊÇOGNLµÄ¸ù£¬ËùÒÔ·ÃÎÊActionµÄÊôĞÔÊ±¿ÉÒÔÊ¡ÂÔ¾®ºÅ#
+*OGNLï¼š*
+**è®¿é—®Actionå±æ€§**
+- Actionå®ä¾‹é€šå¸¸å‹å…¥å€¼æ ˆä¸­ã€‚ å› ä¸ºActionåœ¨å€¼æ ˆä¸­ï¼Œå¹¶ä¸”å€¼æ ˆæ˜¯OGNLçš„æ ¹ï¼Œæ‰€ä»¥è®¿é—®Actionçš„å±æ€§æ—¶å¯ä»¥çœç•¥äº•å·#
 
-**±íµ¥±êÇ©µÄnameºÍvalueÊôĞÔ**
-- nameÊôĞÔ³ıÁËÎªHTML±íµ¥ÔªËØÖ¸¶¨Ãû×Ö£¬ÔÚ±íµ¥Ìá½»Ê±×÷ÎªÇëÇó²ÎÊıµÄÃû×ÖÍâ£¬Í¬Ê±Ëü»¹Ó³Éäµ½ActionµÄÊôĞÔ¡£¶àÊıÏÂ£¬nameÊôĞÔÓ³Éäµ½Ò»¸ö¼òµ¥µÄJavaBeanÊôĞÔ(property)£¬Èç£ºnameÊôĞÔµÄÖµÎª'postalCode',±íµ¥Ìá½»ºó£¬Struts2¿ò¼Ü»áµ÷ÓÃActionµÄsetPostalCode()·½·¨À´ÉèÖÃÊôĞÔ(property)
+**è¡¨å•æ ‡ç­¾çš„nameå’Œvalueå±æ€§**
+- nameå±æ€§é™¤äº†ä¸ºHTMLè¡¨å•å…ƒç´ æŒ‡å®šåå­—ï¼Œåœ¨è¡¨å•æäº¤æ—¶ä½œä¸ºè¯·æ±‚å‚æ•°çš„åå­—å¤–ï¼ŒåŒæ—¶å®ƒè¿˜æ˜ å°„åˆ°Actionçš„å±æ€§ã€‚å¤šæ•°ä¸‹ï¼Œnameå±æ€§æ˜ å°„åˆ°ä¸€ä¸ªç®€å•çš„JavaBeanå±æ€§(property)ï¼Œå¦‚ï¼šnameå±æ€§çš„å€¼ä¸º'postalCode',è¡¨å•æäº¤åï¼ŒStruts2æ¡†æ¶ä¼šè°ƒç”¨Actionçš„setPostalCode()æ–¹æ³•æ¥è®¾ç½®å±æ€§(property)
 
-×Ö·û´®ÊôĞÔÓë·Ç×Ö·û´®ÊôĞÔ£º
-	Ê¹ÓÃ%¿ÉÒÔ¶¨Òå·Ç×Ö·û´®ÊôĞÔ
-	Ö®ºó¹ú¼Ê»¯ÓÃ%{getText('key')}À´µ÷ÓÃActionSupportÖĞµÄgetText()·½·¨
+å­—ç¬¦ä¸²å±æ€§ä¸éå­—ç¬¦ä¸²å±æ€§ï¼š
+	ä½¿ç”¨%å¯ä»¥å®šä¹‰éå­—ç¬¦ä¸²å±æ€§
+	ä¹‹åå›½é™…åŒ–ç”¨%{getText('key')}æ¥è°ƒç”¨ActionSupportä¸­çš„getText()æ–¹æ³•
 
-### Struts±êÇ©¿â·ÖÎª
-Ê¹ÓÃÇ°ĞèÒıÈëStruts2±êÇ©¿â
+### Strutsæ ‡ç­¾åº“åˆ†ä¸º
+ä½¿ç”¨å‰éœ€å¼•å…¥Struts2æ ‡ç­¾åº“
 
 ```
 <%@ taglib uri="/struts-tags" prefix = "s" %>
 ```
 
-1. ÓÃ»§½çÃæ±êÇ©
+1. ç”¨æˆ·ç•Œé¢æ ‡ç­¾
 
-- ±íµ¥±êÇ©
-- ·Ç±íµ¥±êÇ©
+- è¡¨å•æ ‡ç­¾
+- éè¡¨å•æ ‡ç­¾
 
-2. ·ÇÓÃ»§±êÇ©(ÆÕÍ¨±êÇ©)
-- ¿ØÖÆ±êÇ©
-- Êı¾İ±êÇ©
+2. éç”¨æˆ·æ ‡ç­¾(æ™®é€šæ ‡ç­¾)
+- æ§åˆ¶æ ‡ç­¾
+- æ•°æ®æ ‡ç­¾
 
 
 ### issues
-±íµ¥valueÖµÎª´«¸ø·şÎñÆ÷µÄÖµ
+è¡¨å•valueå€¼ä¸ºä¼ ç»™æœåŠ¡å™¨çš„å€¼
 ```
 <select>
-	<option value="1">¸ßÖĞ</option>
-	<option value="2">´óÑ§</option>
-	<option value="3">Ë¶Ê¿</option>
-	<option value="4">²©Ê¿</option>
+	<option value="1">é«˜ä¸­</option>
+	<option value="2">å¤§å­¦</option>
+	<option value="3">ç¡•å£«</option>
+	<option value="4">åšå£«</option>
 
 </select>
 ```
 
 ### Chapter5(Ex5)
-**¹ú¼Ê»¯**
-1. JavaÖĞµÄ¹ú¼Ê»¯
-java.utilÖĞ£º
+**å›½é™…åŒ–**
+1. Javaä¸­çš„å›½é™…åŒ–
+java.utilä¸­ï¼š
 
 java.util.Locale
 - public Locale(String language)
 - public Locale(String language,String country)
-language±íÊ¾ÓïÑÔ£¬È¡ÖµÓÉISO-639¶¨ÒåµÄĞ¡Ğ´µÄ¡¢Á½¸ö×ÖÄ¸×é³ÉµÄÓïÑÔ´úÂë¡£
-country±íÊ¾¹ú¼Ò»òµØÇø£¬È¡ÖµÓÉISO-3166¶¨ÒåµÄ´óĞ´µÄ¡¢Á½¸ö×ÖÄ¸×é³ÉµÄ´úÂë¡£
+languageè¡¨ç¤ºè¯­è¨€ï¼Œå–å€¼ç”±ISO-639å®šä¹‰çš„å°å†™çš„ã€ä¸¤ä¸ªå­—æ¯ç»„æˆçš„è¯­è¨€ä»£ç ã€‚
+countryè¡¨ç¤ºå›½å®¶æˆ–åœ°åŒºï¼Œå–å€¼ç”±ISO-3166å®šä¹‰çš„å¤§å†™çš„ã€ä¸¤ä¸ªå­—æ¯ç»„æˆçš„ä»£ç ã€‚
 
 ```
 import java.util.Locale;
@@ -469,8 +464,8 @@ import java.util.ResourceBundle;
 	
 ```
 
-**×ÊÔ´°ü**
-ÔÚ **src**ÏÂĞÂ½¨×ÊÔ´ÎÄ¼ş
+**èµ„æºåŒ…**
+åœ¨ **src**ä¸‹æ–°å»ºèµ„æºæ–‡ä»¶
 baseName_language_country.properties
 
 ```
@@ -479,27 +474,27 @@ MyResources_en_US.properties
 MyResources_zn_CN.properties
 ```
 
-×ÊÔ´ÎÄ¼şÄÚÈİÎª key = value
+èµ„æºæ–‡ä»¶å†…å®¹ä¸º key = value
 eg:
 
 ```
 msg = hello
 ```
 
-Í¨¹ı
-java.util.ResourceBundleÀà
+é€šè¿‡
+java.util.ResourceBundleç±»
 
-»ñÈ¡Ä³¸ö×ÊÔ´°ü£¬µ÷ÓÃÕâ¸öÀàµÄ¾²Ì¬·½·¨getBundle()£º
-¸ù¾İ»ùÃûµÃµ½×ÊÔ´°ü£¬Ê¹ÓÃÏµÍ³È±Ê¡µÄLocale¶ÔÏó
+è·å–æŸä¸ªèµ„æºåŒ…ï¼Œè°ƒç”¨è¿™ä¸ªç±»çš„é™æ€æ–¹æ³•getBundle()ï¼š
+æ ¹æ®åŸºåå¾—åˆ°èµ„æºåŒ…ï¼Œä½¿ç”¨ç³»ç»Ÿç¼ºçœçš„Localeå¯¹è±¡
 - public static final ResourceBundle getBundle(String baseName)
 
-¸ù¾İ»ùÃûºÍLocale¶ÔÏóµÃµ½×ÊÔ´°ü
+æ ¹æ®åŸºåå’ŒLocaleå¯¹è±¡å¾—åˆ°èµ„æºåŒ…
 - public static final ResourceBundle getBundle(String baseName,Locale locale)
 
-ÀûÓÃgetBundle()·½·¨¿ÉÒÔµÃµ½¶ÔÓ¦ÓÚÄ³¸öLocale¶ÔÏóµÄ×ÊÔ´°ü£¬È»ºó¾Í¿ÉÒÔÀûÓÃResourceBundleÀàµÄgetString()·½·¨µÃµ½ÏàÓ¦ÓïÑÔ°æ±¾µÄ×Ö·û´®¡£
+åˆ©ç”¨getBundle()æ–¹æ³•å¯ä»¥å¾—åˆ°å¯¹åº”äºæŸä¸ªLocaleå¯¹è±¡çš„èµ„æºåŒ…ï¼Œç„¶åå°±å¯ä»¥åˆ©ç”¨ResourceBundleç±»çš„getString()æ–¹æ³•å¾—åˆ°ç›¸åº”è¯­è¨€ç‰ˆæœ¬çš„å­—ç¬¦ä¸²ã€‚
 
 - public final String getString(String key)
-´Ó×ÊÔ´°üÖĞ¸ù¾İ¹Ø¼ü×ÖµÃµ½×Ö·û´®
+ä»èµ„æºåŒ…ä¸­æ ¹æ®å…³é”®å­—å¾—åˆ°å­—ç¬¦ä¸²
 
 ```
 Locale locale = new Locale("zn","CN");
@@ -508,45 +503,45 @@ ResourceBundle res = ResourceBundle.getBundle("MyResources",locale);
 System.out.println(res.getString("msg"));
 ```
 
-2. StrutsÖĞµÄ¹ú¼Ê»¯
+2. Strutsä¸­çš„å›½é™…åŒ–
 
-**a. Ê¹ÓÃstruts.custom.i18n.resources³£Á¿ÊµÏÖ¹ú¼Ê»¯**
-(1)´´½¨¹¤³ÌÓëweb.xmlÎÄ¼ş£¬ÅäÖÃ¹ıÂËÆ÷
-(2)srcÏÂ½¨Á¢struts.xml
-- actionÖĞ name class
-- result±êÇ©ÖĞ nameÊôĞÔ
-**Ìí¼Óconstant³£Á¿**
+**a. ä½¿ç”¨struts.custom.i18n.resourceså¸¸é‡å®ç°å›½é™…åŒ–**
+(1)åˆ›å»ºå·¥ç¨‹ä¸web.xmlæ–‡ä»¶ï¼Œé…ç½®è¿‡æ»¤å™¨
+(2)srcä¸‹å»ºç«‹struts.xml
+- actionä¸­ name class
+- resultæ ‡ç­¾ä¸­ nameå±æ€§
+**æ·»åŠ constantå¸¸é‡**
 
 ```
 <constant name="struts.custom.i18n.resources value="baseName of properties"/>
 ```
 
-(3)´´½¨Action£¬·µ»Østruts.xmlÖĞÖ¸¶¨µÄ×Ö·û´®
-(4)´´½¨ÊÓÍ¼
-Ö±½ÓÊ¹ÓÃi18n±êÇ©
+(3)åˆ›å»ºActionï¼Œè¿”å›struts.xmlä¸­æŒ‡å®šçš„å­—ç¬¦ä¸²
+(4)åˆ›å»ºè§†å›¾
+ç›´æ¥ä½¿ç”¨i18næ ‡ç­¾
 
 ```
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<s:a href="login?request_locale=en">Ó¢Óï</s:a>
-	<s:a href="login?request_locale=zh">ººÓï</s:a>
+<s:a href="login?request_locale=en">è‹±è¯­</s:a>
+	<s:a href="login?request_locale=zh">æ±‰è¯­</s:a>
 	<s:form>
 		<s:textfield name="username" key="info.username"></s:textfield>
-<!-- 		getText()Òª¼Ì³ĞActionSupport·½·¨²ÅÓĞ    
-			 %¿ÉÒÔµ÷·½·¨£¬·ÀÖ¹Ö»Êä³ö×Ö·û´® -->
+<!-- 		getText()è¦ç»§æ‰¿ActionSupportæ–¹æ³•æ‰æœ‰    
+			 %å¯ä»¥è°ƒæ–¹æ³•ï¼Œé˜²æ­¢åªè¾“å‡ºå­—ç¬¦ä¸² -->
 		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
 		<s:submit key="info.submit"></s:submit>
 	</s:form>
 ```
 
-×ÊÔ´ÎÄ¼ş£º
+èµ„æºæ–‡ä»¶ï¼š
 ```
 info.username=username
 info.password=password
 ```
 
-**b. Ê¹ÓÃi18n±êÇ©ÊµÏÖ¹ú¼Ê»¯**
-²»Ê¹ÓÃconstantÅäÖÃ£¬ÏÔÊ¾ÉùÃ÷±êÇ©
+**b. ä½¿ç”¨i18næ ‡ç­¾å®ç°å›½é™…åŒ–**
+ä¸ä½¿ç”¨constanté…ç½®ï¼Œæ˜¾ç¤ºå£°æ˜æ ‡ç­¾
 ```
 	<s:i18n name="baseName">
 ```
@@ -555,83 +550,17 @@ info.password=password
 <s:form>
 		<s:i18n name="app">
 		<s:textfield name="username" key="info.username"></s:textfield>
-<!-- 		getText()Òª¼Ì³ĞActionSupport·½·¨²ÅÓĞ    
-			 %¿ÉÒÔµ÷·½·¨£¬·ÀÖ¹Ö»Êä³ö×Ö·û´® -->
+<!-- 		getText()è¦ç»§æ‰¿ActionSupportæ–¹æ³•æ‰æœ‰    
+			 %å¯ä»¥è°ƒæ–¹æ³•ï¼Œé˜²æ­¢åªè¾“å‡ºå­—ç¬¦ä¸² -->
 		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
 		<s:submit key="info.submit"></s:submit>
 		</s:i18n name="app">
 	</s:form>
 ```
 
-#### ·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞÏûÏ¢µÄ·½Ê½
+#### 
 
-1. ÔÚ±íµ¥±êÇ©ÖĞ·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞµÄÏûÏ¢
-
-(1) Ê¹ÓÃ±íµ¥±êÇ©µÄkeyÊôĞÔ£¬ÊôĞÔµÄÖµÊÇ×ÊÔ´ÎÄ¼şÖĞÏûÏ¢µÄkey
-
-```
-<s:textfield name="username" key="info.username"></s:textfield>
-```
-
-(2) Ê¹ÓÃ±íµ¥±êÇ©µÄlabelÊôĞÔ£¬ÊôĞÔµÄÖµÍ¨¹ıgetText()·½·¨»ñÈ¡
-
-```
-<!-- 		getText()Òª¼Ì³ĞActionSupport·½·¨²ÅÓĞ    
-			 %¿ÉÒÔµ÷·½·¨£¬·ÀÖ¹Ö»Êä³ö×Ö·û´® -->
-		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
-```
-
-2. ÔÚActionÖĞ·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞµÄÏûÏ¢
-Struts2µÄcom.opensymphony.xwork2.TextProvider½Ó¿Ú¶¨ÒåÁË·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞÏûÏ¢µÄgetText()·½·¨£¬ActionSupportÀàÊµÏÖÁË¸Ã½Ó¿Ú¡£
-
-Òò´ËÔÚActionÖĞ·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞµÄÏûÏ¢£¬Ö»ĞèAction extends ActionSupport¾Í¿ÉÔÚActionÀàÖĞÖ±½ÓÊ¹ÓÃgetText(String key) ·½·¨»ñÈ¡×ÊÔ´ÎÄ¼şÖĞµÄÏûÏ¢
-
-3. ÔÚJSPÒ³ÃæÖĞ·ÃÎÊ×ÊÔ´ÎÄ¼şÖĞµÄÏûÏ¢
-- Ê¹ÓÃtext±êÇ©
-(1) ×ÊÔ´ÎÄ¼şÖĞÓÃÕ¼Î»·û:{0}
-
-```
-msg.welcome=\u6B22\u8FCE,{0}
-```
-
-ÊÓÍ¼ÖĞ£º
-
-Í¨¹ıs:param±êÇ©¸ø×ÊÔ´ÎÄ¼şÖĞµÄÕ¼Î»·û´«µİ²ÎÊı¡£
-Èç¹ûÓĞ¶à¸ö²»Í¬µÄÕ¼Î»·û£¬Ôòs:param±êÇ©µÄË³ĞòºÍÕ¼Î»·ûµÄÊı×ÖË³ĞòÒÀ´Î¶ÔÓ¦
-
-```
-<s:text name="msg.welcome">
-<!-- 		Í¨¹ıÔÚ×ÊÔ´ÎÄ¼şÖĞÌí¼ÓÕ¼Î»·û£¬ÔÚÊÓÍ¼ÓÃs:param¸ø×ÊÔ´ÎÄ¼şµÄÕ¼Î»·û´«µİ²ÎÊı -->
-		<s:param>
-			<s:property value="username"/>
-		</s:param>
-	</s:text>
-```
-
-(2)×ÊÔ´ÎÄ¼şÖĞÓÃognl±í´ïÊ½:${username}
-
-```
-msg.welcome.ognl=\u6B22\u8FCE,${username}
-```
-
-```
-1. Õ¼Î»·û{0}   s:param ´«²Î <br>
-	<s:text name="msg.welcome">
-<!-- 		Í¨¹ıÔÚ×ÊÔ´ÎÄ¼şÖĞÌí¼ÓÕ¼Î»·û£¬ÔÚÊÓÍ¼ÓÃs:param¸ø×ÊÔ´ÎÄ¼şµÄÕ¼Î»·û´«µİ²ÎÊı -->
-		<s:param>
-			<s:property value="username"/>
-		</s:param>
-	</s:text>
-<%-- 	<s:property value="username"/> --%>
-<br>
-=============<br>
-2. ognl $ {username } <br>
-	<s:text name="msg.welcome.ognl">
-		
-	</s:text>
-```
-
-**Ìí¼ÓÓÃ»§ÃûÑéÖ¤**
+**æ·»åŠ ç”¨æˆ·åéªŒè¯**
 
 1. struts.xml
 
@@ -646,7 +575,7 @@ msg.welcome.ognl=\u6B22\u8FCE,${username}
         </action>
 ```
 
-2. LoginActionÖĞ
+2. LoginActionä¸­
 
 ```
 	public String execute() {
@@ -660,60 +589,60 @@ msg.welcome.ognl=\u6B22\u8FCE,${username}
 ```
 
 3. login.jsp
-(1) ±íµ¥action·¢³öµÄloginÇëÇó»á±»strut.xml×ª½»¸øLoginAction´¦Àí
-(2) ÔÚLoginActionÖĞÅĞ¶ÏÓÃ»§Ãû
-- Îª¿Õ£º·µ»Ø×Ö·û´®login
-- ²»Îª¿Õ£º·µ»Ø×Ö·û´®success
-(3) ´¦Àí½á¹û×Ö·û´®ºÍresult±êÇ©µÄnameÊôĞÔ±È¶Ô
-- ÈôÎªlogin,Ìø×ªµ½login.jsp(ÓÃ»§ÃûÎª¿Õ£¬Ìø×ª»ØµÇÂ¼Ò³Ãæ)
-- ÈôÎªsuccess,Ìø×ªµ½welcome.jsp(ÓÃ»§ÃûÕıÈ·£¬Ìø×ªµ½»¶Ó­Ò³Ãæ)
+(1) è¡¨å•actionå‘å‡ºçš„loginè¯·æ±‚ä¼šè¢«strut.xmlè½¬äº¤ç»™LoginActionå¤„ç†
+(2) åœ¨LoginActionä¸­åˆ¤æ–­ç”¨æˆ·å
+- ä¸ºç©ºï¼šè¿”å›å­—ç¬¦ä¸²login
+- ä¸ä¸ºç©ºï¼šè¿”å›å­—ç¬¦ä¸²success
+(3) å¤„ç†ç»“æœå­—ç¬¦ä¸²å’Œresultæ ‡ç­¾çš„nameå±æ€§æ¯”å¯¹
+- è‹¥ä¸ºlogin,è·³è½¬åˆ°login.jsp(ç”¨æˆ·åä¸ºç©ºï¼Œè·³è½¬å›ç™»å½•é¡µé¢)
+- è‹¥ä¸ºsuccess,è·³è½¬åˆ°welcome.jsp(ç”¨æˆ·åæ­£ç¡®ï¼Œè·³è½¬åˆ°æ¬¢è¿é¡µé¢)
 ```
 <s:form action="login">
 		<s:textfield name="username" key="info.username"></s:textfield>
-<!-- 		getText()Òª¼Ì³ĞActionSupport·½·¨²ÅÓĞ    
-			 %¿ÉÒÔµ÷·½·¨£¬·ÀÖ¹Ö»Êä³ö×Ö·û´® -->
+<!-- 		getText()è¦ç»§æ‰¿ActionSupportæ–¹æ³•æ‰æœ‰    
+			 %å¯ä»¥è°ƒæ–¹æ³•ï¼Œé˜²æ­¢åªè¾“å‡ºå­—ç¬¦ä¸² -->
 		<s:textfield name="password" label="%{getText('info.password')}"></s:textfield>
 		<s:submit key="info.submit"></s:submit>
 	</s:form>
 ```
 
 ### Learn
-**Q**£º½â¾ö¶Ë¿ÚÕ¼ÓÃ
+**Q**ï¼šè§£å†³ç«¯å£å ç”¨
 **S**
-1. ²é¿´¶Ë¿ÚÇé¿ö
+1. æŸ¥çœ‹ç«¯å£æƒ…å†µ
 ```
 netstat -ano
 ```
-2. ²é¿´½ø³ÌºÅ
+2. æŸ¥çœ‹è¿›ç¨‹å·
 ```
-netstat -ano|findstr "¶Ë¿ÚºÅ"
+netstat -ano|findstr "ç«¯å£å·"
 ```
-3. ÈÎÎñ¹ÜÀíÆ÷½ûÓÃÕ¼ÓÃ¶Ë¿ÚµÄ½ø³Ì
+3. ä»»åŠ¡ç®¡ç†å™¨ç¦ç”¨å ç”¨ç«¯å£çš„è¿›ç¨‹
 
 ### chapter6(EX6)
-Struts2¿ò¼ÜµÄÀàĞÍ×ª»»
-1. »ù±¾Êı¾İÀàĞÍ×ª»»
+Struts2æ¡†æ¶çš„ç±»å‹è½¬æ¢
+1. åŸºæœ¬æ•°æ®ç±»å‹è½¬æ¢
 
 **issues**
-- ÖĞÎÄÂÒÂë
-- ÈÕÆÚ¸ñÊ½Ö»ÄÜÎª 'xxxx-xx-xx'
-SHORT¸ñÊ½ÈÕÆÚ
-2. ListÀàĞÍ×ª»»
+- ä¸­æ–‡ä¹±ç 
+- æ—¥æœŸæ ¼å¼åªèƒ½ä¸º 'xxxx-xx-xx'
+SHORTæ ¼å¼æ—¥æœŸ
+2. Listç±»å‹è½¬æ¢
 
-3. ×Ô¶¨ÒåÀàĞÍ×ª»»
+3. è‡ªå®šä¹‰ç±»å‹è½¬æ¢
 
-(1)´´½¨×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷
+(1)åˆ›å»ºè‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨
 
 Converter:
-- ¼Ì³ĞDefaultTypeConverterÀà
-ËüÊÇStrutsTypeConverter½Ó¿ÚµÄ¼ò»¯°æ
+- ç»§æ‰¿DefaultTypeConverterç±»
+å®ƒæ˜¯StrutsTypeConverteræ¥å£çš„ç®€åŒ–ç‰ˆ
 
 ```
 
 /*
-	 * Map context:ÓÃÓÚÖ¸¶¨Ö´ĞĞ×ª»»µÄÉÏÏÂÎÄ
-	 * Object value:ÓÃÓÚÖ¸¶¨½«±»×ª»»µÄÖµ
-	 * Class toType:ÓÃÓÚÖ¸¶¨Öµ±»×ª»»µ½µÄÀàĞÍ
+	 * Map context:ç”¨äºæŒ‡å®šæ‰§è¡Œè½¬æ¢çš„ä¸Šä¸‹æ–‡
+	 * Object value:ç”¨äºæŒ‡å®šå°†è¢«è½¬æ¢çš„å€¼
+	 * Class toType:ç”¨äºæŒ‡å®šå€¼è¢«è½¬æ¢åˆ°çš„ç±»å‹
 	 */
 
 public Object convertValue(Map<String,Object) context, Object target, Member member, String propertyName, Object value, Class toType){
@@ -728,42 +657,42 @@ public Object convertValue(Map<String,Object> context, Object value,Class toType
 PointConverter:
 ```
 public class PointConverter extends StrutsTypeConverter{
-//±íµ¥ÖĞµÄÊı¾İÔÚÕâ¸ö·½·¨ÖĞ±»×ª»»£¬·µ»ØÖµÊÇÄ¿±ê¶ÔÏó
+//è¡¨å•ä¸­çš„æ•°æ®åœ¨è¿™ä¸ªæ–¹æ³•ä¸­è¢«è½¬æ¢ï¼Œè¿”å›å€¼æ˜¯ç›®æ ‡å¯¹è±¡
 	
 	/*
-	 * Map context:ÓÃÓÚÖ¸¶¨Ö´ĞĞ×ª»»µÄÉÏÏÂÎÄ
-	 * Object value:ÓÃÓÚÖ¸¶¨½«±»×ª»»µÄÖµ
-	 * Class toType:ÓÃÓÚÖ¸¶¨Öµ±»×ª»»µ½µÄÀàĞÍ
+	 * Map context:ç”¨äºæŒ‡å®šæ‰§è¡Œè½¬æ¢çš„ä¸Šä¸‹æ–‡
+	 * Object value:ç”¨äºæŒ‡å®šå°†è¢«è½¬æ¢çš„å€¼
+	 * Class toType:ç”¨äºæŒ‡å®šå€¼è¢«è½¬æ¢åˆ°çš„ç±»å‹
 	 */
 	@Override
 	public Object convertFromString(Map context, String[] values, Class toClass) {
 		// TODO Auto-generated method stub
-		System.out.println("½«String×ª»»ÎªÖ¸¶¨µÄÀàĞÍ");
+		System.out.println("å°†Stringè½¬æ¢ä¸ºæŒ‡å®šçš„ç±»å‹");
 		String value = values[0];
 		Point point = new Point();
 		//(3,4)
-		//x:µÚ¶ş¸ö¿ªÊ¼£¬µ½¶ººÅ½áÊø
-		//y:´Ó¶ººÅ¿ªÊ¼£¬µ½µ¹ÊıµÚ¶ş¸ö½áÊø
+		//x:ç¬¬äºŒä¸ªå¼€å§‹ï¼Œåˆ°é€—å·ç»“æŸ
+		//y:ä»é€—å·å¼€å§‹ï¼Œåˆ°å€’æ•°ç¬¬äºŒä¸ªç»“æŸ
 		/*
 		 *1. substring: 
 		 * Returns a string that is a substring of this string. 
 		 * The substring begins at the specified beginIndex andextends to the character at index endIndex - 1.
 		 * Thus the length of the substring is endIndex-beginIndex.
-		 * ·µ»ØÖ¸¶¨ÏÂ±êµÄ×Ó´®
+		 * è¿”å›æŒ‡å®šä¸‹æ ‡çš„å­ä¸²
 		 * 2. indexof(str):
 		 * Returns the index within this string of the first occurrence of the specified substring. 
-		 * ·µ»ØÖ¸¶¨×Ó´®µÚÒ»´Î³öÏÖµÄÏÂ±ê
+		 * è¿”å›æŒ‡å®šå­ä¸²ç¬¬ä¸€æ¬¡å‡ºç°çš„ä¸‹æ ‡
 		 */ 
 		
 		point.setX(Integer.parseInt(value.substring(1, value.indexOf(","))));
 		point.setY(Integer.parseInt(value.substring(value.indexOf(","), value.length()-1)));
 		return point;
 	}
-	//Ê¹ÓÃognl±í´ïÊ½»ñÈ¡ÖµÊ±»áµ÷ÓÃ¸Ã·½·¨
+	//ä½¿ç”¨ognlè¡¨è¾¾å¼è·å–å€¼æ—¶ä¼šè°ƒç”¨è¯¥æ–¹æ³•
 	@Override
 	public String convertToString(Map content, Object obj) {
 		// TODO Auto-generated method stub
-		System.out.println("½«Ö¸¶¨µÄÀàĞÍ×ª»»ÎªString");
+		System.out.println("å°†æŒ‡å®šçš„ç±»å‹è½¬æ¢ä¸ºString");
 		Point p = (Point)obj;
 		return p.toString();
 	}
@@ -772,40 +701,40 @@ public class PointConverter extends StrutsTypeConverter{
 
 ```
 
-(2)×¢²á×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷
+(2)æ³¨å†Œè‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨
 
-- È«¾Ö×¢²á·½Ê½
-×¢²áÎªÈ«¾ÖµÄÀàĞÍ×ª»»Æ÷¶ÔËùÓĞµÄAction¶¼Æğ×÷ÓÃ¡£×¢²áÈ«¾ÖµÄÀàĞÍ×ª»»Æ÷ĞèÒªÔÚWebÓ¦ÓÃµÄWEB-INF/classesÄ¿Â¼ÏÂ´´½¨Ò»¸öÃû³ÆÎªxwork-conversion.propertiesµÄÊôĞÔÎÄ¼ş¡£
+- å…¨å±€æ³¨å†Œæ–¹å¼
+æ³¨å†Œä¸ºå…¨å±€çš„ç±»å‹è½¬æ¢å™¨å¯¹æ‰€æœ‰çš„Actionéƒ½èµ·ä½œç”¨ã€‚æ³¨å†Œå…¨å±€çš„ç±»å‹è½¬æ¢å™¨éœ€è¦åœ¨Webåº”ç”¨çš„WEB-INF/classesç›®å½•ä¸‹åˆ›å»ºä¸€ä¸ªåç§°ä¸ºxwork-conversion.propertiesçš„å±æ€§æ–‡ä»¶ã€‚
 
-ÊôĞÔÎÄ¼şÓÉ¼ü-Öµ¶Ô×é³É£¬¸ñÊ½ÈçÏÂ£º
-
-```
-±»×ª»»ÀàµÄÍêÕûÊµÏÖÀàÃû³Æ = ×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷µÄÍêÕûÊµÏÖÀàÃû³Æ
-```
-
-- ¾Ö²¿×¢²á·½Ê½
-
-×¢²áÎª¾Ö²¿µÄÀàĞÍ×ª»»Æ÷ÓÖ³ÆÎªÌØ¶¨ÀàµÄÀàĞÍ×ª»»Æ÷¡£×¢²á¾Ö²¿µÄÀàĞÍ×ª»»Æ÷ĞèÒªÔÚÀàËùÔÚµÄ°üÖĞ½¨Á¢Ò»¸öÎÄ¼şÃû³ÆĞÎÈçClassName-conversion.propertiesµÄÊôĞÔÎÄ¼ş¡£
-
-ÊôĞÔÎÄ¼şÓÉ¼üÖµ¶Ô×é³É£¬¸ñÊ½ÈçÏÂ£º
+å±æ€§æ–‡ä»¶ç”±é”®-å€¼å¯¹ç»„æˆï¼Œæ ¼å¼å¦‚ä¸‹ï¼š
 
 ```
-propertyName = ×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷µÄÍêÕûÊµÏÖÀàÃû³Æ
+è¢«è½¬æ¢ç±»çš„å®Œæ•´å®ç°ç±»åç§° = è‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨çš„å®Œæ•´å®ç°ç±»åç§°
 ```
-propertyNameÊÇÀàÖĞ±»×ª»»µÄ×Ö¶ÎÃû³Æ£¬ÖµÊÇ×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷ÍêÕûÊµÏÖÀàÃû³Æ¡£
 
-(3) ÔÚWebÓ¦ÓÃÖĞÊ¹ÓÃ×Ô¶¨ÒåÀàĞÍ×ª»»Æ÷
+- å±€éƒ¨æ³¨å†Œæ–¹å¼
+
+æ³¨å†Œä¸ºå±€éƒ¨çš„ç±»å‹è½¬æ¢å™¨åˆç§°ä¸ºç‰¹å®šç±»çš„ç±»å‹è½¬æ¢å™¨ã€‚æ³¨å†Œå±€éƒ¨çš„ç±»å‹è½¬æ¢å™¨éœ€è¦åœ¨ç±»æ‰€åœ¨çš„åŒ…ä¸­å»ºç«‹ä¸€ä¸ªæ–‡ä»¶åç§°å½¢å¦‚ClassName-conversion.propertiesçš„å±æ€§æ–‡ä»¶ã€‚
+
+å±æ€§æ–‡ä»¶ç”±é”®å€¼å¯¹ç»„æˆï¼Œæ ¼å¼å¦‚ä¸‹ï¼š
+
+```
+propertyName = è‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨çš„å®Œæ•´å®ç°ç±»åç§°
+```
+propertyNameæ˜¯ç±»ä¸­è¢«è½¬æ¢çš„å­—æ®µåç§°ï¼Œå€¼æ˜¯è‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨å®Œæ•´å®ç°ç±»åç§°ã€‚
+
+(3) åœ¨Webåº”ç”¨ä¸­ä½¿ç”¨è‡ªå®šä¹‰ç±»å‹è½¬æ¢å™¨
 
 ### issues
-ÊÓÍ¼ÊÕ²»µ½Êı¾İ£¬Ò²Ã»ÓĞ×ª»»
-³õ²½ÍÆ²â£º×ª»»ÀàÃ»ÓĞ¼ÓÔØ³öÀ´£¬×¢²á×ª»»Æ÷ÓĞÎÊÌâ
+è§†å›¾æ”¶ä¸åˆ°æ•°æ®ï¼Œä¹Ÿæ²¡æœ‰è½¬æ¢
+åˆæ­¥æ¨æµ‹ï¼šè½¬æ¢ç±»æ²¡æœ‰åŠ è½½å‡ºæ¥ï¼Œæ³¨å†Œè½¬æ¢å™¨æœ‰é—®é¢˜
 
 ### chapter7(Ex7)
-Ò»¡¢ À¹½ØÆ÷
+ä¸€ã€ æ‹¦æˆªå™¨
 
-1. ´´½¨À¹½ØÆ÷£¨Á½ÖÖÊµÏÖ·½Ê½£ºaÊµÏÖInterceptor½Ó¿Ú    b£º¼Ì³ĞAbstractIntercepterÀà£©
+1. åˆ›å»ºæ‹¦æˆªå™¨ï¼ˆä¸¤ç§å®ç°æ–¹å¼ï¼šaå®ç°Interceptoræ¥å£    bï¼šç»§æ‰¿AbstractIntercepterç±»ï¼‰
 
-- ÊµÏÖInterceptor½Ó¿Ú
+- å®ç°Interceptoræ¥å£
 
 ```
 public class MyInterceptor1 extends AbstractInterceptor{
@@ -813,19 +742,19 @@ public class MyInterceptor1 extends AbstractInterceptor{
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		// TODO Auto-generated method stub
-		//·µ»ØÖµObject,Ç¿×ª
-		HelloWorld hw = (HelloWorld)invocation.getAction(); //²éÅäÖÃÎÄ¼ş£¬»ñÈ¡Action¶ÔÏó 
-		hw.addActionMessage("Calling MyInterceptor1"); //action¼Ì³ĞActionSupport,ÓµÓĞµÄ¸¸Àà·½·¨
+		//è¿”å›å€¼Object,å¼ºè½¬
+		HelloWorld hw = (HelloWorld)invocation.getAction(); //æŸ¥é…ç½®æ–‡ä»¶ï¼Œè·å–Actionå¯¹è±¡ 
+		hw.addActionMessage("Calling MyInterceptor1"); //actionç»§æ‰¿ActionSupport,æ‹¥æœ‰çš„çˆ¶ç±»æ–¹æ³•
 		System.out.println("Calling MyInterceptor1");
 		hw.addActionMessage("MyInterceptor1-1:ActionClass name is: "+ hw.getClass().getName());
 		
 		System.out.println("MyInterceptor1-1:ActionClass name is: "+ hw.getClass().getName());
 		
 		/*
-		 * invocation.invoke()µ÷ÓÃÖ®Ç°µÄ´úÂë½«ÔÚActionÖ´ĞĞÖ®Ç°Ö´ĞĞ
-			invocation.invoke()µ÷ÓÃÖ®ºóµÄ´úÂë½«ÔÚActionÖ´ĞĞÖ®ºóÖ´ĞĞ¡£
+		 * invocation.invoke()è°ƒç”¨ä¹‹å‰çš„ä»£ç å°†åœ¨Actionæ‰§è¡Œä¹‹å‰æ‰§è¡Œ
+			invocation.invoke()è°ƒç”¨ä¹‹åçš„ä»£ç å°†åœ¨Actionæ‰§è¡Œä¹‹åæ‰§è¡Œã€‚
 		 */
-		String result = invocation.invoke(); //·ÅĞĞ£¬×ª»ØActionInvocation
+		String result = invocation.invoke(); //æ”¾è¡Œï¼Œè½¬å›ActionInvocation
 		hw.addActionMessage("MyInterceptor1-2:Theresult is: "+result);
 		System.out.println("MyInterceptor1-2:Theresult is: "+result);
 		
@@ -836,10 +765,10 @@ public class MyInterceptor1 extends AbstractInterceptor{
 
 ```
 
-2. ×¢²áÀ¹½ØÆ÷
+2. æ³¨å†Œæ‹¦æˆªå™¨
 
 ```
-<!-- 		×¢²áÀ¹½ØÆ÷  »áÔÚActionÖ®Ç°Ö´ĞĞ-->
+<!-- 		æ³¨å†Œæ‹¦æˆªå™¨  ä¼šåœ¨Actionä¹‹å‰æ‰§è¡Œ-->
 		<interceptors>
 			<interceptor name="myInterceptor1"
 			class="sxau.rjxy.MyInterceptor1"></interceptor>
@@ -847,7 +776,7 @@ public class MyInterceptor1 extends AbstractInterceptor{
 		
 ```
 
-3. Ê¹ÓÃÀ¹½ØÆ÷
+3. ä½¿ç”¨æ‹¦æˆªå™¨
 
 ```
 <action name="helloWorld" class="sxau.rjxy.HelloWorld" >
@@ -855,7 +784,7 @@ public class MyInterceptor1 extends AbstractInterceptor{
 				/inputMessage.jsp
 			</result>
 			
-<!-- 			Ê¹ÓÃÀ¹½ØÆ÷ ÔÚactionÄÚ¶¨Òå-->
+<!-- 			ä½¿ç”¨æ‹¦æˆªå™¨ åœ¨actionå†…å®šä¹‰-->
 			<interceptor-ref name="defaultStack"/>
 			<interceptor-ref name="myInterceptor1"/>			
 			
@@ -863,12 +792,12 @@ public class MyInterceptor1 extends AbstractInterceptor{
 		
 ```
 
-5. Action·½·¨ »ñÈ¡ĞÅÏ¢
+5. Actionæ–¹æ³• è·å–ä¿¡æ¯
 
 ```
 public class HelloWorld extends ActionSupport{
 	private String message;
-	//·½·¨£¬Òª¿´·µ»ØÖµºÍ²ÎÊı
+	//æ–¹æ³•ï¼Œè¦çœ‹è¿”å›å€¼å’Œå‚æ•°
 	public String getMessage() {
 		return message;
 	}
@@ -885,43 +814,43 @@ public class HelloWorld extends ActionSupport{
 }
 ```
 
-6. ViewÊÓÍ¼
+6. Viewè§†å›¾
 
 ```
 <s:actionmessage/>
 	<s:form action="helloWorld">
 		<s:textfield name="message" label="Message"/>
-		<!--nameÈ¥µô£¬¾Í²»»áÌá½»¸øaction´¦Àí-->
+		<!--nameå»æ‰ï¼Œå°±ä¸ä¼šæäº¤ç»™actionå¤„ç†-->
 		<s:submit />
 	</s:form>
 ```
 
-invocation.invoke()µ÷ÓÃÖ®Ç°µÄ´úÂë½«ÔÚActionÖ´ĞĞÖ®Ç°Ö´ĞĞ
-invocation.invoke()µ÷ÓÃÖ®ºóµÄ´úÂë½«ÔÚActionÖ´ĞĞÖ®ºóÖ´ĞĞ¡£
+invocation.invoke()è°ƒç”¨ä¹‹å‰çš„ä»£ç å°†åœ¨Actionæ‰§è¡Œä¹‹å‰æ‰§è¡Œ
+invocation.invoke()è°ƒç”¨ä¹‹åçš„ä»£ç å°†åœ¨Actionæ‰§è¡Œä¹‹åæ‰§è¡Œã€‚
 
-ÔÚÉèÖÃÀ¹½Ø»òÅÅ³ıµÄ·½·¨Ê±£¬Èç¹ûÓĞ¶à¸ö·½·¨£¬ÄÇÃ´ÒÔ¶ººÅ£©£¬·Ö¸ô
+åœ¨è®¾ç½®æ‹¦æˆªæˆ–æ’é™¤çš„æ–¹æ³•æ—¶ï¼Œå¦‚æœæœ‰å¤šä¸ªæ–¹æ³•ï¼Œé‚£ä¹ˆä»¥é€—å·ï¼‰ï¼Œåˆ†éš”
 
-PreResultListener½Ó¿Ú
+PreResultListeneræ¥å£
 
 void beforeResult(ActionInvocation invocation, String resultCode)
 
-resultCodeÊÇActionÖ´ĞĞ·µ»ØµÄ½á¹ûÂë¡£
-Õâ¸ö·½·¨½«ÔÚActionÖ´ĞĞºó£¬ResultÖ´ĞĞÇ°±»µ÷ÓÃ¡£
+resultCodeæ˜¯Actionæ‰§è¡Œè¿”å›çš„ç»“æœç ã€‚
+è¿™ä¸ªæ–¹æ³•å°†åœ¨Actionæ‰§è¡Œåï¼ŒResultæ‰§è¡Œå‰è¢«è°ƒç”¨ã€‚
 
-¶ş¡¢ µÇÂ¼À¹½ØÆ÷
+äºŒã€ ç™»å½•æ‹¦æˆªå™¨
 
-Èı¡¢ ÄÚÖÃÀ¹½ØÆ÷
-Struts2¿ò¼ÜÌá¹©ÁËºÜ¶àµÄÄÚÖÃÀ¹½ØÆ÷£¬ÕâĞ©À¹½ØÆ÷ÔÚstruts-default.xmlÅäÖÃÎÄ¼şÖĞ×¢²á£¬¿ª·¢ÈËÔ±¿ÉÒÔÖ±½ÓÊ¹ÓÃ¡£
+ä¸‰ã€ å†…ç½®æ‹¦æˆªå™¨
+Struts2æ¡†æ¶æä¾›äº†å¾ˆå¤šçš„å†…ç½®æ‹¦æˆªå™¨ï¼Œè¿™äº›æ‹¦æˆªå™¨åœ¨struts-default.xmlé…ç½®æ–‡ä»¶ä¸­æ³¨å†Œï¼Œå¼€å‘äººå‘˜å¯ä»¥ç›´æ¥ä½¿ç”¨ã€‚
 
-- TokenÀ¹½ØÆ÷£¨token£©
-È·±£Ã¿¸öÇëÇóÖ»ÓĞÒ»¸ötoken±»´¦Àí¡£¿ÉÒÔÈ·±£ºóÍË°´Å¥ºÍË«»÷²Ù×÷²»»áÒıÆğ²»±ØÒªµÄ¸ºÃæÓ°Ïì¡£ 
+- Tokenæ‹¦æˆªå™¨ï¼ˆtokenï¼‰
+ç¡®ä¿æ¯ä¸ªè¯·æ±‚åªæœ‰ä¸€ä¸ªtokenè¢«å¤„ç†ã€‚å¯ä»¥ç¡®ä¿åé€€æŒ‰é’®å’ŒåŒå‡»æ“ä½œä¸ä¼šå¼•èµ·ä¸å¿…è¦çš„è´Ÿé¢å½±å“ã€‚ 
 
-½â¾öÖØ¸´Ìá½»
+è§£å†³é‡å¤æäº¤
 
 ### Learn
-//Function·½·¨£¬Òª¿´·µ»ØÖµºÍ²ÎÊı
+//Functionæ–¹æ³•ï¼Œè¦çœ‹è¿”å›å€¼å’Œå‚æ•°
 
-StrutsÒ»¸öActionÀà£¬ÊµÏÖÒ»¸ö¹¦ÄÜ
+Strutsä¸€ä¸ªActionç±»ï¼Œå®ç°ä¸€ä¸ªåŠŸèƒ½
 
 ### issues
 
@@ -931,4 +860,4 @@ Struts has detected an unhandled exception:
 Q:**Messages: No result defined for action **
 
 **Solution**:
-²é¿´ActionÖĞµÄ·µ»ØÖµ result£¬ ÊÓÍ¼ÃûÊÇ·ñÕıÈ·
+æŸ¥çœ‹Actionä¸­çš„è¿”å›å€¼ resultï¼Œ è§†å›¾åæ˜¯å¦æ­£ç¡®

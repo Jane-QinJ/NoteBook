@@ -101,6 +101,24 @@ ajax: 数据的交互
 	%>
 ```
 
+## Ajax程序异步执行过程
+(1) 用户通过用户界面发出需求；
+(2) JavaScript开始调用XMLHttpRequest对象并设置传递给服务器的参数；
+(3) XMLHttpRequest对象通过网络连接Web服务器并发出HTTP请求；
+(4) Web服务器接收到请求和传递来参数后与数据库进行数据交换；
+(5) Web服务器通过网络把数据按XML或者JSON或者别的形式传回给客户端；
+(6) XMLHttpRequest对象接收到数据后回调预先设置好的事件函数；
+(7) 事件函数解析数据后把结果显示在用户界面。
+这里的事件函数就是XMLHttpRequest对象的onreadystatechange事件函数，这个事件函数指向程序中一个自定义的函数体。
+
+![ajax_process](https://github.com/Jane-QinJ/NoteBook/blob/master/AJAX/images/2_ajax_process.png)
+
+使用ajax与服务器通信的的步骤
+1. 创建一个XMLHttpRequest对象
+2. 通过xmlHttpRequest对象的方法发送请求到服务器的某个页面，使用xmlHttpRequest.open(), xmlHttpRequest.send()
+3. 服务器端接收 ajax的请求,做相应处理(操作数据库)，然后返回结果
+4. 客户端通过xmlHttpRequest的属性 接收数据，然后就完成局部刷新当前页面任务-- reponseText , responseXML 
+
 ## issues
 
 **Q1:取返回值时,取到的是一整个页面**
