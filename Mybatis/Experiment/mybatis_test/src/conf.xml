@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<properties resource="db.properties"/>
+	
+	<!-- 	为实体类定义别名,简化sql映射xml文件中的引用 -->
+	<typeAliases>
+<!-- 		<typeAlias type="com.rjxy.ex1.User" alias="User"></typeAlias> -->
+		<package name="com.rjxy.ex1"></package>
+	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver"   value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/mybatis" />
-				<property name="username" value="root" />
-				<property name="password" value="123456" />
+				<property name="driver"   value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
 			</dataSource>
 		</environment>
 	</environments>
@@ -16,6 +24,8 @@
 	<mappers>
 <!-- 		相对路径为src/ -->
 		<mapper resource="com/rjxy/ex1/userMapper.xml"/>
+		<mapper resource="com/rjxy/ex2/userMapper.xml"/>
 	</mappers>
 	
+
 </configuration>

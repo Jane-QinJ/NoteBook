@@ -186,6 +186,9 @@ id INT PRIMARY KEY AUTO_INCREMENT
 [Reference](http://www.cnblogs.com/wangdianqian/p/9927406.html)
 
 ```
+mysql -uroot -p
+pw:123456
+
 set global time_zone = ‘+8:00‘; ##修改mysql全局时区为北京时间，即我们所在的东8区
 set time_zone = ‘+8:00‘; ##修改当前会话时区
 flush privileges; #立即生效
@@ -218,11 +221,17 @@ SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 这个值要和userMapper中namespace值和select SQL语句的 id 相同，才能准确找到sql映射文件中的某个sql语句。
 
+selectOnt("String",1)
+String: userMapper中的namespace和 id
+int: 传入的参数值
+
 **userMapper.xml**
 
 ```
 <!-- namespace可自定义，但规范是包名+类名  -->
 <mapper namespace="com.rjxy.ex1.userMapper"> 
+<!-- 	parameterType:传入参数类型 -->
+<!-- 	resultType：返回值类型 -->
 	<select id="getUser" parameterType="int" 
 		resultType="com.rjxy.ex1.User">
 		select * from users where id=#{id}
@@ -230,6 +239,8 @@ SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 </mapper>
 ```
 
+parameterType:传入参数类型 
+resultType：返回值类型 
 
 ### To be solved:
 -[ ] 添加DTD文档
@@ -284,3 +295,167 @@ ResultSet rs = stmt.executeQuery(sql)
 7. 关闭连接：
 
 rs.close()、stmt.close()、conn.close()
+
+## Ex 2 操作users表的CRUD
+1). 定义sql映射xml文件：
+之前的几步可以省略：导包、建表建库、定义实体类、创建conf.xml
+
+在同一工程下，创建一个新的包com.rjxy.ex2
+
+userMapper.xml
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace可自定义，但规范是包名+类名  -->
+<mapper namespace="com.rjxy.ex2.userMapper"> 
+	<insert id="insertUser" parameterType="com.rjxy.ex1.User">
+	insert into users(name, age) values(#{name}, #{age});
+	</insert>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from users where id=#{id}
+	</delete>
+	
+	<update id="updateUser" parameterType="com.rjxy.ex1.User">
+		update users set name=#{name},age=#{age} where id=#{id}
+	</update>
+	
+	<select id="selectUser" parameterType="int"
+		resultType="com.rjxy.ex1.User">
+		select * from users where id=#{id}	
+	</select>
+	
+	<select id="selectAllUsers" resultType="com.rjxy.ex1.User">
+		select * from users
+	</select>
+</mapper>
+```
+
+2). 在config.xml中注册这个映射文件
+
+```
+	<mapper resource="com/rjxy/ex2/userMapper.xml"/>
+```
+
+3). 测试CRUD
+
+将常用的方法封装为一个类方法
+
+MybatisUtils.java
+
+```
+public class MybatisUtils {
+	public static SqlSessionFactory getFactory() {
+		String resource = "conf.xml";
+		InputStream is = Test1.class.getClassLoader().getResourceAsStream(resource);
+		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+		return factory;
+	}
+}
+```
+
+JUnit测试：(点击要测试的方法名，右键run as JUnit)
+```
+public class Test1 {
+	@Test
+	public void testAdd() {
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		//默认是手动提交的
+		//可以将factory.openSession(true);重载
+		SqlSession session = factory.openSession();
+		
+		String statement = "com.rjxy.ex2.userMapper.insertUser";
+		int insert = session.insert(statement, new User(-1,"Jane",21));	
+		
+		//提交
+		session.commit();
+		session.close();
+		
+		System.out.println(insert);
+
+	}
+	
+	@Test
+	public void testDelete() {
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		//默认是手动提交的
+		//可以将factory.openSession(true);重载
+		SqlSession session = factory.openSession(true);
+		String statement1 = "com.rjxy.ex2.userMapper.deleteUser";
+		int delete = session.insert(statement1, 6);
+		System.out.println(delete);
+	}
+	
+	@Test
+	public void testSelect() {
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		//默认是手动提交的
+		//可以将factory.openSession(true);重载
+		SqlSession session = factory.openSession(true);
+		String statement2 = "com.rjxy.ex2.userMapper.selectUser";
+		User user = session.selectOne(statement2, 1);
+		System.out.println(user);
+	}
+	
+	@Test
+	public void testSelectAll() {
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		//默认是手动提交的
+		//可以将factory.openSession(true);重载
+		SqlSession session = factory.openSession(true);
+		String statement3 = "com.rjxy.ex2.userMapper.selectAllUsers";
+		List<User> list = session.selectList(statement3);
+		session.close();
+		System.out.println(list);
+	}
+}
+```
+### 优化
+4.1. 连接数据库的配置单独放在一个properties文件中
+
+db.properties(src下)
+
+```
+driver= com.mysql.cj.jdbc.Driver
+url= jdbc:mysql://localhost:3306/mybatis
+username=root
+password=123456
+```
+
+将db.properties导入到conf.xml中
+
+```
+<configuration>
+
+	<properties resource="db.properties"/>
+ 
+	<property name="driver" value="${driver}" />
+	<property name="url" value="${url}" />
+	<property name="username" value="${username}" />
+	<property name="password" value="${password}" />
+</configuration>
+```
+
+4.2. 为实体类定义别名,简化sql映射xml文件中的引用
+放在configuration标签下
+
+```
+<typeAliases>
+		<typeAlias type="com.rjxy.ex1.User" alias="User"></typeAlias>
+	
+	</typeAliases>
+```
+
+每次写全类名太繁琐，用别名代替
+
+```
+	<package name="com.rjxy.ex1"></package>
+```
+
+4.3. 可以在src下加入log4j的配置文件,打印日志信息
+1. 添加jar: 
+	log4j-1.2.16.jar 
+
+2.1. log4j.properties(方式一) （放到src下）
+2.2. log4j.xml(方式二)（放到src下）

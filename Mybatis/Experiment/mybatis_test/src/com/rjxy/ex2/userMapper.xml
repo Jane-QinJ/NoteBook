@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace可自定义，但规范是包名+类名  -->
+<mapper namespace="com.rjxy.ex2.userMapper"> 
+	<insert id="insertUser" parameterType="User">
+	insert into users(name, age) values(#{name}, #{age});
+	</insert>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from users where id=#{id}
+	</delete>
+	
+	<update id="updateUser" parameterType="User">
+		update users set name=#{name},age=#{age} where id=#{id}
+	</update>
+	
+	<select id="selectUser" parameterType="int"
+		resultType="User">
+		select * from users where id=#{id}	
+	</select>
+	
+	<select id="selectAllUsers" resultType="com.rjxy.ex1.User">
+		select * from users
+	</select>
+</mapper>
