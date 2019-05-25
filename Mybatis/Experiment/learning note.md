@@ -314,7 +314,7 @@ userMapper.xml
 	</insert>
 	
 	<delete id="deleteUser" parameterType="int">
-		delete from users where id=#{id}
+		delete frosm users where id=#{id}
 	</delete>
 	
 	<update id="updateUser" parameterType="com.rjxy.ex1.User">
