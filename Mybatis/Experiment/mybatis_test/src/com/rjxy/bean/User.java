@@ -1,4 +1,4 @@
-package com.rjxy.ex1;
+package com.rjxy.bean;
 
 public class User {
 	private int id;

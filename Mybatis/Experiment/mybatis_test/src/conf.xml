@@ -6,7 +6,8 @@
 	<!-- 	为实体类定义别名,简化sql映射xml文件中的引用 -->
 	<typeAliases>
 <!-- 		<typeAlias type="com.rjxy.ex1.User" alias="User"></typeAlias> -->
-		<package name="com.rjxy.ex1"></package>
+		<package name="com.rjxy.bean"></package>
+		
 	</typeAliases>
 	
 	<environments default="development">
@@ -25,7 +26,10 @@
 <!-- 		相对路径为src/ -->
 		<mapper resource="com/rjxy/ex1/userMapper.xml"/>
 		<mapper resource="com/rjxy/ex2/userMapper.xml"/>
+		<mapper resource="com/rjxy/ex3/orderMapper.xml"/>
+		<mapper resource="com/rjxy/ex4/classMapper.xml"/>
+		<mapper resource="com/rjxy/ex5/classMapper.xml"/>
 	</mappers>
-	
+		
 
 </configuration>

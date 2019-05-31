@@ -20,7 +20,7 @@
 		select * from users where id=#{id}	
 	</select>
 	
-	<select id="selectAllUsers" resultType="com.rjxy.ex1.User">
+	<select id="selectAllUsers" resultType="User">
 		select * from users
 	</select>
 </mapper>

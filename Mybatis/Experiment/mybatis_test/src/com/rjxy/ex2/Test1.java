@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 
-import com.rjxy.ex1.User;
+import com.rjxy.bean.User;
 
 public class Test1 {
 	@Test

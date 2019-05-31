@@ -1,0 +1,36 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rjxy.ex4.classMapper">
+	<select id="getClass" parameterType="int" resultMap="ClassResultMap">
+		select * from class c, teacher t where c.teacher_id = t.t_id and c.c_id= #{id}
+	</select>
+
+	<resultMap type="Classes" id="ClassResultMap">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+
+		<association property="teacher" javaType="Teacher">
+			<id property="id" column="t_id"/>
+			<result property="name" column="t_name"/>
+		</association>
+	</resultMap> 
+	
+	<select id="getClass2" parameterType="int" resultMap="ClassResultMap2">
+	select*from class where c_id=#{id}
+</select>
+
+<resultMap type="Classes" id="ClassResultMap2">
+	<id property="id" column="c_id"/>
+	<result property="name" column ="c_name"/>
+	
+	<association property="teacher" column="teacher_id" select="getTeacher">
+	</association>
+
+</resultMap>
+
+<select id="getTeacher" parameterType="int" resultType="Teacher">
+	select t_id id, t_name name from teacher where t_id = #{id}
+</select>
+	
+</mapper> 

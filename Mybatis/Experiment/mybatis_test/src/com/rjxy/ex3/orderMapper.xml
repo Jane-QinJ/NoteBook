@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.rjxy.ex3.orderMapper">
+<!-- private int id; -->
+<!-- 	private String orderNo; -->
+<!-- 	private float price; -->
+<!-- 	1. 取别名 -->
+<!-- 	<select id="getOrder" parameterType="int" resultType="Order"> -->
+<!-- 		select order_id id, order_no orderNo, order_price price from orders where order_id = #{id} -->
+<!-- 	</select> -->
+
+	<select id = "getOrder" parameterType="int" resultType="Order"
+	resultMap = "orderResultMap">
+	select * from orders where order_id=#{id}
+</select>
+
+<resultMap type="Order" id="orderResultMap">
+	<!--id为主键
+		property:java类属性
+		column:数据库字段
+		-->
+	<id property="id" column="order_id"/>
+	<result property="orderNo" column="order_no"/>
+	<result property="price" column="order_proce"/>
+</resultMap>
+</mapper>

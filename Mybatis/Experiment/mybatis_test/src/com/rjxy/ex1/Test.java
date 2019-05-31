@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.rjxy.bean.User;
+
 public class Test {
 	public static void main(String[] args) throws IOException {
 		String resource = "conf.xml"; 

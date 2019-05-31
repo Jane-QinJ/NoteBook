@@ -438,6 +438,7 @@ password=123456
 ```
 
 4.2. 为实体类定义别名,简化sql映射xml文件中的引用
+conf.xml
 放在configuration标签下
 
 ```
@@ -459,3 +460,336 @@ password=123456
 
 2.1. log4j.properties(方式一) （放到src下）
 2.2. log4j.xml(方式二)（放到src下）
+
+## Ex3 解决字段名与实体类属性名不相同的冲突
+
+之前的几步可以省略：1.导包
+
+2.建表建库
+
+注意数据库的字段名 和 javabean不同
+```
+CREATE TABLE orders(
+	order_id INT PRIMARY KEY AUTO_INCREMENT,
+	order_no VARCHAR(20), 
+	order_price FLOAT
+);
+INSERT INTO orders(order_no, order_price) VALUES('aaaa', 23);
+INSERT INTO orders(order_no, order_price) VALUES('bbbb', 33);
+INSERT INTO orders(order_no, order_price) VALUES('cccc', 22);
+
+```
+3.定义实体类
+
+**注意：数据库表字段和实体类属性名不一致。**
+
+```
+public class Order {
+	private int id;
+	private String orderNo;
+	private float price;
+}
+
+```
+
+4.创建conf.xml
+
+1) 定义sql映射xml文件：
+
+
+orderMapper.xml
+```
+<mapper namespace = "com.rjxy.ex3.orderMapper">
+	<!-- private int id; -->
+<!-- 	private String orderNo; -->
+<!-- 	private float price; -->
+	<select id="getOrder" parameterType="int" resultType="Order">
+		select * from orders where order_id = #{id}
+	</select>
+
+</mapper>
+```
+
+2)注册
+conf.xml
+
+```
+<!--mapper的路径名-->
+<mapper resource = "com/rjxy/ex3/orderMapper.xml"/>
+```
+
+3)编写测试类
+
+OrderTest.java
+
+```
+public class OrderTest{
+	@Test
+	public void getOrder(){
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession();
+
+		String statement = "com.rjxy.ex3.orderMapper.getOrder";
+		Order order = session.selectOne(statement,2);
+		System.out.println(order);
+	}
+}
+```
+
+运行结果为null，原因是属性名和字段名不一致
+
+### 解决方法
+- 1)可以取别名，和属性一一对应
+
+```
+select order_id id, order_no orderNo, order_price price from orders where order_id = #{id}
+```
+
+- 2)通过resultMap键值对取别名
+
+resultMap:封装一些映射关系
+     id:针对主键
+     result：针对一般字段
+
+标签      | 属性   | 含义
+resultMap | type  | 要定义别名的实体类
+          | id    | 和select标签中的resultMap相同
+
+子标签   | 属性 | 含义
+id      |property| id为主键， java类属性
+        |column  | 数据库字段
+result  |property | result为普通字段， Java类属性
+		|column   | 数据库字段
+
+```
+<select id = "getOrder" parameterType="int" resultType="Order"
+	resultMap = "orderResultMap">
+	select * from orders where order_id=#{id}
+</select>
+
+<resultMap type="Order" id="orderResultMap">
+	<!--id为主键
+		property:java类属性
+		column:数据库字段
+		-->
+	<id property="id" column="order_id"/>
+	<result property="orderNo" column="order_no"/>
+	<result property="price" column="order_proce"/>
+</resultMap>
+```
+## Ex4 实现关联表查询
+6.1. 一对一关联
+1). 提出需求
+根据班级id查询班级信息
+(带老师的信息)
+
+一个教师只带一个班
+一个班只有一个老师
+根据班级id查询班级信息(带老师的信息)
+
+教师表
+
+```
+CREATE TABLE teacher(
+	t_id INT PRIMARY KEY AUTO_INCREMENT, 
+	t_name VARCHAR(20)
+);
+```
+
+班级表
+
+```
+CREATE TABLE class(
+	c_id INT PRIMARY KEY AUTO_INCREMENT, 
+	c_name VARCHAR(20), 
+	teacher_id INT
+);
+```
+2). 创建表和数据
+
+给class这个表的teacher_id字段加一个外键约束，名字叫fk_teacher_id ，依赖于teacher表的t_id字段
+
+```
+ALTER TABLE class ADD CONSTRAINT fk_teacher_id FOREIGN KEY (teacher_id) REFERENCES teacher(t_id);	
+ 
+INSERT INTO teacher(t_name) VALUES('LS1');
+INSERT INTO teacher(t_name) VALUES('LS2');
+ 
+INSERT INTO class(c_name, teacher_id) VALUES('bj_a', 1);
+INSERT INTO class(c_name, teacher_id) VALUES('bj_b', 2);
+
+```
+
+3). 定义实体类
+
+注意:Classes类中有Teacher对象这样才能找到教师名
+
+```
+public class Teacher {
+	private int id;
+	private String name;
+}
+public class Classes {
+	private int id;
+	private String name;
+	private Teacher teacher;
+}
+```
+
+- 方式一：嵌套结果（联表查询》
+  使用嵌套结果映射来处理重复的联合结果的子集封装联表查询的数据(去除重复的数据)
+
+```
+select * from class c, teacher t where c.teacher_id=t.t_id and  c.c_id=1
+```
+
+classMapper.xml
+
+```
+<mapper namespace="com.rjxy.ex4.classMapper">
+	<select id="getClass" parameterType="int" resultMap="ClassResultMap">
+		select * from class c, teacher t where c.teacher_id = t.t_id and c.c_id= #{id}
+	</select>
+
+	<resultMap type="Classes" id="ClassResultMap">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+
+		<association property="teacher" javaType="Teacher">
+			<id property="id" column="t_id"/>
+			<result property="name" column="t_name"/>
+		</association>
+	</resultMap> 
+</mapper>
+```
+注册：
+
+```
+<mapper resource="com/rjxy/ex4/classMapper.xml"/>
+```
+
+编写测试类(测试类不能名为Test，会和junit冲突）：
+
+```
+public class Test5{
+	@Test
+	public void getClasses(){
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession();
+
+		String statement = "com.rjxy.ex4.classMapper.getClass";
+
+		Classes c = session.selectOne(statement,2);
+		System.out.println(c);
+
+		session.close();
+	}
+}
+```
+- 方式二：嵌套查询 执行两次查询
+方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型
+	SELECT * FROM class WHERE c_id=1;
+	SELECT * FROM teacher WHERE t_id=1   //1 是上一个查询得到的teacher_id的值
+
+```
+<select id="getClass2" parameterType="int" resultMap="ClassResultMap2">
+	select*from class where c_id=#{id}
+</select>
+
+<resultMap type="Classes" id="ClassResultMap2">
+	<id property="id" column="c_id"/>
+	<result property="name" column ="c_name"/>
+	
+	<association property="teacher" column="teacher_id" select="getTeacher">
+	</association>
+
+</resultMap>
+
+<select id="getTeacher" parameterType="int" resultType="Teacher">
+	select t_id id, t_name name from teacher where t_id = #{id}
+</select>
+```
+
+测试类：
+
+## Ex5 一对多关联
+1). 提出需求
+    根据classId查询对应的班级信息,包括学生,老师
+
+2). 创建表和数据
+新建一个学生表，class_id表示班级id，一个班级有多个学生
+
+```
+CREATE TABLE student(
+	s_id INT PRIMARY KEY AUTO_INCREMENT, 
+	s_name VARCHAR(20), 
+	class_id INT
+);
+
+INSERT INTO student(s_name, class_id) VALUES('xs_A', 1);
+INSERT INTO student(s_name, class_id) VALUES('xs_B', 1);
+INSERT INTO student(s_name, class_id) VALUES('xs_C', 1);
+INSERT INTO student(s_name, class_id) VALUES('xs_D', 2);
+INSERT INTO student(s_name, class_id) VALUES('xs_E', 2);
+INSERT INTO student(s_name, class_id) VALUES('xs_F', 2);
+```
+3). 定义实体类：
+
+```
+public class Student {
+	private int id;
+	private String name;
+}
+ 
+public class Classes {
+	private int id;
+	private String name;
+	private Teacher teacher;
+	private List<Student> students;
+} 
+
+
+```
+
+4) 注册
+
+```
+<mapper resource="com/rjxy/ex5/classMapper.xml"/>
+```
+
+5) classMapper.xml
+
+- 1. 联表查询
+```
+<select id="getClass" parameterType="int" resultMap="getClassMap">
+	select * from class c, student s where c.c_id = s.class_id and c.c_id=#{id}
+</select>
+
+<resultMap id="getClassMap" type="Classes">
+	<id property="id" column="c_id"/>
+	<result property="name" column="c_name"/>
+	<collection property="students" ofType="Student">
+		<id property="id" column="s_id"/>
+		<result property="name" column="s_name"/>
+	</collection>
+</resultMap>
+```
+测试类：
+Test6.java
+
+public class Test6{
+	@Test
+	public void getClasses(){
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession();
+
+		String statement = "com.rjxy.ex5.classMapper.getClass";
+
+		Classes c = session.selectOne(statement,2);
+		System.out.println(c);
+
+		session.close();
+}
+}
+
+- 2. 嵌套查询
