@@ -551,15 +551,18 @@ resultMap:封装一些映射关系
      id:针对主键
      result：针对一般字段
 
-标签      | 属性   | 含义
-resultMap | type  | 要定义别名的实体类
-          | id    | 和select标签中的resultMap相同
+|标签      | 属性   | 含义|
+| --------   | -----  | ---  |
+|resultMap | type  | 要定义别名的实体类|
+|          | id    | 和select标签中的resultMap相同|
 
-子标签   | 属性 | 含义
-id      |property| id为主键， java类属性
-        |column  | 数据库字段
-result  |property | result为普通字段， Java类属性
-		|column   | 数据库字段
+
+|子标签   | 属性 | 含义|
+|---|---|---|
+|id      |property| id为主键， java类属性|
+|        |column  | 数据库字段|
+|result  |property | result为普通字段， Java类属性|
+|		|column   | 数据库字段|
 
 ```
 <select id = "getOrder" parameterType="int" resultType="Order"
