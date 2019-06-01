@@ -108,6 +108,17 @@ public class User {
 </mapper>
 ```
 
+|标签|属性|含义|
+|---|---|---|
+|mapper|namespace|定位这条mapper|
+
+|子标签|属性|含义|
+|---|---|---|
+|select|id|唯一定位这条select标签|
+|insert    |parameterType|传入参数类型|
+|delete |resultType|返回值类型|
+|update||
+
 **Attention**:
 - 这里的namespace 和 select语句中的 id 可以自定义，目的是准确定位这一条SQL语句的位置
 - namespace可自定义，但规范是包名+类名 
@@ -302,6 +313,13 @@ rs.close()、stmt.close()、conn.close()
 
 在同一工程下，创建一个新的包com.rjxy.ex2
 
+|功能|SQL语句|
+|---|---|
+|增|insert into 表名 values 字段值;|
+|删|delete from 表名 where 条件；
+|改|update 表名 set 字段=新字段值 where 条件；
+|查|select 字段值 from 表名 where 条件；
+
 userMapper.xml
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -314,7 +332,7 @@ userMapper.xml
 	</insert>
 	
 	<delete id="deleteUser" parameterType="int">
-		delete frosm users where id=#{id}
+		delete from users where id=#{id}
 	</delete>
 	
 	<update id="updateUser" parameterType="com.rjxy.ex1.User">
