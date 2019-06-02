@@ -163,14 +163,14 @@ public class Test {
 		//加载mybatis的配置文件（它也加载关联的映射文件）
 		Reader reader = Resources.getResourceAsReader(resource); 
 		//构建sqlSession的工厂	
-**SqlSessionFactory** sessionFactory = new **SqlSessionFactoryBuilder**().build(reader);
+SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		//创建能执行映射文件中sql的sqlSession
-		**SqlSession** session = sessionFactory.openSession();
+		SqlSession session = sessionFactory.openSession();
 		
 		//映射sql的标识字符串
 		String statement = "com.rjxy.ex1.userMapper"+".getUser";
 		//执行查询返回一个唯一user对象的sql
-		User user = session.**selectOne**(statement, 1);
+		User user = session.selectOne(statement, 1);
 		System.out.println(user);
 	}
 }
@@ -401,8 +401,16 @@ public class Test1 {
 		//可以将factory.openSession(true);重载
 		SqlSession session = factory.openSession(true);
 		String statement1 = "com.rjxy.ex2.userMapper.deleteUser";
-		int delete = session.insert(statement1, 6);
+		int delete = session.delete(statement1, 6);
 		System.out.println(delete);
+	}
+	
+	@Test
+	public void testUpdate(){
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession(true);
+		String statementUpdate = “com.rjxy.ex2.userMapper.updateUser”;
+		int update = session.update(statementUpdate ,new User(4,”KK444”,25);
 	}
 	
 	@Test
