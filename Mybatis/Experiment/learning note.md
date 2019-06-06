@@ -715,7 +715,7 @@ public class Test5{
 	}
 }
 ```
-- 方式二：嵌套查询 执行两次查询
+- 方式二 嵌套查询 执行两次查询
 方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型
 	SELECT * FROM class WHERE c_id=1;
 	SELECT * FROM teacher WHERE t_id=1   //1 是上一个查询得到的teacher_id的值
@@ -822,3 +822,58 @@ public class Test6{
 }
 
 - 2. 嵌套查询
+<<<<<<< HEAD
+
+```
+<!-- 
+	方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型
+		SELECT * FROM class WHERE c_id=1;
+		SELECT * FROM teacher WHERE t_id=1   //1 是上一个查询得到的teacher_id的值
+		SELECT * FROM student WHERE class_id=1  //1是第一个查询得到的c_id字段的值
+ -->
+```
+
+## Ex6 动态SQL与模糊查询
+
+1)  提出需求: 
+   实现多条件查询用户(姓名模糊匹配, 年龄在指定的最小值到最大值之间)
+
+|标签|属性|含义|
+|---|---|---|
+|select|id|唯一标识select语句|
+|	   |parameterMap|引用parameterMap|
+|      |statementType|指定Statement的真实类型:CALLABLE 执行调用存储过程的语句|
+
+|标签|属性|含义|
+|---  |---|---|
+|parameterMap|type|需要传递的参数的真是类型 java.util.Map|
+| 			|id|和select中定义一致|
+|子标签|属性|含义|
+|parameter|property|指定参数的key-value|
+|		  |mode|IN/OUT|
+|		  |jdbcType|INTEGER|
+
+<!--
+	<select>
+		parameterMap:引用<parameterMap>
+		statementType:指定Statement的真实类型:CALLABLE 执行调用存储过程的语句
+		<parameterMap>:定义多个参数的键值对
+			type:需要传递的参数的真是类型 java.util.Map
+			<parameter>:指定一个参数key-value
+-->
+### Issues
+F:\MySQL\bin>net start mysql
+MySQL 服务正在启动 ...
+MySQL 服务无法启动。
+
+系统出错。
+
+发生系统错误 1067。
+
+进程意外终止。
+
+### Solution
+[Solution](https://blog.csdn.net/jiurangwolai/article/details/52899937)
+- 删除myini文件
+=======
+
