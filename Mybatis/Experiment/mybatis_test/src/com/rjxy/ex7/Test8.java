@@ -23,8 +23,20 @@ public class Test8 {
 		
 		session.selectOne(statement,parameterMap);
 		
+		//返回值为Integer
 		Integer result = parameterMap.get("user_count");
 		System.out.println(result);
+		
+		System.out.println("-------------------");
+		
+		parameterMap.put("sex_id",1);
+		parameterMap.put("user_count",-1);
+		
+		session.selectOne(statement,parameterMap);
+		
+		//返回值为Integer
+		Integer result1 = parameterMap.get("user_count");
+		System.out.println(result1);
 		session.close();
 	}
 }	

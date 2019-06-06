@@ -11,4 +11,10 @@
 		</if>
 		age between #{minAge} and #{maxAge}
 	</select>
+	
+	<select id="getUser1" parameterType="ConditionUser"
+	resultType="User">
+		select * from d_user where  name like #{name} and
+		age between #{minAge} and #{maxAge}
+	</select>
 </mapper>

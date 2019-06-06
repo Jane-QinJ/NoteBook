@@ -108,6 +108,17 @@ public class User {
 </mapper>
 ```
 
+|标签|属性|含义|
+|---|---|---|
+|mapper|namespace|定位这条mapper|
+
+|子标签|属性|含义|
+|---|---|---|
+|select|id|唯一定位这条select标签|
+|insert    |parameterType|传入参数类型|
+|delete |resultType|返回值类型|
+|update||
+
 **Attention**:
 - 这里的namespace 和 select语句中的 id 可以自定义，目的是准确定位这一条SQL语句的位置
 - namespace可自定义，但规范是包名+类名 
@@ -152,14 +163,14 @@ public class Test {
 		//加载mybatis的配置文件（它也加载关联的映射文件）
 		Reader reader = Resources.getResourceAsReader(resource); 
 		//构建sqlSession的工厂	
-**SqlSessionFactory** sessionFactory = new **SqlSessionFactoryBuilder**().build(reader);
+SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		//创建能执行映射文件中sql的sqlSession
-		**SqlSession** session = sessionFactory.openSession();
+		SqlSession session = sessionFactory.openSession();
 		
 		//映射sql的标识字符串
 		String statement = "com.rjxy.ex1.userMapper"+".getUser";
 		//执行查询返回一个唯一user对象的sql
-		User user = session.**selectOne**(statement, 1);
+		User user = session.selectOne(statement, 1);
 		System.out.println(user);
 	}
 }
@@ -302,6 +313,13 @@ rs.close()、stmt.close()、conn.close()
 
 在同一工程下，创建一个新的包com.rjxy.ex2
 
+|功能|SQL语句|
+|---|---|
+|增|insert into 表名 values 字段值;|
+|删|delete from 表名 where 条件；
+|改|update 表名 set 字段=新字段值 where 条件；
+|查|select 字段值 from 表名 where 条件；
+
 userMapper.xml
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -314,7 +332,7 @@ userMapper.xml
 	</insert>
 	
 	<delete id="deleteUser" parameterType="int">
-		delete frosm users where id=#{id}
+		delete from users where id=#{id}
 	</delete>
 	
 	<update id="updateUser" parameterType="com.rjxy.ex1.User">
@@ -383,8 +401,16 @@ public class Test1 {
 		//可以将factory.openSession(true);重载
 		SqlSession session = factory.openSession(true);
 		String statement1 = "com.rjxy.ex2.userMapper.deleteUser";
-		int delete = session.insert(statement1, 6);
+		int delete = session.delete(statement1, 6);
 		System.out.println(delete);
+	}
+	
+	@Test
+	public void testUpdate(){
+		SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession(true);
+		String statementUpdate = “com.rjxy.ex2.userMapper.updateUser”;
+		int update = session.update(statementUpdate ,new User(4,”KK444”,25);
 	}
 	
 	@Test
@@ -551,15 +577,18 @@ resultMap:封装一些映射关系
      id:针对主键
      result：针对一般字段
 
-标签      | 属性   | 含义
-resultMap | type  | 要定义别名的实体类
-          | id    | 和select标签中的resultMap相同
+|标签      | 属性   | 含义|
+| --------   | -----  | ---  |
+|resultMap | type  | 要定义别名的实体类|
+|          | id    | 和select标签中的resultMap相同|
 
-子标签   | 属性 | 含义
-id      |property| id为主键， java类属性
-        |column  | 数据库字段
-result  |property | result为普通字段， Java类属性
-		|column   | 数据库字段
+
+|子标签   | 属性 | 含义|
+|---|---|---|
+|id      |property| id为主键， java类属性|
+|        |column  | 数据库字段|
+|result  |property | result为普通字段， Java类属性|
+|		|column   | 数据库字段|
 
 ```
 <select id = "getOrder" parameterType="int" resultType="Order"
@@ -686,7 +715,7 @@ public class Test5{
 	}
 }
 ```
-- 方式二：嵌套查询 执行两次查询
+- 方式二 嵌套查询 执行两次查询
 方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型
 	SELECT * FROM class WHERE c_id=1;
 	SELECT * FROM teacher WHERE t_id=1   //1 是上一个查询得到的teacher_id的值
@@ -793,6 +822,7 @@ public class Test6{
 }
 
 - 2. 嵌套查询
+<<<<<<< HEAD
 
 ```
 <!-- 
@@ -845,3 +875,5 @@ MySQL 服务无法启动。
 ### Solution
 [Solution](https://blog.csdn.net/jiurangwolai/article/details/52899937)
 - 删除myini文件
+=======
+
