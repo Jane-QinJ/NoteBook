@@ -5,9 +5,9 @@
 	<select id="getUser" parameterType="ConditionUser"
 	resultType="User">
 		select * from d_user where 
-		<if test='name!="%null%"' >
+		<if test='name != "%null%"' >
 		
-		 name like #{name}
+		 name like #{name} and
 		</if>
 		age between #{minAge} and #{maxAge}
 	</select>

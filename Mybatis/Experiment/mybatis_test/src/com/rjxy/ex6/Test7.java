@@ -18,7 +18,7 @@ public class Test7 {
 		
 		String statement = "com.rjxy.ex6.userMapper.getUser";
 		
-		String name = "o";
+		String name = null;
 		ConditionUser parameter = new ConditionUser("%"+name+"%",13,18);
 		List<User> userlist = session.selectList(statement,parameter);
 		System.out.println(userlist);

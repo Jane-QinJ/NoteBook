@@ -3,6 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.rjxy.ex7.userMapper">
+	<!-- 
+	查询得到男性或女性的数量，如果传入的是0就是女性，否则是男性
+	CALL mybatis.ges_user_count(1,@user_count); -->
 	<select id="getCount" statementType="CALLABLE"
 	parameterMap="getCountMap"
 	>

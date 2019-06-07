@@ -198,7 +198,7 @@ id INT PRIMARY KEY AUTO_INCREMENT
 
 ```
 mysql -uroot -p
-pw:123456
+pw:123123
 
 set global time_zone = ‘+8:00‘; ##修改mysql全局时区为北京时间，即我们所在的东8区
 set time_zone = ‘+8:00‘; ##修改当前会话时区
@@ -835,8 +835,164 @@ public class Test6{
 
 ## Ex6 动态SQL与模糊查询
 
-1)  提出需求: 
+1. 提出需求: 
    实现多条件查询用户(姓名模糊匹配, 年龄在指定的最小值到最大值之间)
+
+2. 准备数据表和数据:
+
+```
+create table d_user(  
+	id int primary key auto_increment,  
+	name varchar(10),
+	age int(3)
+); 
+ 
+insert into d_user(name,age) values('Tom',12);  
+insert into d_user(name,age) values('Bob',13);  
+insert into d_user(name,age) values('Jack',18);
+```
+
+3. ConditionUser(查询条件实体类)
+将查询条件封装为一个实体类
+
+```
+private String name;
+private int minAge;
+private int maxAge;
+```
+
+4. User(表实体类)
+```
+private int id;
+private String name;
+private int age;
+```
+
+5. userMapper.xml(映射文件)
+```
+<mapper namespace="com.rjxy.ex6.userMapper">
+	<select id="getUser" parameterType="ConditionUser"
+	resultType="User">
+		select * from d_user where 
+		<if test='name != "%null%"' >
+		
+		 name like #{name} and
+		</if>
+		age between #{minAge} and #{maxAge}
+	</select>
+	
+	<select id="getUser1" parameterType="ConditionUser"
+	resultType="User">
+		select * from d_user where  name like #{name} and
+		age between #{minAge} and #{maxAge}
+	</select>
+</mapper>
+```
+
+6. 注册
+```
+<mapper resource="com/rjxy/ex6/userMapper.xml"/>
+```
+
+## Ex7 调用存储过程
+1. 提出需求:
+	查询得到男性或女性的数量, 如果传入的是0就女性否则是男性。
+2. 准备数据库表和存储过程:
+```
+create table p_user(  
+	id int primary key auto_increment,  
+	name varchar(10),
+	sex char(2)
+); 
+ 
+insert into p_user(name,sex) values('A',"男");  
+insert into p_user(name,sex) values('B',"女");  
+insert into p_user(name,sex) values('C',"男");  
+```
+
+```
+#创建存储过程(查询得到男性或女性的数量, 如果传入的是0就女性否则是男性)
+DELIMITER $   //分隔符 $为分隔符,结尾也有同样的一个
+CREATE PROCEDURE mybatis.get_user_count(IN sex_id INT, OUT user_count INT)			//procedure 存储过程
+BEGIN  
+IF sex_id=0 THEN    //如果sex_id为0,查找性别为女的人数(COUNT)
+SELECT COUNT(*) FROM mybatis.p_user WHERE p_user.sex='女' INTO user_count;
+ELSE
+SELECT COUNT(*) FROM mybatis.p_user WHERE p_user.sex='男' INTO user_count;
+END IF;
+END 
+$
+```
+调用存储过程
+```
+DELIMITER ;
+SET @user_count = 0;
+CALL mybatis.ges_user_count(1, @user_count);
+SELECT @user_count;
+```
+
+3. 创建表的实体类
+```
+public class User {
+	private String id;
+	private String name;
+	private String sex;
+}
+```
+4. userMapper.xml
+```
+<mapper namespace="com.rjxy.ex7.userMapper">
+	<!-- 
+	查询得到男性或女性的数量，如果传入的是0就是女性，否则是男性
+	CALL mybatis.ges_user_count(1,@user_count); -->
+	<select id="getCount" statementType="CALLABLE"
+	parameterMap="getCountMap"
+	>
+		call mybatis.get_user_count(?,?)
+	</select>
+	
+	<parameterMap type="java.util.Map" id="getCountMap">
+		<parameter property="sex_id" mode="IN" jdbcType="INTEGER"></parameter>
+		<parameter property="user_count" mode="OUT" jdbcType="INTEGER"></parameter>
+	</parameterMap>
+</mapper>
+```
+5. Test
+```
+	SqlSessionFactory factory = MybatisUtils.getFactory();
+		SqlSession session = factory.openSession();
+		
+		String statement = "com.rjxy.ex7.userMapper.getCount";
+		
+		Map<String, Integer> parameterMap = new HashMap<String, Integer>();
+		parameterMap.put("sex_id",0);
+		parameterMap.put("user_count",-1);
+		
+		session.selectOne(statement,parameterMap);
+		
+		//返回值为Integer
+		Integer result = parameterMap.get("user_count");
+		System.out.println(result);
+		
+		System.out.println("-------------------");
+		
+		parameterMap.put("sex_id",1);
+		parameterMap.put("user_count",-1);
+		
+		session.selectOne(statement,parameterMap);
+		
+		//返回值为Integer
+		Integer result1 = parameterMap.get("user_count");
+		System.out.println(result1);
+		session.close();
+```
+
+	<select>
+		parameterMap:引用<parameterMap>
+		statementType:指定Statement的真实类型:CALLABLE 执行调用存储过程的语句
+		<parameterMap>:定义多个参数的键值对
+			type:需要传递的参数的真是类型 java.util.Map
+			<parameter>:指定一个参数key-value
 
 |标签|属性|含义|
 |---|---|---|
@@ -853,14 +1009,7 @@ public class Test6{
 |		  |mode|IN/OUT|
 |		  |jdbcType|INTEGER|
 
-<!--
-	<select>
-		parameterMap:引用<parameterMap>
-		statementType:指定Statement的真实类型:CALLABLE 执行调用存储过程的语句
-		<parameterMap>:定义多个参数的键值对
-			type:需要传递的参数的真是类型 java.util.Map
-			<parameter>:指定一个参数key-value
--->
+
 ### Issues
 F:\MySQL\bin>net start mysql
 MySQL 服务正在启动 ...
