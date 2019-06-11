@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>黄金市场报告</title>
+<script type="text/javascript" src="my.js"></script>
+<script type="text/javascript">
+	var myXmlHttpRequest = "";
+
+	function updatePrice() {
+		//window.alert("ok");
+		myXmlHttpRequest = getXmlHttpObject();
+		//怎么判断创建ok
+		if (myXmlHttpRequest) {
+			var url = "goldPriceProcess.jsp";
+			var data = "city=ld&city=tw&city=dj";
+// 			window.alert(data);
+			myXmlHttpRequest.open("post", url, true);
+			//指定回调函数 chuli为函数名
+
+			myXmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			myXmlHttpRequest.onreadystatechange = process;
+			myXmlHttpRequest.send(data);
+		}
+	}
+
+	function process() {
+		if (myXmlHttpRequest.readyState = 4) {
+// 			window.alert(myXmlHttpRequest.status);
+// 			window.alert(myXmlHttpRequest.responseText);
+			var value = myXmlHttpRequest.responseText;
+			value = eval("("+value+")");
+			$("ld").innerText = value[0].price;
+			$("tw").innerText = value[1].price;
+			$("dj").innerText = value[2].price;
+
+		}
+	}
+		window.setInterval("updatePrice()",1000);
+	function $(id) {
+		return document.getElementById(id);
+	}
+</script>
+</head>
+
+<body>
+
+	<h1>每隔1秒更新数据（以1000为基数计算涨跌）</h1>
+	<table border="1" class="abc">
+		<tr>
+			<td colspan="3">img</td>
+		</tr>
+		<tr>
+			<td>市场</td>
+			<td>最新价格$</td>
+			<td>涨跌</td>
+		</tr>
+		<tr>
+			<td>伦敦</td>
+			<td id="ld">788.7</td>
+			<td>img</td>
+		</tr>
+		
+		<tr>
+			<td>台湾</td>
+			<td id="tw">854.0</td>
+			<td>img</td>
+		</tr>
+		<tr>
+			<td>东京</td>
+			<td id="dj">1791.3</td>
+			<td>img</td>
+		</tr>
+	</table>
+	<input type="button" value="点击" onclick="updatePrice();">
+
+</body>
+</html>
