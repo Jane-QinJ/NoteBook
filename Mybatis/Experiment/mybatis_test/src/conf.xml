@@ -31,6 +31,7 @@
 		<mapper resource="com/rjxy/ex5/classMapper.xml"/>
 		<mapper resource="com/rjxy/ex6/userMapper.xml"/>
 		<mapper resource="com/rjxy/ex7/userMapper.xml"/>
+		<mapper resource="com/rjxy/ex8/userMapper.xml"/>
 	</mappers>
 		
 

@@ -29,12 +29,12 @@ INSERT INTO users(NAME, age) VALUES('Jack', 11);
 3. 添加Mybatis的配置文件conf.xml
 
 **注意**： 
-- conf.xml名称可随便起，之后加载时和它一致即可
+- conf.xml名称可随便起,之后加载时和它一致即可
 - conf.xml配置文件要在src文件下
 
 ```
 String resource = "conf.xml"; 
-		//加载mybatis的配置文件（它也加载关联的映射文件）
+		//加载mybatis的配置文件(它也加载关联的映射文件)
 		Reader reader = Resources.getResourceAsReader(resource); 
 ```
 
@@ -99,7 +99,7 @@ public class User {
 5. 定义操作users表的sql映射文件userMapper.xml
 
 ```
-<!-- namespace可自定义，但规范是包名+类名  -->
+<!-- namespace可自定义,但规范是包名+类名  -->
 <mapper namespace="com.rjxy.ex1.userMapper"> 
 	<select id="getUser" parameterType="int" 
 		resultType="com.rjxy.ex1.User">
@@ -120,9 +120,9 @@ public class User {
 |update||
 
 **Attention**:
-- 这里的namespace 和 select语句中的 id 可以自定义，目的是准确定位这一条SQL语句的位置
-- namespace可自定义，但规范是包名+类名 
--  id=#{id} : '#'是占位符，之后可以传入参数
+- 这里的namespace 和 select语句中的 id 可以自定义,目的是准确定位这一条SQL语句的位置
+- namespace可自定义,但规范是包名+类名 
+-  id=#{id} : '#'是占位符,之后可以传入参数
 
 ```
 //映射sql的标识字符串
@@ -149,7 +149,7 @@ select * from users where id = 1
 ```
 
 **Attention**:
-- 这里的路径为src下的相对路径，所以从包名开始+xml文件名
+- 这里的路径为src下的相对路径,所以从包名开始+xml文件名
 
 > 路径的设置目的都为使计算机找到对应的文件所在的地址
 
@@ -160,7 +160,7 @@ select * from users where id = 1
 public class Test {
 	public static void main(String[] args) throws IOException {
 		String resource = "conf.xml"; 
-		//加载mybatis的配置文件（它也加载关联的映射文件）
+		//加载mybatis的配置文件(它也加载关联的映射文件)
 		Reader reader = Resources.getResourceAsReader(resource); 
 		//构建sqlSession的工厂	
 SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -187,20 +187,20 @@ id INT PRIMARY KEY AUTO_INCREMENT
 ```
 
 **Solution**
-因为id字段为主键，不允许重复。而表中已经有id为1的数据，所以将id改为不为1即可。
+因为id字段为主键,不允许重复。而表中已经有id为1的数据,所以将id改为不为1即可。
 
 
 2. **The server time zone value 'ÖÐ¹ú±ê×¼Ê±¼ä' is unrecognized or represents more than one time zone**
 
 **Solution**
-时区问题，只需更改时区即可
+时区问题,只需更改时区即可
 [Reference](http://www.cnblogs.com/wangdianqian/p/9927406.html)
 
 ```
 mysql -uroot -p
 pw:123123
 
-set global time_zone = ‘+8:00‘; ##修改mysql全局时区为北京时间，即我们所在的东8区
+set global time_zone = ‘+8:00‘; ##修改mysql全局时区为北京时间,即我们所在的东8区
 set time_zone = ‘+8:00‘; ##修改当前会话时区
 flush privileges; #立即生效
 ```
@@ -212,7 +212,7 @@ flush privileges; #立即生效
 public class Test {
 	public static void main(String[] args) throws IOException {
 		String resource = "conf.xml"; 
-		//加载mybatis的配置文件（它也加载关联的映射文件）
+		//加载mybatis的配置文件(它也加载关联的映射文件)
 		Reader reader = Resources.getResourceAsReader(resource); 
 		//构建sqlSession的工厂	
 SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -230,7 +230,7 @@ SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 *String statement = "com.rjxy.ex1.userMapper"+".getUser";*
 
-这个值要和userMapper中namespace值和select SQL语句的 id 相同，才能准确找到sql映射文件中的某个sql语句。
+这个值要和userMapper中namespace值和select SQL语句的 id 相同,才能准确找到sql映射文件中的某个sql语句。
 
 selectOnt("String",1)
 String: userMapper中的namespace和 id
@@ -239,7 +239,7 @@ int: 传入的参数值
 **userMapper.xml**
 
 ```
-<!-- namespace可自定义，但规范是包名+类名  -->
+<!-- namespace可自定义,但规范是包名+类名  -->
 <mapper namespace="com.rjxy.ex1.userMapper"> 
 <!-- 	parameterType:传入参数类型 -->
 <!-- 	resultType：返回值类型 -->
@@ -258,9 +258,9 @@ resultType：返回值类型
 
 ### JDBC应用步骤
 1. 注册加载一个驱动
-2. 创建数据库连接（Connection）
+2. 创建数据库连接(Connection)
 3. 构造SQL语句
-4. 创建statement，发送sql语句
+4. 创建statement,发送sql语句
 5. 执行sql语句
 6. 处理sql结果(查询select需要处理)
 7. 关闭statement和connection 
@@ -274,14 +274,14 @@ Creates a Statement object for sendingSQL statements to the database.SQL stateme
 
 创建一个statement对象用于给数据库传送SQL语句。
 没有参数的SQL语句通常使用Statement对象。
-如果相同的SQL语句执行多次，使用PreparedStatement对象会更有效。
+如果相同的SQL语句执行多次,使用PreparedStatement对象会更有效。
 
 Result sets created using the returned Statementobject will by default be type TYPE_FORWARD_ONLYand have a concurrency level of CONCUR_READ_ONLY.The holdability of the created result sets can be determined bycalling getHoldability().
 Returns:a new default Statement objectThrows:SQLException - if a database access error occursor this method is called on a closed connection
 
 ### ResultSet接口实现查询操作：
 
-步骤如下：（和上一篇博文中的增删改的步骤类似哦）
+步骤如下：(和上一篇博文中的增删改的步骤类似哦)
 
 1. 加载数据库驱动程序：
 
@@ -297,7 +297,7 @@ DriverManager.getConnection(连接地址,用户名,密码)
 
 Statement stmt = conn.createStatement()
 
-5. 执行查询SQL语句，并返回结果：
+5. 执行查询SQL语句,并返回结果：
 
 ResultSet rs = stmt.executeQuery(sql)
 
@@ -311,7 +311,7 @@ rs.close()、stmt.close()、conn.close()
 1). 定义sql映射xml文件：
 之前的几步可以省略：导包、建表建库、定义实体类、创建conf.xml
 
-在同一工程下，创建一个新的包com.rjxy.ex2
+在同一工程下,创建一个新的包com.rjxy.ex2
 
 |功能|SQL语句|
 |---|---|
@@ -325,7 +325,7 @@ userMapper.xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- namespace可自定义，但规范是包名+类名  -->
+<!-- namespace可自定义,但规范是包名+类名  -->
 <mapper namespace="com.rjxy.ex2.userMapper"> 
 	<insert id="insertUser" parameterType="com.rjxy.ex1.User">
 	insert into users(name, age) values(#{name}, #{age});
@@ -373,7 +373,7 @@ public class MybatisUtils {
 }
 ```
 
-JUnit测试：(点击要测试的方法名，右键run as JUnit)
+JUnit测试：(点击要测试的方法名,右键run as JUnit)
 ```
 public class Test1 {
 	@Test
@@ -474,7 +474,7 @@ conf.xml
 	</typeAliases>
 ```
 
-每次写全类名太繁琐，用别名代替
+每次写全类名太繁琐,用别名代替
 
 ```
 	<package name="com.rjxy.ex1"></package>
@@ -484,8 +484,8 @@ conf.xml
 1. 添加jar: 
 	log4j-1.2.16.jar 
 
-2.1. log4j.properties(方式一) （放到src下）
-2.2. log4j.xml(方式二)（放到src下）
+2.1. log4j.properties(方式一) (放到src下)
+2.2. log4j.xml(方式二)(放到src下)
 
 ## Ex3 解决字段名与实体类属性名不相同的冲突
 
@@ -562,10 +562,10 @@ public class OrderTest{
 }
 ```
 
-运行结果为null，原因是属性名和字段名不一致
+运行结果为null,原因是属性名和字段名不一致
 
 ### 解决方法
-- 1)可以取别名，和属性一一对应
+- 1)可以取别名,和属性一一对应
 
 ```
 select order_id id, order_no orderNo, order_price price from orders where order_id = #{id}
@@ -585,9 +585,9 @@ resultMap:封装一些映射关系
 
 |子标签   | 属性 | 含义|
 |---|---|---|
-|id      |property| id为主键， java类属性|
+|id      |property| id为主键, java类属性|
 |        |column  | 数据库字段|
-|result  |property | result为普通字段， Java类属性|
+|result  |property | result为普通字段, Java类属性|
 |		|column   | 数据库字段|
 
 ```
@@ -636,7 +636,7 @@ CREATE TABLE class(
 ```
 2). 创建表和数据
 
-给class这个表的teacher_id字段加一个外键约束，名字叫fk_teacher_id ，依赖于teacher表的t_id字段
+给class这个表的teacher_id字段加一个外键约束,名字叫fk_teacher_id ,依赖于teacher表的t_id字段
 
 ```
 ALTER TABLE class ADD CONSTRAINT fk_teacher_id FOREIGN KEY (teacher_id) REFERENCES teacher(t_id);	
@@ -665,7 +665,7 @@ public class Classes {
 }
 ```
 
-- 方式一：嵌套结果（联表查询》
+- 方式一：嵌套结果(联表查询》
   使用嵌套结果映射来处理重复的联合结果的子集封装联表查询的数据(去除重复的数据)
 
 ```
@@ -697,7 +697,7 @@ classMapper.xml
 <mapper resource="com/rjxy/ex4/classMapper.xml"/>
 ```
 
-编写测试类(测试类不能名为Test，会和junit冲突）：
+编写测试类(测试类不能名为Test,会和junit冲突)：
 
 ```
 public class Test5{
@@ -746,7 +746,7 @@ public class Test5{
     根据classId查询对应的班级信息,包括学生,老师
 
 2). 创建表和数据
-新建一个学生表，class_id表示班级id，一个班级有多个学生
+新建一个学生表,class_id表示班级id,一个班级有多个学生
 
 ```
 CREATE TABLE student(
@@ -943,7 +943,7 @@ public class User {
 ```
 <mapper namespace="com.rjxy.ex7.userMapper">
 	<!-- 
-	查询得到男性或女性的数量，如果传入的是0就是女性，否则是男性
+	查询得到男性或女性的数量,如果传入的是0就是女性,否则是男性,
 	CALL mybatis.ges_user_count(1,@user_count); -->
 	<select id="getCount" statementType="CALLABLE"
 	parameterMap="getCountMap"
@@ -1026,3 +1026,19 @@ MySQL 服务无法启动。
 - 删除myini文件
 =======
 
+
+## Ex7 Mybatis缓存
+1. 一级缓存: 基于PerpetualCache 的 HashMap本地缓存,
+**其存储作用域为 Session**,当 Session flush 或 close 之后,该Session中的所有 Cache 就将清空。
+2. 二级缓存与一级缓存其机制相同,默认也是采用 PerpetualCache,HashMap存储,不同在于其**存储作用域为 Mapper(Namespace)**,并且可自定义存储源,如 Ehcache(EhCache 是一个纯Java的进程内缓存框架,具有快速、精干等特点)。
+3. 对于缓存数据更新机制,当某一个作用域(一级缓存Session/二级缓存Namespaces)的**进行了 C/U/D 操作后,默认该作用域下所有 select 中的缓存将被clear。**
+
+一级缓存在以下情况会被清除:
+1. 执行了session.clearCache
+2. 执行CUD操作
+3. 不是同一个session对象
+
+**一级缓存是默认开启的**
+一级缓存其存储作用域为 Session
+二级缓存存储作用域为 Mapper(Namespace)
+当某一个作用域(一级缓存Session/二级缓存Namespaces)的**进行了 C/U/D 操作后,默认该作用域下所有 select 中的缓存将被clear。**
